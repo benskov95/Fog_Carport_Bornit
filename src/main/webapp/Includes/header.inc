@@ -13,18 +13,15 @@
 <header>
     <div class="container responsive-header">
         <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #0C2069">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="index.jsp">
                 <img src ="Images/logo-fog.png" alt="logo">
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link 1</a>
+                    <a class="nav-link" href="#" style="font-family: 'Roboto Light', sans-serif; font-size: 26px; font-weight: bold; color: white">Quickbyg</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link 3</a>
+                    <a class="nav-link" href="#" style="font-family: 'Roboto Light', sans-serif; font-size: 26px; font-weight: bold; color: white">Se ordre</a>
                 </li>
             </ul>
         </nav>
@@ -34,5 +31,5 @@
 
 <div class="container">
 
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-color: white">
 

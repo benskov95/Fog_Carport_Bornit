@@ -4,45 +4,29 @@
 
 
 
-        <h1>Welcome to Sem 2</h1>
-        
-        <table>
-            <tr><td>Login</td>
-                <td>
-                    <form name="login" action="FrontController" method="POST">
-                        <input type="hidden" name="target" value="login">
-                        Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
-                        <br>
-                        Password:<br>
-                        <input type="password" name="password" value="sesam">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </td>
-                <td>Or Register</td>
-                <td>
-                    <form name="register" action="FrontController" method="POST">
-                        <input type="hidden" name="target" value="register">
-                        Email:<br>
-                        <input type="text" name="email" value="someone@nowhere.com">
-                        <br>
-                        Password:<br>
-                        <input type="password" name="password1" value="sesam">
-                        <br>
-                        Retype Password:<br>
-                        <input type="password" name="password2" value="sesam">
-                        <br>
-                        <input type="submit" value="Submit">
-                    </form>
-                </td>
-            </tr>
-        </table>
+<div class="row">
+    <div class="col-md-3"></div>
+<div class="col-md-6">
+<p class="lead">
+    <p style="font-weight: bold; font-size: 20px">QUICKBYG TILBUD</p>
+    <p>
+    Med et specialudviklet computerprogram kan vi lynhurtigt beregne prisen
+    og udskrive en skitsetegning på en carport indenfor vores standardprogram, der tilpasses dine specifikke ønsker.
+    <br>
+    <br>
+    Tilbud og skitsetegning fremsendes med post hurtigst muligt.
+    Ved bestilling medfølger standardbyggevejledning.
+    <br>
+    <br>
+    Rekvirér tilbud - start med at vælge type: </p>
 
-        <c:if test = "${requestScope.error!= null}" >
-           <h2>Error ! </h2>
-            ${requestScope.error}
-        </c:if>
+    <div style="alignment: center">
+    <a href="#"><img src="Images/fladttag.gif" class="img-fluid" style="float: left"></a>
+    <a href="#"><img src="Images/tagmedrejsning.gif" class="img-fluid" style="float: right"></a>
+    </div>
+</div>
+    <div class="col-md-3"></div>
+</div>
 
 <%@include file="Includes/footer.inc"%>
 
