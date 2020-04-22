@@ -10,21 +10,27 @@
 
 </head>
 
+<link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
+
 <header>
     <div class="container responsive-header">
-        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #0C2069">
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #0C2069; max-height: 126px">
             <a class="navbar-brand" href="index.jsp">
-                <img src ="Images/logo-fog.png" alt="logo">
+                <img src="Images/logo-fog.png" alt="logo" style="margin-left: -15px">
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="font-family: 'Roboto Light', sans-serif; font-size: 26px; font-weight: bold; color: white">Quickbyg</a>
+                    <a class="nav-link" href="#"
+                       style="font-family: Bebas Neue; font-size: 32px; color: white">Quickbyg</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="font-family: 'Roboto Light', sans-serif; font-size: 26px; font-weight: bold; color: white">Se ordre</a>
+                    <a class="nav-link" href="#"
+                       style="font-family: Bebas Neue; font-size: 32px; color: white">Se
+                        ordre</a>
                 </li>
             </ul>
         </nav>
+    </div>
 </header>
 
 <body>
