@@ -1,0 +1,14 @@
+@startuml
+
+class Order
+class Customer
+class BillOfMaterials
+class Materials
+class Employee
+
+Order "1" -- "1" BillOfMaterials
+BillOfMaterials "1" -- "*" Materials
+Customer "1" -- "*" Order
+
+
+@enduml
