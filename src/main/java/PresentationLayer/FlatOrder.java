@@ -25,6 +25,6 @@ public class FlatOrder extends Command {
 
         System.out.println(carportWidth + " " + carportLength + " " + shedWidth + " " + shedLength + " " + name + " " + address + " " + postalCodeCity + " " + telephone + " " + email);
 
-        return "flatorder";
+        return "receipt";
     }
 }
