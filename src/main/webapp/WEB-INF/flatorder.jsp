@@ -1,8 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../Includes/header.inc" %>
-<link href='https://fonts.googleapis.com/css?family=Roboto Condensed' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+<title>Fladt tag</title>
 
     <h3 style="font-family: Roboto Condensed; text-transform: uppercase"><img style="float: right; margin-left: 10px;"src="Images/fladttag.gif"
              height="87" width="165" class="img-responsive">Quick-Byg tilbud - carport med fladt tag</h3>

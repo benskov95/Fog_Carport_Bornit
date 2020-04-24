@@ -4,6 +4,7 @@
 <link href='https://fonts.googleapis.com/css?family=Roboto Condensed' rel='stylesheet'>
 <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
+<title>Checkout</title>
 
 <section>
     <div class="container">

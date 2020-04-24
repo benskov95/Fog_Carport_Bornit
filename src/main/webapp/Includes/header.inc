@@ -11,6 +11,8 @@
 </head>
 
 <link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto Condensed' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
 <header>
     <div class="container responsive-header">
@@ -24,7 +26,7 @@
                        style="font-family: Bebas Neue; font-size: 32px; color: white">Quickbyg</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"
+                    <a class="nav-link" href="FrontController?target=redirect&destination=myorders"
                        style="font-family: Bebas Neue; font-size: 32px; color: white">Se
                         ordre</a>
                 </li>
