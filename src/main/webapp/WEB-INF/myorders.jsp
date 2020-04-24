@@ -31,8 +31,22 @@
         <td>24/4/2020</td>
         <td>$1.000.000</td>
         <td>Godkendt</td>
-        <td><a href="#" class="btn btn-success btn-sm active" role="button" aria-pressed="true">Bestil</a></td>
+        <td><a href="#" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Bestil</a></td>
     </tr>
+    </tbody>
+</table>
+
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Carport detaljer
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body" style="width: 8rem; text-align: center">
+            <a href="stykliste">Stykliste</a>
+            <a href="tegning">Tegning</a>
+        </div>
+    </div>
 
 
 
