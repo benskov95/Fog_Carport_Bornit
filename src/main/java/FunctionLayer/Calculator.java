@@ -26,7 +26,7 @@ public class Calculator {
     }
 
     public int calcNumberOfRafters(int length) {
-        int numberOfRafters = 0;
+        int numberOfRafters = 1;
         int space = calcSpaceBetweenRafters(length);
 
         while (length >= space) {
