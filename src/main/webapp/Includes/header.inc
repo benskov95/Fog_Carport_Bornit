@@ -17,9 +17,10 @@
 <header>
     <div class="container responsive-header">
         <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #0C2069; max-height: 126px">
-            <a class="navbar-brand" href="../index.jsp">
+            <a class="navbar-brand" href="FrontController?target=redirect&destination=index">
                 <img src="Images/logo-fog.png" alt="logo" style="margin-left: -15px">
             </a>
+<!--            Hvad skal Quickbyg knappen bruges til?-->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#"
