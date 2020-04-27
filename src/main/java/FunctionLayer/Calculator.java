@@ -26,14 +26,32 @@ public class Calculator {
     }
 
     public int calcNumberOfRafters(int length) {
-        int numberOfRafters = 1;
+        int numberOfRafters = 0;
+        int space = calcSpaceBetweenRafters(length);
 
-        while (length >= 55) {
+        while (length >= space) {
             numberOfRafters++;
-            length -= 55;
+            length -= space;
         }
-
         return numberOfRafters;
+    }
+
+    public int calcSpaceBetweenRafters(int length) {
+        int space = 45;
+        int initialLength = length;
+
+        while (length >= 0) {
+            length -= space;
+            if (length < 0) {
+                length = initialLength;
+                space++;
+            }
+            if (length == 0) {
+                break;
+            }
+        }
+        return space;
+
     }
 
 }
