@@ -8,7 +8,33 @@ public class Calculator {
 
         calcNumberOfPosts(length, width);
         calcNumberOfRafters(length);
+        calcNumberOfSoffits(width);
+        calcNumberOfSoffits(length);
+        calcNumberOfFascia(width);
 
+
+    }
+
+    public int calcNumberOfFascia(int measurement) {
+
+
+        return 0;
+    }
+
+    public int calcNumberOfSoffits(int measurement) {
+
+
+       double soffitSize = 360;
+
+
+       int soffitsNumber = (int) Math.ceil(measurement/ soffitSize);
+
+
+       int result = soffitsNumber * 2;
+       System.out.println(result);
+
+
+       return result;
 
     }
 
