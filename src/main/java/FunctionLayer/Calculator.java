@@ -9,7 +9,6 @@ public class Calculator {
         calcNumberOfPosts(length, width);
         calcNumberOfRafters(length);
 
-
     }
 
     public int calcNumberOfPosts(int length, int width) {
