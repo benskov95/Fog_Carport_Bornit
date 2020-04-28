@@ -12,7 +12,6 @@ public class Calculator {
         calcNumberOfSoffits(length);
         calcNumberOfFascia(width);
 
-
     }
 
     public int calcNumberOfFascia(int measurement) {
