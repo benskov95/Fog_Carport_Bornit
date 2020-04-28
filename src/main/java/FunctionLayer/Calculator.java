@@ -8,32 +8,32 @@ public class Calculator {
 
         calcNumberOfPosts(length, width);
         calcNumberOfRafters(length);
-        calcNumberOfSoffits(width);
-        calcNumberOfSoffits(length);
-        calcNumberOfFascia(width);
+        calcNumberOfFascia(width, true, false); // Understernbrædder til for og bagende.
+        calcNumberOfFascia(length, true, true); // Understernbrædder til siderne.
+        calcNumberOfFascia(width, false, false); // Oversternbrædder til forenden.
+        calcNumberOfFascia(length, true, true); // Oversternbrædder til siderne.
+        calcNumberOfFascia(width, false, false); // Vandbræt til front.
+        calcNumberOfFascia(length, true, true); // Vandbræt til siderne.
 
     }
 
-    public int calcNumberOfFascia(int measurement) {
+    public int calcNumberOfFascia(int measurement, boolean doMultiply, boolean isSides) { // doMultiply bruges primært til at gange siderne på carporten.
 
+        double fasciaSize;
 
-        return 0;
-    }
+        if (isSides) {
+            fasciaSize = 540;
+        } else {
+            fasciaSize = 360;
+        }
 
-    public int calcNumberOfSoffits(int measurement) {
+        int fasciaNumber = (int) Math.ceil(measurement/ fasciaSize);
 
-
-       double soffitSize = 360;
-
-
-       int soffitsNumber = (int) Math.ceil(measurement/ soffitSize);
-
-
-       int result = soffitsNumber * 2;
-       System.out.println(result);
-
-
-       return result;
+        if (doMultiply) {
+            return fasciaNumber * 2;
+        } else{
+            return fasciaNumber;
+        }
 
     }
 
