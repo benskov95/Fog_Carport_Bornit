@@ -32,7 +32,8 @@
         <td>24/4/2020</td>
         <td>$1.000.000</td>
         <td>Godkendt</td>
-        <td><a href="FrontController?target=redirect&destination=checkout" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Bestil</a></td>
+        <td><a href="FrontController?target=redirect&destination=checkout" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Bestil</a>
+            <a href="FrontController?target=redirect&destination=myorders" class="btn btn-danger btn-sm" role="button" aria-pressed="true">Afslå</a></td>
     </tr>
     </tbody>
 </table>

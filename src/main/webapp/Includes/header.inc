@@ -20,10 +20,10 @@
             <a class="navbar-brand" href="FrontController?target=redirect&destination=index">
                 <img src="Images/logo-fog.png" alt="logo" style="margin-left: -15px">
             </a>
-<!--            Hvad skal Quickbyg knappen bruges til?-->
+
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"
+                    <a class="nav-link" href="FrontController?target=redirect&destination=index"
                        style="font-family: Bebas Neue; font-size: 32px; color: white">Quickbyg</a>
                 </li>
                 <li class="nav-item">
