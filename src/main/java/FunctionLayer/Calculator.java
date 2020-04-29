@@ -23,7 +23,7 @@ public class Calculator {
 
     }
 
-    public int calcNumberOfFascia(int measurement, boolean doMultiply, boolean isSides) { // doMultiply bruges primært til at gange siderne på carporten.
+    public int calcNumberOfFascia(int measurement, boolean doMultiply, boolean isSides) { // doMultiply bruges primært til at gange siderne på carporten. Fascia = sternbræt.
 
         double fasciaSize;
 
