@@ -123,7 +123,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (28261990,'Pelle','Smedeløkken 66','robin@nowhere.com','3770 Allinge');
+INSERT INTO `customer` VALUES (20404110,'John','Køkkenvej 55','henning@mail.dk','3740'),(28261990,'Pelle','Smedeløkken 66','robin@nowhere.com','3770 Allinge'),(42425675,'Pelle','Smedeløkken 66','admin@cupcake.com','3770 Allinge'),(56404030,'Hans','Hansevej 5','someone@robin.com','6400 Prut'),(65404310,'Matt','Nexøvej 45','matt@mail.dk','3730'),(66050411,'Henning','Pruttevej 12','lort@mail.dk','3770 Allinge');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +220,7 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `cp_id` int(11) NOT NULL,
-  `date` timestamp NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `carport_width` int(11) NOT NULL,
   `carport_length` int(11) NOT NULL,
   `shed_width` int(11) NOT NULL,
@@ -234,7 +234,7 @@ CREATE TABLE `order` (
   CONSTRAINT `fk_cp_id` FOREIGN KEY (`cp_id`) REFERENCES `carport` (`carport_id`),
   CONSTRAINT `fk_phone` FOREIGN KEY (`phone`) REFERENCES `customer` (`phone`),
   CONSTRAINT `fk_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,6 +243,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (2,1,'0000-00-00 00:00:00',360,480,0,0,66050411,1),(3,1,'0000-00-00 00:00:00',390,570,0,0,20404110,1),(4,1,'2020-04-30 12:12:43',240,240,0,0,65404310,1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,4 +352,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-30 13:08:46
+-- Dump completed on 2020-04-30 15:15:43

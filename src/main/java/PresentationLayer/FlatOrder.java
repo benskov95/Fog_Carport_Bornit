@@ -2,6 +2,7 @@ package PresentationLayer;
 
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.Order;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,8 @@ public class FlatOrder extends Command {
         String email = request.getParameter("email");
 
         LogicFacade.insertOrder(1,carportWidth,carportLength,shedWidth,shedLength,telephone,1, name,address,email,postalCodeCity);
+
+
 
         return "receipt";
     }

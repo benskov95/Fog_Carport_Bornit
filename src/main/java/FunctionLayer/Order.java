@@ -1,8 +1,11 @@
 package FunctionLayer;
 
+import java.sql.Date;
+
 public class Order {
 
     int carport_id;
+    Date date;
     int carport_width;
     int carport_length;
     int shed_width;
@@ -10,6 +13,16 @@ public class Order {
     int phone;
     int status_id;
 
+    public Order(int carport_id, Date date, int carport_width, int carport_length, int shed_width, int shed_length, int phone, int status_id) {
+        this.carport_id = carport_id;
+        this.date = date;
+        this.carport_width = carport_width;
+        this.carport_length = carport_length;
+        this.shed_width = shed_width;
+        this.shed_length = shed_length;
+        this.phone = phone;
+        this.status_id = status_id;
+    }
 
     public int getStatus_id() {
         return status_id;
