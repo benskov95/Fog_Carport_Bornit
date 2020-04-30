@@ -1,6 +1,7 @@
 package FunctionLayer;
 
 import DBAccess.CustomerMapper;
+import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
 
 /**
@@ -18,11 +19,12 @@ public class LogicFacade {
         UserMapper.createUser( user );
         return user;
     }
-    public static Customer insertCustomer (int phone, String name, String address, String email, String zip_code){
-        Customer customer = new Customer(phone,name,address,email,zip_code);
-        CustomerMapper.insertCustomer(customer);
-        return  customer;
 
+    public static Order insertOrder (int carport_id, int carport_width, int carport_length, int shed_width, int shed_length, int phone, int status_id, String name, String address, String email, String zip_code){
+        Customer customer = new Customer(phone,name,address,email,zip_code );
+        Order order = new Order(carport_id,carport_width,carport_length,shed_width,shed_length,phone,status_id);
+        OrderMapper.insertOrder(customer,order);
+        return order;
     }
 
 }

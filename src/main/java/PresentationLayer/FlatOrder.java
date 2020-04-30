@@ -24,8 +24,10 @@ public class FlatOrder extends Command {
         int telephone = Integer.parseInt(request.getParameter("telephone"));
         String email = request.getParameter("email");
 
-        LogicFacade.insertCustomer(telephone,name,address,email,postalCodeCity);
+        LogicFacade.insertOrder(1,carportWidth,carportLength,shedWidth,shedLength,telephone,1, name,address,email,postalCodeCity);
 
         return "receipt";
     }
+
+
 }

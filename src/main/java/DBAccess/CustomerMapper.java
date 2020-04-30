@@ -1,37 +1,44 @@
 package DBAccess;
 
 import FunctionLayer.Customer;
+import FunctionLayer.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class CustomerMapper {
 
-    public static void insertCustomer (Customer customer){
+   public static ArrayList<Customer> getAllCustomers () throws SQLException, ClassNotFoundException {
+
+       ArrayList<Customer> customerArrayList = new ArrayList<>();
+
+       String sql = "select * from fog.customer";
+       Connection con = Connector.connection();
+       try {
+           PreparedStatement ps = con.prepareStatement(sql) ;
+           ResultSet resultSet = ps.executeQuery();
+           while (resultSet.next()){
+
+               int phone = resultSet.getInt("phone");
+               String name = resultSet.getString("name");
+               String address = resultSet.getString("address");
+               String email = resultSet.getString("email");
+               String zip_code = resultSet.getString("zip_code");
+               customerArrayList.add(new Customer(phone,name,address,email,zip_code));
 
 
+           }
+       } catch (SQLException e) {
+           System.out.println("Fejl i connection til database");
+           e.printStackTrace();
+       }
 
-        String sqlCustomer ="INSERT INTO fog.customer (phone, name, address, email, zip_code) VALUES (?,?,?,?,?)";
+       return customerArrayList;
+   }
 
 
-        try  {
-            Connection con = Connector.connection();
-            try (PreparedStatement ps = con.prepareStatement(sqlCustomer, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setInt(1, customer.getPhone());
-                ps.setString(2, customer.getName());
-                ps.setString(3, customer.getAddress());
-                ps.setString(4, customer.getEmail());
-                ps.setString(5, customer.getZip_code());
-                ps.executeUpdate();
-
-                ResultSet idResultSet = ps.getGeneratedKeys();
-
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
 
 
     }
 
-}
+
