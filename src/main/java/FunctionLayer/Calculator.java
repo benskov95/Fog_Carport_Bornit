@@ -1,5 +1,9 @@
 package FunctionLayer;
 
+import com.sun.xml.internal.bind.v2.runtime.SwaRefAdapter;
+
+import java.util.ArrayList;
+
 public class Calculator {
 
     public void type1Calc(int length, int width) {
@@ -20,8 +24,60 @@ public class Calculator {
         calcNumberOfBracketScrewPacks(0); // <-- Placeholder værdi
         calcNumberOfCarriageBolts(0, 0); // <-- Placeholder værdi
         calcNumberOfSquareWashers(0); // <-- Placeholder værdi
+        calcNumberOfTrapezPlates(length,width);
 
     }
+
+    public static int calcNumberOfTrapezPlates(int length, int width) {
+
+
+
+        boolean test = false;
+        int count = 0;
+
+        while (!test) {
+            width -= 100;
+            count++;
+
+            if (width == 0) {
+
+                test = true;
+            }
+            if (width < 100 && width != 0) {
+                count++;
+                test = true;
+            }
+        }
+        return count;
+
+
+    }
+
+    public  static int test (int length, ArrayList<Integer> mål){
+
+
+
+
+        int test = 0;
+        int initLength = length;
+        for (Integer integer : mål) {
+            int etellerandet = length%integer;
+            while (length > 0) {
+                length -= integer;
+                if (length < 0 ){
+                    length = initLength;
+                    break;
+                }
+                if (etellerandet > 0 && etellerandet < 100) {
+                    test = integer;
+                    System.out.println(integer);
+                    break;
+                }
+            }
+        }
+        return test;
+    }
+
 
     public int calcNumberOfFascia(int measurement, boolean doMultiply, boolean isSides) { // doMultiply bruges primært til at gange siderne på carporten. Fascia = sternbræt.
 
@@ -84,6 +140,7 @@ public class Calculator {
         return space;
 
     }
+
 
     public int calcNumberOfBottomScrewPacks(int numberOfRoofPlates) { // Bundskruepakker.
         return numberOfRoofPlates / 4; // For hver 4 tagplader skal der 1 pakke bundskruer til.
