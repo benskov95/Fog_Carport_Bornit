@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.CustomerMapper;
 import DBAccess.UserMapper;
 
 /**
@@ -16,6 +17,12 @@ public class LogicFacade {
         User user = new User(email, password, "customer");
         UserMapper.createUser( user );
         return user;
+    }
+    public static Customer insertCustomer (int phone, String name, String address, String email, String zip_code){
+        Customer customer = new Customer(phone,name,address,email,zip_code);
+        CustomerMapper.insertCustomer(customer);
+        return  customer;
+
     }
 
 }

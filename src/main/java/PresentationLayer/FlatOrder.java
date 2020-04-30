@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,10 +21,10 @@ public class FlatOrder extends Command {
         String name = request.getParameter("name");
         String address = request.getParameter("address");
         String postalCodeCity = request.getParameter("postalcode");
-        String telephone = request.getParameter("telephone");
+        int telephone = Integer.parseInt(request.getParameter("telephone"));
         String email = request.getParameter("email");
 
-        System.out.println(carportWidth + " " + carportLength + " " + shedWidth + " " + shedLength + " " + name + " " + address + " " + postalCodeCity + " " + telephone + " " + email);
+        LogicFacade.insertCustomer(telephone,name,address,email,postalCodeCity);
 
         return "receipt";
     }
