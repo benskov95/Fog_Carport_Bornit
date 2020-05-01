@@ -85,4 +85,18 @@ public class OrderMapper {
         return null;
 
     }
+
+    public static void deleteOrder (int order_id) throws LoginSampleException, SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM fog.order\n" +
+                "WHERE order_id = ?";
+        Connection con = Connector.connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, order_id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+    }
 }
