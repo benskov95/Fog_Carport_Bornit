@@ -72,6 +72,30 @@ INSERT INTO `carport` VALUES (1,1),(2,2),(3,3),(4,4);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `carport_length`
+--
+
+DROP TABLE IF EXISTS `carport_length`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carport_length` (
+  `cp_length_id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` int(11) NOT NULL,
+  PRIMARY KEY (`cp_length_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carport_length`
+--
+
+LOCK TABLES `carport_length` WRITE;
+/*!40000 ALTER TABLE `carport_length` DISABLE KEYS */;
+INSERT INTO `carport_length` VALUES (1,240),(2,270),(3,300),(4,330),(5,360),(6,390),(7,420),(8,450),(9,480),(10,510),(11,540),(12,570),(13,600),(14,630),(15,660),(16,690),(17,720),(18,750),(19,780);
+/*!40000 ALTER TABLE `carport_length` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `carport_parts`
 --
 
@@ -100,6 +124,30 @@ INSERT INTO `carport_parts` VALUES (27,32,'understernbrædder til for & bag ende
 UNLOCK TABLES;
 
 --
+-- Table structure for table `carport_width`
+--
+
+DROP TABLE IF EXISTS `carport_width`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carport_width` (
+  `cp_width_id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` int(11) NOT NULL,
+  PRIMARY KEY (`cp_width_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carport_width`
+--
+
+LOCK TABLES `carport_width` WRITE;
+/*!40000 ALTER TABLE `carport_width` DISABLE KEYS */;
+INSERT INTO `carport_width` VALUES (1,240),(2,270),(3,300),(4,330),(5,360),(6,390),(7,420),(8,450),(9,480),(10,510),(11,540),(12,570),(13,600),(14,630),(15,660),(16,690),(17,720),(18,750);
+/*!40000 ALTER TABLE `carport_width` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `customer`
 --
 
@@ -123,7 +171,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (20404110,'John','Køkkenvej 55','henning@mail.dk','3740'),(28261990,'Pelle','Smedeløkken 66','robin@nowhere.com','3770 Allinge'),(42425675,'Pelle','Smedeløkken 66','admin@cupcake.com','3770 Allinge'),(56404030,'Hans','Hansevej 5','someone@robin.com','6400 Prut'),(65404310,'Matt','Nexøvej 45','matt@mail.dk','3730'),(66050411,'Henning','Pruttevej 12','lort@mail.dk','3770 Allinge');
+INSERT INTO `customer` VALUES (28261990,'Pelle','Smedeløkken 66','robin@nowhere.com','3770 Allinge');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,13 +205,13 @@ INSERT INTO `link_material_size` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),
 UNLOCK TABLES;
 
 --
--- Table structure for table `link_materials_part`
+-- Table structure for table `link_materials_parts`
 --
 
-DROP TABLE IF EXISTS `link_materials_part`;
+DROP TABLE IF EXISTS `link_materials_parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `link_materials_part` (
+CREATE TABLE `link_materials_parts` (
   `part_id` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
   KEY `fk_part_id_idx` (`part_id`),
@@ -174,12 +222,12 @@ CREATE TABLE `link_materials_part` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `link_materials_part`
+-- Dumping data for table `link_materials_parts`
 --
 
-LOCK TABLES `link_materials_part` WRITE;
-/*!40000 ALTER TABLE `link_materials_part` DISABLE KEYS */;
-/*!40000 ALTER TABLE `link_materials_part` ENABLE KEYS */;
+LOCK TABLES `link_materials_parts` WRITE;
+/*!40000 ALTER TABLE `link_materials_parts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `link_materials_parts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -220,7 +268,7 @@ DROP TABLE IF EXISTS `order`;
 CREATE TABLE `order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `cp_id` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date` timestamp NOT NULL,
   `carport_width` int(11) NOT NULL,
   `carport_length` int(11) NOT NULL,
   `shed_width` int(11) NOT NULL,
@@ -234,7 +282,7 @@ CREATE TABLE `order` (
   CONSTRAINT `fk_cp_id` FOREIGN KEY (`cp_id`) REFERENCES `carport` (`carport_id`),
   CONSTRAINT `fk_phone` FOREIGN KEY (`phone`) REFERENCES `customer` (`phone`),
   CONSTRAINT `fk_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,8 +291,55 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (2,1,'0000-00-00 00:00:00',360,480,0,0,66050411,1),(3,1,'0000-00-00 00:00:00',390,570,0,0,20404110,1),(4,1,'2020-04-30 12:12:43',240,240,0,0,65404310,1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shed_length`
+--
+
+DROP TABLE IF EXISTS `shed_length`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `shed_length` (
+  `shed_length_id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`shed_length_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shed_length`
+--
+
+LOCK TABLES `shed_length` WRITE;
+/*!40000 ALTER TABLE `shed_length` DISABLE KEYS */;
+INSERT INTO `shed_length` VALUES (1,'150'),(2,'180'),(3,'210'),(4,'240'),(5,'270'),(6,'300'),(7,'330'),(8,'360'),(9,'390'),(10,'420'),(11,'450'),(12,'480'),(13,'510'),(14,'540'),(15,'570'),(16,'600'),(17,'630'),(18,'660'),(19,'690');
+/*!40000 ALTER TABLE `shed_length` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shed_width`
+--
+
+DROP TABLE IF EXISTS `shed_width`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `shed_width` (
+  `shed_width_id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`shed_width_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shed_width`
+--
+
+LOCK TABLES `shed_width` WRITE;
+/*!40000 ALTER TABLE `shed_width` DISABLE KEYS */;
+INSERT INTO `shed_width` VALUES (1,'210'),(2,'240'),(3,'270'),(4,'300'),(5,'330'),(6,'360'),(7,'390'),(8,'420'),(9,'450'),(10,'480'),(11,'510'),(12,'540'),(13,'570'),(14,'600'),(15,'630'),(16,'660'),(17,'690'),(18,'720');
+/*!40000 ALTER TABLE `shed_width` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -352,4 +447,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-30 15:15:43
+-- Dump completed on 2020-05-01 10:31:39
