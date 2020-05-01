@@ -1,7 +1,4 @@
 package FunctionLayer;
-
-import com.sun.xml.internal.bind.v2.runtime.SwaRefAdapter;
-
 import java.util.ArrayList;
 
 public class Calculator {
@@ -24,13 +21,10 @@ public class Calculator {
         calcNumberOfBracketScrewPacks(0); // <-- Placeholder værdi
         calcNumberOfCarriageBolts(0, 0); // <-- Placeholder værdi
         calcNumberOfSquareWashers(0); // <-- Placeholder værdi
-        calcNumberOfTrapezPlates(length,width);
 
     }
 
-    public static int calcNumberOfTrapezPlates(int length, int width) {
-
-
+    public static int calcNumberOfTrapezPlates(int width) {
 
         boolean test = false;
         int count = 0;
@@ -38,9 +32,7 @@ public class Calculator {
         while (!test) {
             width -= 100;
             count++;
-
             if (width == 0) {
-
                 test = true;
             }
             if (width < 100 && width != 0) {
@@ -49,14 +41,9 @@ public class Calculator {
             }
         }
         return count;
-
-
     }
 
     public  static int test (int length, ArrayList<Integer> mål){
-
-
-
 
         int test = 0;
         int initLength = length;
