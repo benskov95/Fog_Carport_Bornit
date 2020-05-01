@@ -1,8 +1,12 @@
 package FunctionLayer;
 
 import DBAccess.CustomerMapper;
+import DBAccess.InitializeMapper;
 import DBAccess.OrderMapper;
 import DBAccess.UserMapper;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * The purpose of LogicFacade is to...
@@ -25,6 +29,22 @@ public class LogicFacade {
         Order order = new Order(carport_id,carport_width,carport_length,shed_width,shed_length,phone,status_id);
         OrderMapper.insertOrder(customer,order);
         return order;
+    }
+
+    public static ArrayList<Integer> getCWList() throws LoginSampleException, SQLException, ClassNotFoundException {
+        return InitializeMapper.getCarportWidth();
+    }
+
+    public static ArrayList<Integer> getCLList() throws LoginSampleException, SQLException, ClassNotFoundException {
+        return InitializeMapper.getCarportLength();
+    }
+
+    public static ArrayList<Integer> getSWList() throws LoginSampleException, SQLException, ClassNotFoundException {
+        return InitializeMapper.getShedWidth();
+    }
+
+    public static ArrayList<Integer> getSLList() throws LoginSampleException, SQLException, ClassNotFoundException {
+        return InitializeMapper.getShedLength();
     }
 
 }
