@@ -1,6 +1,22 @@
+<%@ page import="CarportUtil.Initializer" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="Includes/header.inc" %>
+
+<%
+    if (request.getServletContext().getAttribute("CWList") == null) {
+        request.getServletContext().setAttribute("CWList", Initializer.initCWLIST());
+    }
+    if (request.getServletContext().getAttribute("CLList") == null) {
+        request.getServletContext().setAttribute("CLList", Initializer.initCLList());
+    }
+    if (request.getServletContext().getAttribute("SWList") == null) {
+        request.getServletContext().setAttribute("SWList", Initializer.initSWList());
+    }
+    if (request.getServletContext().getAttribute("SLList") == null) {
+        request.getServletContext().setAttribute("SLList", Initializer.initSLList());
+    }
+%>
 
 <title>Forside</title>
 

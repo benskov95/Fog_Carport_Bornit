@@ -1,15 +1,15 @@
-CREATE DATABASE  IF NOT EXISTS `Fog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `Fog`;
--- MySQL dump 10.13  Distrib 8.0.15, for macos10.14 (x86_64)
+CREATE DATABASE  IF NOT EXISTS `fog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `fog`;
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: Fog
+-- Host: localhost    Database: fog
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +23,7 @@ USE `Fog`;
 
 DROP TABLE IF EXISTS `bill_of_materials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bill_of_materials` (
   `bom_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -51,7 +51,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `carport` (
   `carport_id` int(11) NOT NULL AUTO_INCREMENT,
   `type_id` int(11) NOT NULL,
@@ -72,12 +72,36 @@ INSERT INTO `carport` VALUES (1,1),(2,2),(3,3),(4,4);
 UNLOCK TABLES;
 
 --
+-- Table structure for table `carport_length`
+--
+
+DROP TABLE IF EXISTS `carport_length`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carport_length` (
+  `cp_length_id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` int(11) NOT NULL,
+  PRIMARY KEY (`cp_length_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carport_length`
+--
+
+LOCK TABLES `carport_length` WRITE;
+/*!40000 ALTER TABLE `carport_length` DISABLE KEYS */;
+INSERT INTO `carport_length` VALUES (1,240),(2,270),(3,300),(4,330),(5,360),(6,390),(7,420),(8,450),(9,480),(10,510),(11,540),(12,570),(13,600),(14,630),(15,660),(16,690),(17,720),(18,750),(19,780);
+/*!40000 ALTER TABLE `carport_length` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `carport_parts`
 --
 
 DROP TABLE IF EXISTS `carport_parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `carport_parts` (
   `pk_carport_part_id` int(11) NOT NULL AUTO_INCREMENT,
   `material_id` int(11) NOT NULL,
@@ -100,20 +124,43 @@ INSERT INTO `carport_parts` VALUES (27,32,'understernbrædder til for & bag ende
 UNLOCK TABLES;
 
 --
+-- Table structure for table `carport_width`
+--
+
+DROP TABLE IF EXISTS `carport_width`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carport_width` (
+  `cp_width_id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` int(11) NOT NULL,
+  PRIMARY KEY (`cp_width_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carport_width`
+--
+
+LOCK TABLES `carport_width` WRITE;
+/*!40000 ALTER TABLE `carport_width` DISABLE KEYS */;
+INSERT INTO `carport_width` VALUES (1,240),(2,270),(3,300),(4,330),(5,360),(6,390),(7,420),(8,450),(9,480),(10,510),(11,540),(12,570),(13,600),(14,630),(15,660),(16,690),(17,720),(18,750);
+/*!40000 ALTER TABLE `carport_width` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `customer`
 --
 
 DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
-  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
   `address` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `phone` int(11) NOT NULL,
   `zip_code` varchar(45) NOT NULL,
-  PRIMARY KEY (`customer_id`),
+  PRIMARY KEY (`phone`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -124,6 +171,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (28261990,'Pelle','Smedeløkken 66','robin@nowhere.com','3770 Allinge'),(42425675,'Pelle','Køkkenvej 55','someone@robin.com','fkaælfkælsa');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +181,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `link_material_size`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `link_material_size` (
   `pk_link_material_size` int(11) NOT NULL AUTO_INCREMENT,
   `link_material_id` int(11) NOT NULL,
@@ -157,13 +205,13 @@ INSERT INTO `link_material_size` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),
 UNLOCK TABLES;
 
 --
--- Table structure for table `link_materials_part`
+-- Table structure for table `link_materials_parts`
 --
 
-DROP TABLE IF EXISTS `link_materials_part`;
+DROP TABLE IF EXISTS `link_materials_parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `link_materials_part` (
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `link_materials_parts` (
   `part_id` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
   KEY `fk_part_id_idx` (`part_id`),
@@ -174,12 +222,12 @@ CREATE TABLE `link_materials_part` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `link_materials_part`
+-- Dumping data for table `link_materials_parts`
 --
 
-LOCK TABLES `link_materials_part` WRITE;
-/*!40000 ALTER TABLE `link_materials_part` DISABLE KEYS */;
-/*!40000 ALTER TABLE `link_materials_part` ENABLE KEYS */;
+LOCK TABLES `link_materials_parts` WRITE;
+/*!40000 ALTER TABLE `link_materials_parts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `link_materials_parts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -188,7 +236,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `materials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `materials` (
   `material_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -216,22 +264,25 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `cp_id` int(11) NOT NULL,
-  `date` timestamp NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `carport_width` int(11) NOT NULL,
   `carport_length` int(11) NOT NULL,
   `shed_width` int(11) NOT NULL,
   `shed_length` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
+  `phone` int(11) NOT NULL,
+  `status_id` int(11) NOT NULL,
   PRIMARY KEY (`order_id`),
-  KEY `fk_customer_id_idx` (`customer_id`),
   KEY `fk_carport_id_idx` (`cp_id`),
+  KEY `fk_phone_idx` (`phone`),
+  KEY `fk_status_idx` (`status_id`),
   CONSTRAINT `fk_cp_id` FOREIGN KEY (`cp_id`) REFERENCES `carport` (`carport_id`),
-  CONSTRAINT `fk_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_phone` FOREIGN KEY (`phone`) REFERENCES `customer` (`phone`),
+  CONSTRAINT `fk_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +291,56 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (1,1,'2020-05-01 10:52:08',270,630,0,0,42425675,1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shed_length`
+--
+
+DROP TABLE IF EXISTS `shed_length`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `shed_length` (
+  `shed_length_id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`shed_length_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shed_length`
+--
+
+LOCK TABLES `shed_length` WRITE;
+/*!40000 ALTER TABLE `shed_length` DISABLE KEYS */;
+INSERT INTO `shed_length` VALUES (1,'150'),(2,'180'),(3,'210'),(4,'240'),(5,'270'),(6,'300'),(7,'330'),(8,'360'),(9,'390'),(10,'420'),(11,'450'),(12,'480'),(13,'510'),(14,'540'),(15,'570'),(16,'600'),(17,'630'),(18,'660'),(19,'690');
+/*!40000 ALTER TABLE `shed_length` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `shed_width`
+--
+
+DROP TABLE IF EXISTS `shed_width`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `shed_width` (
+  `shed_width_id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`shed_width_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `shed_width`
+--
+
+LOCK TABLES `shed_width` WRITE;
+/*!40000 ALTER TABLE `shed_width` DISABLE KEYS */;
+INSERT INTO `shed_width` VALUES (1,'210'),(2,'240'),(3,'270'),(4,'300'),(5,'330'),(6,'360'),(7,'390'),(8,'420'),(9,'450'),(10,'480'),(11,'510'),(12,'540'),(13,'570'),(14,'600'),(15,'630'),(16,'660'),(17,'690'),(18,'720');
+/*!40000 ALTER TABLE `shed_width` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -249,7 +349,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `size`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `size` (
   `size_id` int(11) NOT NULL AUTO_INCREMENT,
   `size` int(11) NOT NULL,
@@ -268,12 +368,36 @@ INSERT INTO `size` VALUES (1,210),(2,240),(3,270),(4,300),(5,330),(6,360),(7,390
 UNLOCK TABLES;
 
 --
+-- Table structure for table `status`
+--
+
+DROP TABLE IF EXISTS `status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `status` (
+  `status_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` varchar(45) NOT NULL,
+  PRIMARY KEY (`status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `status`
+--
+
+LOCK TABLES `status` WRITE;
+/*!40000 ALTER TABLE `status` DISABLE KEYS */;
+INSERT INTO `status` VALUES (1,'Afventer'),(2,'Godkendt'),(3,'Pakkes'),(4,'Afsendt');
+/*!40000 ALTER TABLE `status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `type`
 --
 
 DROP TABLE IF EXISTS `type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `type` (
   `type_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
@@ -297,7 +421,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `unit` (
   `unit_id` int(11) NOT NULL AUTO_INCREMENT,
   `unit_type` varchar(45) NOT NULL,
@@ -324,4 +448,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-27  9:51:08
+-- Dump completed on 2020-05-01 12:53:11
