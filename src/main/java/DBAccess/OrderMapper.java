@@ -37,6 +37,7 @@ public class OrderMapper {
                     ps1.setInt(7, 1);
                     ps1.executeUpdate();
                 } catch (Exception e) {
+                    e.printStackTrace();
                     con.rollback();
                 }
 
