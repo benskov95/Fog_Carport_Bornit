@@ -3,7 +3,7 @@ package DBAccess;
 import FunctionLayer.Customer;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
-import com.sun.org.apache.xpath.internal.operations.Or;
+
 
 import java.sql.*;
 

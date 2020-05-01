@@ -43,26 +43,233 @@ public class Calculator {
         return count;
     }
 
-    public  static int test (int length, ArrayList<Integer> mål){
+    public static int calcSizeOfTrapezPlates(int length, int width, ArrayList<Integer> plateLengthsFromDB) {
 
-        int test = 0;
-        int initLength = length;
-        for (Integer integer : mål) {
-            int etellerandet = length%integer;
+        // todo - Skriver bare en todo for at gøre det her tydeligt: Da metoden potentielt
+        // todo - kan regne flere værdier ud (hvis der bruges mere end én pladestørrelse)
+        // todo - tænker jeg, at de skal settes - evt. på en variabel, der er erklæret i
+        // todo - denne klase, som så kan bruges i type1Calc metoden når al styklisteinfo
+        // todo - skal smides op til databasen.
+
+        int initialLength = length;
+        ArrayList<TrapezPlate> trapezPlates = new ArrayList<>();
+        int numberOfPlates;
+        int leftOverNumberOfPlates = 0;
+        int count = 0;
+        int remainder = 0;
+        int excess = 0;
+        int secondPlateLength = 0;
+        int thirdPlateLength = 0;
+        int remainderPlateLength = 0;
+        int smallestRemainder;
+        TrapezPlate plateForComparison;
+        TrapezPlate finalPlate = new TrapezPlate();
+        String fits = "";
+
+        for (Integer plateLength : plateLengthsFromDB) {
             while (length > 0) {
-                length -= integer;
-                if (length < 0 ){
-                    length = initLength;
-                    break;
+                if (length - plateLength == 0) {
+                    remainder = 0;
+                    count++;
+                    fits = "Den passer";
                 }
-                if (etellerandet > 0 && etellerandet < 100) {
-                    test = integer;
-                    System.out.println(integer);
+                if (length - plateLength < 0) {
+                    remainder = length;
+
+                    if (remainder == initialLength) {
+                        fits = "Denne størrelse er for stor";
+                        excess = plateLength - length;
+                        remainder = 0;
+                    } else {
+                        fits = "Den passer";
+                    }
+                }
+
+                length -= plateLength;
+                count++;
+
+                if (length <= 0) {
+                    count -= 1; // Trækker 1 fra for at tage højde for, at den går i minus før den når hertil.
+
+                    System.out.println("Carport længde: " + initialLength);
+                    System.out.println(fits);
+                    System.out.println("Længde: " + plateLength +  " og antal på langs: " + count);
+                    System.out.println("Mangel: " + remainder + "\n" + "overskud: " + excess + "\n");
+                    length = initialLength;
+                    trapezPlates.add(new TrapezPlate(plateLength, count, remainder, excess));
+                    count = 0;
                     break;
                 }
             }
         }
-        return test;
+        plateForComparison = trapezPlates.get(0);
+        TrapezPlate maxLengthPlate = plateForComparison;
+        int firstCompareForLength = initialLength - maxLengthPlate.getLength();
+
+        for (TrapezPlate trapezPlate : trapezPlates) {
+            smallestRemainder = plateForComparison.getRemainderRelativeToLength();
+            int remainderForComparison = trapezPlate.getRemainderRelativeToLength();
+
+            if (remainderForComparison < smallestRemainder && remainderForComparison != 0 ||  remainderForComparison == smallestRemainder ) {
+                smallestRemainder = remainderForComparison;
+            }
+
+            if (plateForComparison.getLength() < trapezPlate.getLength() && smallestRemainder == remainderForComparison) {
+                finalPlate = trapezPlate;
+            }
+
+            if (trapezPlate.getRemainderRelativeToLength() == 0 && trapezPlate.getExcessRelativeToLength() == 0) {
+                if (initialLength - trapezPlate.getLength() != 0) {
+                    finalPlate = trapezPlate;
+                }  else {
+                    finalPlate = trapezPlate;
+                    break;
+                }
+            }
+
+            int secondCompareForLength = initialLength - trapezPlate.getLength();
+
+            if (firstCompareForLength == secondCompareForLength || firstCompareForLength > secondCompareForLength && secondCompareForLength > 0) {
+                maxLengthPlate = trapezPlate;
+                finalPlate = maxLengthPlate;
+            }
+
+
+        }
+        int lengthWithOverlap = initialLength + 20; //Der skal være et overlap på 20 cm på tagpladerne.
+        int remainingSpace = lengthWithOverlap - (finalPlate.getLength() * finalPlate.getAmount());
+        numberOfPlates = finalPlate.getAmount() * calcNumberOfTrapezPlates(width);
+
+        if (numberOfPlates == 0) {
+            numberOfPlates += 1;
+        }
+
+        if (remainingSpace != 0) {
+            int totalSpaceRemaining = remainingSpace * numberOfPlates;
+            int initialTotalSpace = totalSpaceRemaining;
+            boolean keepGoing = true;
+            TrapezPlate previousPlate = new TrapezPlate();
+            int counter = 0;
+            int combinedPlateLengths;
+
+            for (TrapezPlate trapezPlate : trapezPlates) {
+
+                for (TrapezPlate plate : trapezPlates) {
+                    if (plate.getLength() + previousPlate.getLength() == initialTotalSpace) {
+                        trapezPlate = plate;
+                    }
+                }
+
+                combinedPlateLengths = previousPlate.getLength() + trapezPlate.getLength();
+
+
+                while (keepGoing) {
+
+                    totalSpaceRemaining -= trapezPlate.getLength();
+                    counter++;
+
+                    if (combinedPlateLengths == initialTotalSpace) {
+                        secondPlateLength = trapezPlate.getLength();
+                        thirdPlateLength = previousPlate.getLength();
+                        leftOverNumberOfPlates = 1;
+                        counter = 1;
+
+                        if (secondPlateLength == finalPlate.getLength()) {
+                            numberOfPlates += 1;
+                            leftOverNumberOfPlates -= 1;
+                        }
+
+                        keepGoing = false;
+                    }
+
+                    if (totalSpaceRemaining < 0 && totalSpaceRemaining > -10) { // Sætter en grænse for hvor meget overskydende længde der må være.
+                        secondPlateLength = trapezPlate.getLength();
+                        leftOverNumberOfPlates = counter;
+                        keepGoing = false;
+                    }
+
+                    if (totalSpaceRemaining < 0) {
+
+                        secondPlateLength = trapezPlate.getLength();
+                        leftOverNumberOfPlates = counter;
+                        totalSpaceRemaining = initialTotalSpace;
+                        counter = 0;
+                        previousPlate =  trapezPlate;
+                        break;
+                    }
+
+                    if (totalSpaceRemaining == 0) {
+                        secondPlateLength = trapezPlate.getLength();
+                        if (counter > 1) {
+                            leftOverNumberOfPlates = counter;
+                        }
+
+                        keepGoing = false;
+                        break;
+
+                    }
+                }
+                int multi = initialTotalSpace * 2;
+                if (multi >= trapezPlate.getLength()) {
+                    remainderPlateLength = trapezPlate.getLength();
+                }
+            }
+        }
+
+        if (secondPlateLength == finalPlate.getLength()) {
+            numberOfPlates += leftOverNumberOfPlates;
+            leftOverNumberOfPlates = 0;
+            secondPlateLength = 0;
+        }
+
+        int finalPlateFullSize = finalPlate.getLength() * numberOfPlates;
+        int secondPlateFullSize = secondPlateLength * leftOverNumberOfPlates;
+        int combinedFullSizes = finalPlateFullSize + secondPlateFullSize;
+        int carportFullSize = length * calcNumberOfTrapezPlates(width);
+        int leftOverSpace = combinedFullSizes - carportFullSize;
+
+        if (combinedFullSizes > carportFullSize) {
+            for (TrapezPlate trapezPlate : trapezPlates) {
+                int determine = combinedFullSizes - trapezPlate.getLength();
+
+                if (determine <= carportFullSize) {
+                    if (trapezPlate.getLength() != finalPlate.getLength()) {
+                        secondPlateLength = trapezPlate.getLength();
+                        if (leftOverSpace > trapezPlate.getLength()) {
+                            numberOfPlates -= 1;
+                            leftOverNumberOfPlates += 1;
+                        } else {
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        if (remainderPlateLength != 0 && remainderPlateLength < secondPlateLength) {
+            if (finalPlate.getLength() == remainderPlateLength) {
+                numberOfPlates += 1;
+                secondPlateLength = 0;
+            } else {
+                secondPlateLength = remainderPlateLength;
+            }
+        }
+
+        if (secondPlateLength != 0 && leftOverNumberOfPlates == 0) {
+            leftOverNumberOfPlates = 1;
+            numberOfPlates -= 1;
+        }
+
+
+        System.out.println("Der skal bruges følgende tagplader: \n" + numberOfPlates + " x " + finalPlate.getLength() + " cm plader");
+        if (secondPlateLength > 0) {
+            System.out.println(leftOverNumberOfPlates + " x " + secondPlateLength + " cm plader");
+        }
+        if (thirdPlateLength != 0) {
+            System.out.println("1 x " + thirdPlateLength + " cm plader");
+        }
+        return 0;
     }
 
 
