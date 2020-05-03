@@ -1,8 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.LogicFacade;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.Order;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,12 +10,11 @@ public class FlatOrder extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
 
-        HttpSession session = request.getSession();
-
         int carportWidth = Integer.parseInt(request.getParameter("carportwidth"));
         int carportLength = Integer.parseInt(request.getParameter("carportlength"));
         int shedWidth = Integer.parseInt(request.getParameter("shedwidth"));
         int shedLength = Integer.parseInt(request.getParameter("shedlength"));
+
 
         String name = request.getParameter("name");
         String address = request.getParameter("address");
@@ -25,9 +22,10 @@ public class FlatOrder extends Command {
         int telephone = Integer.parseInt(request.getParameter("telephone"));
         String email = request.getParameter("email");
 
-        LogicFacade.insertOrder(1,carportWidth,carportLength,shedWidth,shedLength,telephone,1, name,address,email,postalCodeCity);
+        Order order = new Order(1, carportWidth, carportLength, shedWidth, shedLength, telephone);
+        Customer customer = new Customer(telephone, name, address, email, postalCodeCity);
 
-
+        request.setAttribute("orderId", OrderFacade.insertOrder(customer, order));
 
         return "receipt";
     }

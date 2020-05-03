@@ -4,7 +4,7 @@
 
 <title>Mine Ordrer</title>
 
-<h1 class="display-4" style="font-family: Roboto,sans-serif">Hej Igor</h1>
+<h1 class="display-4" style="font-family: Roboto,sans-serif">Hej ${sessionScope.customer.name}</h1>
 <br>
 <p class="lead" style="font-family: Roboto,sans-serif">Her kan du se status mm. på din ordre.</p>
 
@@ -12,6 +12,7 @@
     <thead>
     <tr>
         <th scope="col">Ordre nr.</th>
+        <th scope="col">Carport type</th>
         <th scope="col">Carport bredde</th>
         <th scope="col">Carport længde</th>
         <th scope="col">Skur bredde</th>
@@ -24,16 +25,17 @@
     </thead>
     <tbody>
     <tr>
-        <td>1</td>
-        <td>500 cm</td>
-        <td>600 cm</td>
-        <td>200 cm</td>
-        <td>150 cm</td>
-        <td>24/4/2020</td>
-        <td>$1.000.000</td>
-        <td>Godkendt</td>
+        <td>${sessionScope.order.order_id}</td>
+        <td>${sessionScope.carportType}</td>
+        <td>${sessionScope.order.carport_width}</td>
+        <td>${sessionScope.order.carport_length}</td>
+        <td>${sessionScope.order.shed_width}</td>
+        <td>${sessionScope.order.shed_length}</td>
+        <td>${sessionScope.order.date}</td>
+        <td>Mangler i tabel</td>
+        <td>${sessionScope.status}</td>
         <td><a href="FrontController?target=redirect&destination=checkout" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Bestil</a>
-            <a href="FrontController?target=redirect&destination=myorders" class="btn btn-danger btn-sm" role="button" aria-pressed="true">Afslå</a></td>
+            <a href="FrontController?target=redirect&destination=myorder" class="btn btn-danger btn-sm" role="button" aria-pressed="true">Afslå</a></td>
     </tr>
     </tbody>
 </table>

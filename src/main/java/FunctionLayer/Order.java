@@ -4,16 +4,18 @@ import java.sql.Date;
 
 public class Order {
 
-    int carport_id;
-    Date date;
-    int carport_width;
-    int carport_length;
-    int shed_width;
-    int shed_length;
-    int phone;
-    int status_id;
+    private int order_id;
+    private int carport_id;
+    private Date date;
+    private int carport_width;
+    private int carport_length;
+    private int shed_width;
+    private int shed_length;
+    private int phone;
+    private int status_id = 1;
 
-    public Order(int carport_id, Date date, int carport_width, int carport_length, int shed_width, int shed_length, int phone, int status_id) {
+    public Order(int order_id, int carport_id, Date date, int carport_width, int carport_length, int shed_width, int shed_length, int phone, int status_id) {
+        this.order_id = order_id;
         this.carport_id = carport_id;
         this.date = date;
         this.carport_width = carport_width;
@@ -22,6 +24,18 @@ public class Order {
         this.shed_length = shed_length;
         this.phone = phone;
         this.status_id = status_id;
+    }
+
+    public Order(int carport_id, int carport_width, int carport_length, int shed_width, int shed_length, int phone) {
+        this.carport_id = carport_id;
+        this.carport_width = carport_width;
+        this.carport_length = carport_length;
+        this.shed_width = shed_width;
+        this.shed_length = shed_length;
+        this.phone = phone;
+    }
+
+    public Order() {
     }
 
     public int getStatus_id() {
@@ -80,15 +94,24 @@ public class Order {
         this.phone = phone;
     }
 
-
-
-    public Order(int carport_id, int carport_width, int carport_length, int shed_width, int shed_length, int phone, int status_id) {
-        this.carport_id = carport_id;
-        this.carport_width = carport_width;
-        this.carport_length = carport_length;
-        this.shed_width = shed_width;
-        this.shed_length = shed_length;
-        this.phone = phone;
-        this.status_id = status_id;
+    public int getOrder_id() {
+        return order_id;
     }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setPhone(int phone) {
+        this.phone = phone;
+    }
+
 }

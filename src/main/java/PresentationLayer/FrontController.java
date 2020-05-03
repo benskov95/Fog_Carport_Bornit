@@ -8,6 +8,7 @@ package PresentationLayer;
 import FunctionLayer.LoginSampleException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,7 @@ public class FrontController extends HttpServlet {
      @throws IOException if an I/O error occurs
      */
     protected void processRequest( HttpServletRequest request, HttpServletResponse response )
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
 
         try {
             request.setCharacterEncoding("UTF-8");
@@ -62,7 +63,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        processRequest( request, response );
+        try {
+            processRequest( request, response );
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**
@@ -76,7 +81,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        processRequest( request, response );
+        try {
+            processRequest( request, response );
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**

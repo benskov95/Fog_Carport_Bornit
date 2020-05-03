@@ -40,13 +40,12 @@
                                     <h3 style="font-family: Roboto Condensed; font-size: 32px">LOG IND</h3>
                                     <br>
                                     <form action="FrontController" method="post">
-                                        <input type="hidden" name="target" value="redirect">
-                                        <input type="hidden" name="destination" value="myorders">
+                                        <input type="hidden" name="target" value="login">
                                         <div class="form-group">
                                             <label for="phoneNumber">Telefon nr.</label>
                                             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
-                                            <label for="orderNumber">Ordre nr.</label>
-                                            <input type="text" class="form-control" id="orderNumber" name="orderNumber">
+                                            <label for="orderId">Ordre nr.</label>
+                                            <input type="text" class="form-control" id="orderId" name="orderId">
                                         </div>
                                         <button type="submit" class="btn btn-primary">Log ind</button>
                                     </form>

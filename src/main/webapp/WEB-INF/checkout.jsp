@@ -26,7 +26,7 @@
                     Forventet leveringstid: 12-14 dage.
                     <br>
                     <br>
-                    <a href="FrontController?target=redirect&destination=myorders" class="btn btn-primary" role="button" aria-pressed="true">Tilbage til ordreside</a>
+                    <a href="FrontController?target=redirect&destination=myorder" class="btn btn-primary" role="button" aria-pressed="true">Tilbage til ordreside</a>
                 </h3>
             </div>
         </div>

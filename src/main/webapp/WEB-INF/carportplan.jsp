@@ -9,7 +9,7 @@
 
 <h1 style="font-family: Roboto,sans-serif">Carport tegning for ordre nr. 123</h1>
 <p class="lead">Her ses din carports dimensioner fra fugleperspektiv.</p>
-<a href="FrontController?target=redirect&destination=myorders" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
+<a href="FrontController?target=redirect&destination=myorder" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
 
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"

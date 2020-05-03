@@ -1,6 +1,7 @@
 package DBAccess;
 
 import FunctionLayer.Customer;
+import FunctionLayer.LoginSampleException;
 import FunctionLayer.User;
 
 import java.sql.*;
@@ -29,8 +30,8 @@ public class CustomerMapper {
                String name = resultSet.getString("name");
                String address = resultSet.getString("address");
                String email = resultSet.getString("email");
-               String zip_code = resultSet.getString("zip_code");
-               customerArrayList.add(new Customer(phone,name,address,email,zip_code));
+               String zipCode = resultSet.getString("zip_code");
+               customerArrayList.add(new Customer(phone, name, address, email, zipCode));
 
 
            }
@@ -42,6 +43,29 @@ public class CustomerMapper {
        return customerArrayList;
    }
 
+    public static Customer getCustomer (int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
+
+        Connection con = Connector.connection();
+        try {
+            String SQL = "select * from fog.customer where phone = ?";
+            PreparedStatement ps = con.prepareStatement( SQL );
+            ps.setInt( 1, phone);
+            ResultSet rs = ps.executeQuery();
+            if ( rs.next() ) {
+                int phoneNumber = rs.getInt("phone");
+                String name = rs.getString("name");
+                String address= rs.getString("address");
+                String email = rs.getString("email");
+                String zipCode = rs.getString("zip_code");
+                Customer customer = new Customer(phoneNumber, name, address, email, zipCode);
+                return customer;
+            }
+        } catch ( SQLException ex ) {
+            ex.printStackTrace();
+            throw new LoginSampleException(ex.getMessage());
+        }
+        return null;
+    }
 
 
 

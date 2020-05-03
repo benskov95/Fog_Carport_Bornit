@@ -14,7 +14,7 @@
                 <br>
                 <br>
                 <h2>
-                    Dit ordrenr er: 34918.
+                    Dit ordrenr er: ${requestScope.orderId}.
                 </h2>
                 <br>
                 <br>

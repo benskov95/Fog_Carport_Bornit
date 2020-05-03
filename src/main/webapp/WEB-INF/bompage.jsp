@@ -7,7 +7,7 @@
 <h1 style="font-family: Roboto">Stykliste for ordre nr. 123</h1>
 <p class="lead">Her kan du se styklisten til din carport.</p>
 
-<a href="FrontController?target=redirect&destination=myorders" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
+<a href="FrontController?target=redirect&destination=myorder" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
 <br>
 <br>
 

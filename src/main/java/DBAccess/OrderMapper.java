@@ -6,12 +6,14 @@ import FunctionLayer.Order;
 
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class OrderMapper {
 
-    public static void insertOrder(Customer customer, Order order) {
+    public static int insertOrder(Customer customer, Order order) {
 
+        int generatedId = 0;
         String sqlCustomer = "INSERT INTO fog.customer (phone, name, address, email, zip_code) VALUES (?,?,?,?,?)";
         String sqlOrder = "INSERT INTO fog.order (cp_id, carport_width, carport_length, shed_width, shed_length, phone, status_id ) VALUES (?,?,?,?,?,?,?)";
 
@@ -34,49 +36,52 @@ public class OrderMapper {
                     ps1.setInt(4, order.getShed_width());
                     ps1.setInt(5, order.getShed_length());
                     ps1.setInt(6, order.getPhone());
-                    ps1.setInt(7, 1);
+                    ps1.setInt(7, order.getStatus_id());
                     ps1.executeUpdate();
+
+                    ResultSet idResultset = ps1.getGeneratedKeys();
+                    if (idResultset.next()){
+                        generatedId = idResultset.getInt(1);
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     con.rollback();
                 }
-
                 con.commit();
                 con.setAutoCommit(true);
-
             }
 
-
         } catch (Exception e) {
-
-
+            e.printStackTrace();
         }
 
+        return generatedId;
     }
-    public static Order getMyOrder (int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static Order getMyOrder(int orderId, int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
 
-
-        String sqlOrders = "SELECT * fog.order WHERE phone = ?";
         Connection con = Connector.connection();
-        try  (  PreparedStatement ps = con.prepareStatement(sqlOrders);
+        String sqlOrders = "SELECT * from fog.order WHERE order_id = ? AND phone = ?";
+        try  (  PreparedStatement ps = con.prepareStatement(sqlOrders)) {
 
-                ResultSet resultSet = ps.executeQuery() )
-        {
-            while (resultSet.next()) {
-                ps.setInt(1,phone);
+            ps.setInt(1,orderId);
+            ps.setInt(2, phone);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
                 int order_id = resultSet.getInt("order_id");
+                int cp_id = resultSet.getInt("cp_id");
                 Date date = resultSet.getDate("date");
                 int carport_width = resultSet.getInt("carport_width");
                 int carport_length = resultSet.getInt("carport_length");
                 int shed_width = resultSet.getInt("shed_width");
                 int shed_length = resultSet.getInt("shed_length");
-                int phone1 = resultSet.getInt("phone");
+                int phoneNumber = resultSet.getInt("phone");
                 int status_id = resultSet.getInt("status_id");
 
 
-                Order myOrder  = new Order(order_id,date,carport_width,carport_length,shed_width,shed_length,phone1,status_id);
-
-                return myOrder;
+                return new Order(order_id, cp_id, date, carport_width, carport_length, shed_width, shed_length, phoneNumber, status_id);
             }
         } catch (SQLException e) {
             System.out.println("Fejl i connection til database");
@@ -86,17 +91,62 @@ public class OrderMapper {
 
     }
 
-    public static void deleteOrder (int order_id) throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static void deleteOrder(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
+
         String sql = "DELETE FROM fog.order\n" +
                 "WHERE order_id = ?";
         Connection con = Connector.connection();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, order_id);
+            ps.setInt(1, orderId);
             ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Fejl i connection til database");
             e.printStackTrace();
         }
+    }
+
+    public static String getOrderStatus(int statusId) throws SQLException, ClassNotFoundException {
+
+        Connection con = Connector.connection();
+
+        String SQL = "SELECT * from fog.status WHERE status_id = ?";
+        try  (  PreparedStatement ps = con.prepareStatement(SQL)) {
+
+            ps.setInt(1, statusId);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("status");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    public static String getCarportType(int typeId) throws SQLException, ClassNotFoundException {
+
+        Connection con = Connector.connection();
+
+        String SQL = "SELECT * from fog.type WHERE type_id = ?";
+        try  (  PreparedStatement ps = con.prepareStatement(SQL)) {
+
+            ps.setInt(1, typeId);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getString("type");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+        return null;
+
     }
 }

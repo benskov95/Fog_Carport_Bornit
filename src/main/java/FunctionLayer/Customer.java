@@ -1,11 +1,12 @@
 package FunctionLayer;
 
 public class Customer {
-    int phone;
-    String name;
-    String address;
-    String email;
-    String zip_code;
+
+    private int phone;
+    private String name;
+    private String address;
+    private String email;
+    private String zip_code;
 
     public Customer(int phone, String name, String address, String email, String zip_code) {
         this.phone = phone;
@@ -13,6 +14,9 @@ public class Customer {
         this.address = address;
         this.email = email;
         this.zip_code = zip_code;
+    }
+
+    public Customer() {
     }
 
     public int getPhone() {
