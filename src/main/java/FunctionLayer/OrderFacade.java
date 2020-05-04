@@ -3,6 +3,7 @@ package FunctionLayer;
 import DBAccess.OrderMapper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class OrderFacade {
 
@@ -24,5 +25,8 @@ public class OrderFacade {
 
     public static String getCarportType(int typeId) throws SQLException, ClassNotFoundException {
         return OrderMapper.getCarportType(typeId);
+    }
+    public static ArrayList<Order> getAllOrdersByStatusId (int status_id) throws SQLException, ClassNotFoundException {
+        return OrderMapper.getAllOrderByStatus(status_id);
     }
 }
