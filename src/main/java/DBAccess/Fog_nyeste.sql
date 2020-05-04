@@ -1,15 +1,15 @@
 CREATE DATABASE  IF NOT EXISTS `fog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `fog`;
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.15, for macos10.14 (x86_64)
 --
--- Host: 127.0.0.1    Database: fog
+-- Host: localhost    Database: fog
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -23,7 +23,7 @@ USE `fog`;
 
 DROP TABLE IF EXISTS `bill_of_materials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `bill_of_materials` (
   `bom_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -56,7 +56,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `carport` (
   `carport_id` int(11) NOT NULL AUTO_INCREMENT,
   `type_id` int(11) NOT NULL,
@@ -82,7 +82,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carport_length`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `carport_length` (
   `cp_length_id` int(11) NOT NULL AUTO_INCREMENT,
   `size` int(11) NOT NULL,
@@ -106,7 +106,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carport_parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `carport_parts` (
   `pk_carport_part_id` int(11) NOT NULL AUTO_INCREMENT,
   `material_id` int(11) NOT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE `carport_parts` (
   PRIMARY KEY (`pk_carport_part_id`),
   KEY `fk_carport_id_idx` (`carport_id`),
   CONSTRAINT `fk_carport_id` FOREIGN KEY (`carport_id`) REFERENCES `carport` (`carport_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,7 +124,7 @@ CREATE TABLE `carport_parts` (
 
 LOCK TABLES `carport_parts` WRITE;
 /*!40000 ALTER TABLE `carport_parts` DISABLE KEYS */;
-INSERT INTO `carport_parts` VALUES (27,32,'understernbrædder til for & bag ende',2),(28,32,'understernbrædder til siderne',2),(29,20,'oversternbrædder til forenden',2),(30,20,'oversternbrædder til siderne',2),(31,65,'til z på bagside af dør',2),(32,54,'løsholter til skur gavle',2),(33,54,'løsholter til skur sider',2),(34,38,'Remme i sider, sadles ned i stolper',2),(35,38,'Spær, monteres på rem',2),(36,46,'Stolper nedgraves 90 cm. i jord',2),(37,1,'til beklædning af skur 1 på 2',2),(38,1,'vandbrædt på stern i sider',2),(39,1,'vandbrædt på stern i forende',2),(40,69,'tagplader monteres på spær',2),(41,91,'Skruer til tagplader',2),(42,92,'Til vindkryds på spær',2),(43,93,'Til montering af spær på rem',2),(44,94,'Til montering af spær på rem',2),(45,95,'Til montering af stern&vandbrædt',2),(46,96,'Til montering af universalbeslag + hulbånd',2),(47,97,'Til montering af rem på stolper',2),(48,98,'Til montering af rem på stolper',2),(49,99,'til montering af yderste beklædning',2),(50,100,'til montering af inderste beklædning',2),(51,101,'Til lås på dør i skur',2),(52,102,'Til skurdør',2),(53,103,'Til montering af løsholter i skur',2);
+INSERT INTO `carport_parts` VALUES (27,32,'understernbrædder til for & bag ende',2),(28,32,'understernbrædder til siderne',2),(29,20,'oversternbrædder til forenden',2),(30,20,'oversternbrædder til siderne',2),(31,65,'til z på bagside af dør',2),(32,54,'løsholter til skur gavle',2),(33,54,'løsholter til skur sider',2),(34,38,'Remme i sider, sadles ned i stolper',2),(35,38,'Spær, monteres på rem',2),(36,46,'Stolper nedgraves 90 cm. i jord',2),(37,1,'til beklædning af skur 1 på 2',2),(38,1,'vandbrædt på stern i sider',2),(39,1,'vandbrædt på stern i forende',2),(40,69,'tagplader monteres på spær',2),(41,91,'Skruer til tagplader',2),(42,92,'Til vindkryds på spær',2),(43,93,'Til montering af spær på rem',2),(44,94,'Til montering af spær på rem',2),(45,95,'Til montering af stern&vandbrædt',2),(46,96,'Til montering af universalbeslag + hulbånd',2),(47,97,'Til montering af rem på stolper',2),(48,98,'Til montering af rem på stolper',2),(49,99,'til montering af yderste beklædning',2),(50,100,'til montering af inderste beklædning',2),(51,101,'Til lås på dør i skur',2),(52,102,'Til skurdør',2),(53,103,'Til montering af løsholter i skur',2),(54,32,'understernbrædder til for & bag ende',1),(55,32,'understernbrædder til siderne',1),(56,20,'oversternbrædder til forenden',1),(57,20,'oversternbrædder til siderne',1),(58,38,'Remme i sider, sadles ned i stolper',1),(59,38,'Spær, monteres på rem',1),(60,46,'Stolper nedgraves 90 cm. i jord',1),(61,1,'vandbrædt på stern i sider',1),(62,1,'vandbrædt på stern i forende',1),(63,69,'tagplader monteres på spær',1),(64,91,'Skruer til tagplader',1),(65,92,'Til vindkryds på spær',1),(66,93,'Til montering af spær på rem',1),(67,94,'Til montering af spær på rem',1),(68,95,'Til montering af stern&vandbrædt',1),(69,96,'Til montering af universalbeslag + hulbånd',1),(70,97,'Til montering af rem på stolper',1),(71,98,'Til montering af rem på stolper',1);
 /*!40000 ALTER TABLE `carport_parts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,7 +134,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `carport_width`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `carport_width` (
   `cp_width_id` int(11) NOT NULL AUTO_INCREMENT,
   `size` int(11) NOT NULL,
@@ -158,7 +158,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `customer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `customer` (
   `phone` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
@@ -186,7 +186,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `link_material_size`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `link_material_size` (
   `pk_link_material_size` int(11) NOT NULL AUTO_INCREMENT,
   `link_material_id` int(11) NOT NULL,
@@ -215,7 +215,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `link_materials_parts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `link_materials_parts` (
   `part_id` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
@@ -241,7 +241,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `materials`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `materials` (
   `material_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -269,7 +269,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `order` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `cp_id` int(11) NOT NULL,
@@ -306,7 +306,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shed_length`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `shed_length` (
   `shed_length_id` int(11) NOT NULL AUTO_INCREMENT,
   `size` varchar(45) DEFAULT NULL,
@@ -330,7 +330,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `shed_width`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `shed_width` (
   `shed_width_id` int(11) NOT NULL AUTO_INCREMENT,
   `size` varchar(45) DEFAULT NULL,
@@ -354,7 +354,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `size`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `size` (
   `size_id` int(11) NOT NULL AUTO_INCREMENT,
   `size` int(11) NOT NULL,
@@ -378,7 +378,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `status` (
   `status_id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(45) NOT NULL,
@@ -402,7 +402,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `type` (
   `type_id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
@@ -426,7 +426,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `unit` (
   `unit_id` int(11) NOT NULL AUTO_INCREMENT,
   `unit_type` varchar(45) NOT NULL,
@@ -453,4 +453,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-04 10:51:17
+-- Dump completed on 2020-05-04 11:34:30
