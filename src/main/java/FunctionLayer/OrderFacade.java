@@ -29,4 +29,8 @@ public class OrderFacade {
     public static ArrayList<Order> getAllOrdersByStatusId (int status_id) throws SQLException, ClassNotFoundException {
         return OrderMapper.getAllOrderByStatus(status_id);
     }
+
+    public static void updateStatus (int order_id, int status_id) throws LoginSampleException {
+        OrderMapper.updateStatus(order_id,status_id);
+    }
 }

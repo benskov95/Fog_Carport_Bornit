@@ -184,6 +184,29 @@ public class OrderMapper {
         return orderlist;
     }
 
+    public static void updateStatus(int order_id, int status_id) throws LoginSampleException {
+
+
+        String sql = "update fog.order set status_id = ? where order_id = ?";
+
+        try{
+            Connection con = Connector.connection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1,status_id);
+            ps.setInt(2,order_id);
+            ps.executeUpdate();
+        }
+
+        catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+
+        }
+
+    }
+
+
 
 
 }
