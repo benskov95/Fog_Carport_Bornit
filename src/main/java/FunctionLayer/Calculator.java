@@ -1,26 +1,58 @@
 package FunctionLayer;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Calculator {
 
-    public void type1Calc(int length, int width) {
+    public void type1Calc(int length, int width) throws SQLException, ClassNotFoundException {
+        ArrayList<Material> materialHolder = new ArrayList<>();
         int numberOfBeams = 2;
         int numberOfPerforatedBands = 2;
         int numberOfFasciaScrewPacks = 1;
 
-        calcNumberOfPosts(length, width);
-        calcNumberOfRafters(length);
-        calcNumberOfFascia(width, true, false); // Understernbrædder til for og bagende.
-        calcNumberOfFascia(length, true, true); // Understernbrædder til siderne.
-        calcNumberOfFascia(width, false, false); // Oversternbrædder til forenden.
-        calcNumberOfFascia(length, true, true); // Oversternbrædder til siderne.
-        calcNumberOfFascia(width, false, false); // Vandbræt til front.
-        calcNumberOfFascia(length, true, true); // Vandbræt til siderne.
-        calcNumberOfBottomScrewPacks(0); // <-- Placeholder værdi
-        calcNumberOfUniversalBrackets(0); // <-- Placeholder værdi
-        calcNumberOfBracketScrewPacks(0); // <-- Placeholder værdi
-        calcNumberOfCarriageBolts(0, 0); // <-- Placeholder værdi
-        calcNumberOfSquareWashers(0); // <-- Placeholder værdi
+        int posts = calcNumberOfPosts(length, width);
+        int rafters = calcNumberOfRafters(length);
+        int underFasciaFrontBackQuantity = calcNumberOfFascia(width, true, false); // Understernbrædder til for og bagende.
+        int underFasciaFrontBackLength = fasciaLength(false);
+        int underFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Understernbrædder til siderne.
+        int underFasciaSidesLength = fasciaLength(true);
+        int overFasciaFrontQuantity = calcNumberOfFascia(width, false, false); // Oversternbrædder til forenden.
+        int overFasciaFrontLength = fasciaLength(false);
+        int overFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Oversternbrædder til siderne.
+        int overFasciaSidesLength = fasciaLength(true);
+        int waterFasciaFrontQuantity = calcNumberOfFascia(width, false, false); // Vandbræt til front.
+        int waterFasciaFrontLength = fasciaLength(false);
+        int waterFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Vandbræt til siderne.
+        int waterFasciaSidesLength = fasciaLength(true);
+        int plates = calcNumberOfTrapezPlates(width);
+        int plateSizes = calcLengthOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
+        int bottomScrews = calcNumberOfBottomScrewPacks(plates);
+        int brackets = calcNumberOfUniversalBrackets(rafters);
+        int bracketScrews = calcNumberOfBracketScrewPacks(brackets);
+        int carriageBolts = calcNumberOfCarriageBolts(posts, numberOfBeams);
+        int squareWashers = calcNumberOfSquareWashers(posts);
+
+        materialHolder.add(new Material(38, width, numberOfBeams));
+        materialHolder.add(new Material(92, 0, numberOfPerforatedBands));
+        materialHolder.add(new Material(95, 0, numberOfFasciaScrewPacks));
+        materialHolder.add(new Material(46, 300, posts)); // Kun en højde?
+        materialHolder.add(new Material(38, width, rafters));
+        materialHolder.add(new Material(32, underFasciaFrontBackLength, underFasciaFrontBackQuantity));
+        materialHolder.add(new Material(32, underFasciaSidesLength, underFasciaSidesQuantity));
+        materialHolder.add(new Material(20, overFasciaFrontLength,  overFasciaFrontQuantity));
+        materialHolder.add(new Material(20, overFasciaSidesLength, overFasciaSidesQuantity));
+        materialHolder.add(new Material(1, waterFasciaFrontLength, waterFasciaFrontQuantity));
+        materialHolder.add(new Material(1, waterFasciaSidesLength, waterFasciaSidesQuantity));
+        materialHolder.add(new Material(69, plateSizes, plates));
+        materialHolder.add(new Material(91, 0, bottomScrews));
+        materialHolder.add(new Material(93, 0, brackets));
+        materialHolder.add(new Material(94, 0, brackets));
+        materialHolder.add(new Material(96, 0, bracketScrews));
+        materialHolder.add(new Material(97, 0, carriageBolts));
+        materialHolder.add(new Material(98, 0, squareWashers));
+
+
+
 
     }
 
@@ -43,7 +75,7 @@ public class Calculator {
         return count;
     }
 
-    public static int calcSizeOfTrapezPlates(int length, int width, ArrayList<Integer> plateLengthsFromDB) {
+    public static int calcLengthOfTrapezPlates(int length, int width, ArrayList<Integer> plateLengthsFromDB) {
 
         // todo - Skriver bare en todo for at gøre det her tydeligt: Da metoden potentielt
         // todo - kan regne flere værdier ud (hvis der bruges mere end én pladestørrelse)
@@ -251,6 +283,19 @@ public class Calculator {
         }
 
         return numberOfPlates;
+    }
+
+    public int fasciaLength(boolean isSides) {
+
+        int fasciaSize;
+
+        if (isSides) {
+            fasciaSize = 540;
+        } else {
+            fasciaSize = 360;
+        }
+
+        return fasciaSize;
     }
 
 
