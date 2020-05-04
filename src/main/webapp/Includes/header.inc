@@ -49,6 +49,10 @@
                                         </div>
                                         <button type="submit" class="btn btn-primary">Log ind</button>
                                     </form>
+                                    <li class="nav-item">
+                                                        <a class="nav-link" href="FrontController?target=allOrders"
+                                                           style="font-family: Bebas Neue; font-size: 32px; color: white">Forhandler Login</a>
+                                                    </li>
                                 </div>
                                 <div class="modal-footer">
                                 </div>

@@ -7,6 +7,7 @@ import FunctionLayer.Order;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class OrderMapper {
@@ -149,4 +150,41 @@ public class OrderMapper {
         return null;
 
     }
+    public static ArrayList<Order> getAllOrderByStatus (int status_id) throws SQLException, ClassNotFoundException {
+
+        ArrayList<Order> orderlist = new ArrayList<>();
+        String sqlOrders = "SELECT * FROM fog.order\n" +
+                "Where status_id = " + status_id;
+        Connection con = Connector.connection();
+        try  (  PreparedStatement ps = con.prepareStatement(sqlOrders);
+
+                ResultSet resultSet = ps.executeQuery()
+                )
+
+        {
+            while (resultSet.next()) {
+                int order_id = resultSet.getInt("order_id");
+                int cp_id = resultSet.getInt("cp_id");
+                Date date = resultSet.getDate("date");
+                int carport_width = resultSet.getInt("carport_width");
+                int carport_length = resultSet.getInt("carport_length");
+                int shed_width = resultSet.getInt("shed_width");
+                int shed_length = resultSet.getInt("shed_length");
+                int phone = resultSet.getInt("phone");
+                int statusid = resultSet.getInt("status_id");
+
+
+                Order order = new Order(order_id,cp_id,date,carport_width,carport_length,shed_width,shed_length,phone,statusid);
+                orderlist.add(order);
+            }
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+        return orderlist;
+    }
+
+
+
 }
+
