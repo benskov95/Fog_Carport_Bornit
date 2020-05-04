@@ -1,9 +1,6 @@
 package FunctionLayer;
 
-import DBAccess.CustomerMapper;
 import DBAccess.InitializeMapper;
-import DBAccess.OrderMapper;
-import DBAccess.UserMapper;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,11 +11,11 @@ import java.util.ArrayList;
  */
 public class LogicFacade {
 
-    public static User createUser( String email, String password ) throws LoginSampleException {
-        User user = new User(email, password, "customer");
-        UserMapper.createUser( user );
-        return user;
-    }
+//    public static User createUser( String email, String password ) throws LoginSampleException {
+//        User user = new User(email, password, "customer");
+//        UserMapper.createUser( user );
+//        return user;
+//    }
 
     public static ArrayList<Integer> getCWList() throws LoginSampleException, SQLException, ClassNotFoundException {
         return InitializeMapper.getCarportWidth();

@@ -2,6 +2,7 @@ package DBAccess;
 
 import FunctionLayer.CarPortPart;
 import FunctionLayer.Customer;
+import FunctionLayer.Material;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ public class CarportPartsMapper {
 
         ArrayList<CarPortPart> carportPartsArrayList = new ArrayList<>();
 
-        String sql = "SELECT * fog.carport_parts";
+        String sql = "select * from fog.carport_parts";
         Connection con = Connector.connection();
 
         try {
@@ -23,7 +24,7 @@ public class CarportPartsMapper {
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()) {
 
-                int carPortPartId = resultSet.getInt("pk_carport_part_idgi");
+                int carPortPartId = resultSet.getInt("pk_carport_part_id");
                 int materialId = resultSet.getInt("material_id");
                 String beskrivelse = resultSet.getString("beskrivelse");
                 int carPortId = resultSet.getInt("carport_id");
@@ -37,4 +38,62 @@ public class CarportPartsMapper {
 
         return carportPartsArrayList;
     }
+
+    public static void getCarportPartIds(ArrayList<Material> materials, int carportTypeId) throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from fog.carport_parts where carport_id = ?";
+        Connection con = Connector.connection();
+        int partId;
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, carportTypeId);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+
+                int dbMaterialId = resultSet.getInt("material_id");
+
+                for (Material material : materials) {
+
+                    if (dbMaterialId == material.getMaterialId() && material.getCarportPartId() == 0) {
+                        partId = resultSet.getInt("pk_carport_part_id");
+                        material.setCarportPartId(partId);
+                        if (dbMaterialId == 69) {
+                            material.roofCarportPartIdHelper(partId, materials);
+                        }
+                        break;
+                }
+            }
+        }
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+    }
+
+    public static void getCarportPartDescriptions(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from fog.carport_parts where pk_carport_part_id = ?";
+        Connection con = Connector.connection();
+
+        for (Material material : materials) {
+
+            try {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ps.setInt(1, material.getCarportPartId());
+                ResultSet resultSet = ps.executeQuery();
+                if (resultSet.next()) {
+                    material.setCarportPartDescription(resultSet.getString("beskrivelse"));
+
+                }
+            } catch (SQLException e) {
+                System.out.println("Fejl i connection til database");
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+
 }

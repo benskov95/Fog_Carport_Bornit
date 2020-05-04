@@ -4,6 +4,9 @@
 
 <title>Stykliste</title>
 
+Læs materialerne ind i to forskellige arraylists, afhængigt af unit id -
+ellers kan materialerne ikke adskilles i de to kategorier.
+
 <h1 style="font-family: Roboto">Stykliste for ordre nr. 123</h1>
 <p class="lead">Her kan du se styklisten til din carport.</p>
 

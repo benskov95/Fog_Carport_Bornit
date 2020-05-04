@@ -2,7 +2,6 @@ package DBAccess;
 
 import FunctionLayer.Customer;
 import FunctionLayer.LoginSampleException;
-import FunctionLayer.User;
 
 import java.sql.*;
 import java.util.ArrayList;

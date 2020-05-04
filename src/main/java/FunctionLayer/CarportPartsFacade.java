@@ -12,4 +12,12 @@ public class CarportPartsFacade {
         return CarportPartsMapper.getCarportParts();
     }
 
+    public static void getCarportPartIds(ArrayList<Material> materials, int carportTypeId) throws SQLException, ClassNotFoundException {
+        CarportPartsMapper.getCarportPartIds(materials, carportTypeId);
+    }
+
+    public static void getCarportPartDescriptions(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
+        CarportPartsMapper.getCarportPartDescriptions(materials);
+    }
+
 }

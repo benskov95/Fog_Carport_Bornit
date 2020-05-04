@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import java.util.ArrayList;
+
 public class Material {
 
     private int materialId;
@@ -9,7 +11,11 @@ public class Material {
     private int materialSizeId;
     private int quantity;
     private int size;
-    private int sum = quantity * price;
+    private int sizeId;
+    private int sizeMaterialId;
+    private int carportPartId;
+    private String carportPartDescription;
+    private int sum;
 
     public Material(int materialId, String materialName, int unitId, int price, int materialSizeId, int quantity) {
         this.materialId = materialId;
@@ -27,6 +33,14 @@ public class Material {
     }
 
     public Material() {
+    }
+
+    public void roofCarportPartIdHelper(int carportPartId, ArrayList<Material> materials) {
+        for (Material material : materials) {
+            if (material.getMaterialId() == 69) {
+                material.setCarportPartId(carportPartId);
+            }
+        }
     }
 
     public String getMaterialName() {
@@ -70,7 +84,8 @@ public class Material {
     }
 
     public int getSum() {
-        return sum;
+        this.sum = this.quantity * this.price;
+        return this.sum;
     }
 
     public void setSum(int sum) {
@@ -85,11 +100,43 @@ public class Material {
         this.size = size;
     }
 
+    public int getSizeId() {
+        return sizeId;
+    }
+
+    public void setSizeId(int sizeId) {
+        this.sizeId = sizeId;
+    }
+
+    public int getSizeMaterialId() {
+        return sizeMaterialId;
+    }
+
+    public void setSizeMaterialId(int sizeMaterialId) {
+        this.sizeMaterialId = sizeMaterialId;
+    }
+
     public int getMaterialId() {
         return materialId;
     }
 
     public void setMaterialId(int materialId) {
         this.materialId = materialId;
+    }
+
+    public int getCarportPartId() {
+        return carportPartId;
+    }
+
+    public void setCarportPartId(int carportPartId) {
+        this.carportPartId = carportPartId;
+    }
+
+    public String getCarportPartDescription() {
+        return carportPartDescription;
+    }
+
+    public void setCarportPartDescription(String carportPartDescription) {
+        this.carportPartDescription = carportPartDescription;
     }
 }
