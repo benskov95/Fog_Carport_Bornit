@@ -12,7 +12,6 @@ public class Material {
     private int quantity;
     private int size;
     private int sizeId;
-    private int sizeMaterialId;
     private int carportPartId;
     private String carportPartDescription;
     private int sum;
@@ -106,14 +105,6 @@ public class Material {
 
     public void setSizeId(int sizeId) {
         this.sizeId = sizeId;
-    }
-
-    public int getSizeMaterialId() {
-        return sizeMaterialId;
-    }
-
-    public void setSizeMaterialId(int sizeMaterialId) {
-        this.sizeMaterialId = sizeMaterialId;
     }
 
     public int getMaterialId() {
