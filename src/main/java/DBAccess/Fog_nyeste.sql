@@ -2,7 +2,7 @@ CREATE DATABASE  IF NOT EXISTS `fog` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLL
 USE `fog`;
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: fog
+-- Host: 127.0.0.1    Database: fog
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -28,10 +28,15 @@ CREATE TABLE `bill_of_materials` (
   `bom_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
+  `material_size_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `sum` int(11) NOT NULL,
   PRIMARY KEY (`bom_id`),
   KEY `fk_order_id_idx` (`order_id`),
   KEY `fk_material_id_idx` (`material_id`),
+  KEY `fk_id_size_idx` (`material_size_id`),
   CONSTRAINT `fk_material_id` FOREIGN KEY (`material_id`) REFERENCES `materials` (`material_id`),
+  CONSTRAINT `fk_material_size_id` FOREIGN KEY (`material_size_id`) REFERENCES `link_material_size` (`pk_link_material_size`),
   CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -171,7 +176,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (28261990,'Pelle','Smedeløkken 66','robin@nowhere.com','3770 Allinge'),(42425675,'Pelle','Køkkenvej 55','someone@robin.com','fkaælfkælsa');
+INSERT INTO `customer` VALUES (1337,'Henrik','Sologade 30','henrik@glenrik.com','4000 Roskilde'),(12381932,'Timmy','Solvej 409','g@g.dk','3700 Rønne'),(19029312,'Bobby','Gladegade 84','bob@swop.com','3700 Rønne'),(19202122,'Ivar','Gammelgade 11','rynkeby@gammeldansk.dk','3700 Rønne'),(42425675,'Pelle','Køkkenvej 55','someone@robin.com','fkaælfkælsa'),(81928321,'Joe','Hahagade 13','hmm@ja.dk','3700 Rønne'),(123454321,'Leif','Grædegade 25','krølle@bølle.dk','BOINGHOLM');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +287,7 @@ CREATE TABLE `order` (
   CONSTRAINT `fk_cp_id` FOREIGN KEY (`cp_id`) REFERENCES `carport` (`carport_id`),
   CONSTRAINT `fk_phone` FOREIGN KEY (`phone`) REFERENCES `customer` (`phone`),
   CONSTRAINT `fk_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,7 +296,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,1,'2020-05-01 10:52:08',270,630,0,0,42425675,1);
+INSERT INTO `order` VALUES (1,1,'2020-05-01 10:52:08',270,630,0,0,42425675,1),(2,1,'2020-05-01 14:00:52',300,540,0,0,123454321,1),(3,1,'2020-05-03 13:54:52',360,450,0,0,1337,1),(4,1,'2020-05-03 14:02:38',600,780,0,0,19202122,1),(5,1,'2020-05-03 14:05:21',450,600,0,0,81928321,1),(6,1,'2020-05-03 14:07:19',510,360,0,0,19029312,1),(7,1,'2020-05-04 07:40:55',330,300,0,0,12381932,1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,4 +453,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-01 12:53:11
+-- Dump completed on 2020-05-04 10:51:17

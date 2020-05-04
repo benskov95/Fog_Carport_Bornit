@@ -51,10 +51,13 @@ public class Calculator {
         // todo - denne klase, som så kan bruges i type1Calc metoden når al styklisteinfo
         // todo - skal smides op til databasen.
 
+        final int overhang = 5;
+        final int overlap = 20;
         int initialLength = length;
+        length += overhang;
         ArrayList<TrapezPlate> trapezPlates = new ArrayList<>();
-        int numberOfPlates;
-        int leftOverNumberOfPlates = 0;
+        int numberOfPlates = 0;
+        int leftOverNumberOfPlates = numberOfPlates;
         int count = 0;
         int remainder = 0;
         int excess = 0;
@@ -96,6 +99,7 @@ public class Calculator {
                     System.out.println("Længde: " + plateLength +  " og antal på langs: " + count);
                     System.out.println("Mangel: " + remainder + "\n" + "overskud: " + excess + "\n");
                     length = initialLength;
+                    remainder += overlap;
                     trapezPlates.add(new TrapezPlate(plateLength, count, remainder, excess));
                     count = 0;
                     break;
@@ -136,8 +140,7 @@ public class Calculator {
 
 
         }
-        int lengthWithOverlap = initialLength + 20; //Der skal være et overlap på 20 cm på tagpladerne.
-        int remainingSpace = lengthWithOverlap - (finalPlate.getLength() * finalPlate.getAmount());
+        int remainingSpace = initialLength - (finalPlate.getLength() * finalPlate.getAmount());
         numberOfPlates = finalPlate.getAmount() * calcNumberOfTrapezPlates(width);
 
         if (numberOfPlates == 0) {
@@ -247,29 +250,7 @@ public class Calculator {
             }
         }
 
-        if (remainderPlateLength != 0 && remainderPlateLength < secondPlateLength) {
-            if (finalPlate.getLength() == remainderPlateLength) {
-                numberOfPlates += 1;
-                secondPlateLength = 0;
-            } else {
-                secondPlateLength = remainderPlateLength;
-            }
-        }
-
-        if (secondPlateLength != 0 && leftOverNumberOfPlates == 0) {
-            leftOverNumberOfPlates = 1;
-            numberOfPlates -= 1;
-        }
-
-
-        System.out.println("Der skal bruges følgende tagplader: \n" + numberOfPlates + " x " + finalPlate.getLength() + " cm plader");
-        if (secondPlateLength > 0) {
-            System.out.println(leftOverNumberOfPlates + " x " + secondPlateLength + " cm plader");
-        }
-        if (thirdPlateLength != 0) {
-            System.out.println("1 x " + thirdPlateLength + " cm plader");
-        }
-        return 0;
+        return numberOfPlates;
     }
 
 
