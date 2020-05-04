@@ -9,6 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../Includes/header.inc" %>
 <title>Title</title>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -20,6 +21,7 @@
         <th scope="col">Skur længde</th>
         <th scope="col">Dato</th>
         <th scope="col">Pris</th>
+        <th scope="col">Telefon</th>
         <th scope="col">Status</th>
         <th></th>
     </tr>
@@ -39,10 +41,18 @@
             <td>Mangler i tabel</td>
             <td>${orders.phone}</td>
 
-            <td><a href="FrontController?target=redirect&destination=adminpage" class="btn btn-primary btn-sm"
-                   role="button" aria-pressed="true">Godkend</a>
-                <a href="FrontController?target=redirect&destination=adminpage" class="btn btn-danger btn-sm"
-                   role="button" aria-pressed="true">Afslå</a></td>
+            <td>
+                <form name="update" action="FrontController" method="POST">
+                    <input type="hidden" name="target" value="updateorder">
+                    <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
+                    </button>
+                </form>
+                <form name="delete" action="FrontController" method="POST">
+                    <input type="hidden" name="target" value="deleteorder">
+                    <button type="submit" class="btn btn-danger btn-sm" name="delete" value="${orders.order_id}">Slet
+                    </button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
 
