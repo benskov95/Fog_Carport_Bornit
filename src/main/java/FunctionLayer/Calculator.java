@@ -417,7 +417,8 @@ public class Calculator {
     }
 
     public int calcNumberOfCarriageBolts(int numberOfPosts, int numberOfBeams) { // Bræddebolte.
-        return numberOfBeams + numberOfPosts;
+        int total = numberOfBeams + numberOfPosts;
+        return total * 2;
     }
 
     public int calcNumberOfSquareWashers(int numberOfPosts) {
