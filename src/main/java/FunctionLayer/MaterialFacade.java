@@ -22,4 +22,8 @@ public class MaterialFacade {
     public static void setLinkMaterialSizeIds(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
         MaterialMapper.setLinkMaterialSizeIds(materials);
     }
+
+    public static void setUnitTypes(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
+        MaterialMapper.setUnitTypes(materials);
+    }
 }

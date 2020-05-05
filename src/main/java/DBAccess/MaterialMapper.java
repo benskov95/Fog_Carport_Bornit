@@ -143,4 +143,33 @@ public class MaterialMapper {
             }
         }
     }
+
+    public static void setUnitTypes(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
+
+        Connection con = Connector.connection();
+
+        String SQL = "SELECT * from fog.unit";
+
+        for (Material material : materials) {
+
+            try {
+                PreparedStatement ps = con.prepareStatement(SQL);
+                ResultSet resultSet = ps.executeQuery();
+
+                while (resultSet.next()) {
+                    int dbId = resultSet.getInt("unit_id");
+                    String dbUnitType = resultSet.getString("unit_type");
+
+                    if (material.getUnitId() == dbId) {
+                        material.setUnit(dbUnitType);
+                        break;
+                    }
+                }
+
+            } catch (SQLException e) {
+                System.out.println("Fejl i connection til database");
+                e.printStackTrace();
+            }
+        }
+    }
 }

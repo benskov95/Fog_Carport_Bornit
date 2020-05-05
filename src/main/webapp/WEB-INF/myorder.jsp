@@ -32,7 +32,7 @@
         <td>${sessionScope.order.shed_width}</td>
         <td>${sessionScope.order.shed_length}</td>
         <td>${sessionScope.order.date}</td>
-        <td>Mangler i tabel</td>
+        <td>${sessionScope.order.totalPrice} kr.</td>
         <td>${sessionScope.status}</td>
         <td><a href="FrontController?target=redirect&destination=checkout" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Bestil</a>
             <a href="FrontController?target=redirect&destination=myorder" class="btn btn-danger btn-sm" role="button" aria-pressed="true">Afslå</a></td>
@@ -48,7 +48,7 @@
     </p>
     <div class="collapse" id="collapseExample">
         <div class="card card-body" style="width: 8rem; text-align: center">
-            <a href="FrontController?target=redirect&destination=bompage">Stykliste</a>
+            <a href="FrontController?target=bompage">Stykliste</a>
             <a href="FrontController?target=redirect&destination=carportplan">Tegning</a>
         </div>
     </div>

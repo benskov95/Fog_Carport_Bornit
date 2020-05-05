@@ -7,7 +7,7 @@ public class Calculator {
     private int primaryRoofPlateLength;
     private int secondaryRoofPlateLength;
 
-    public BillOfMaterials type1Calc(int length, int width, int orderId) throws SQLException, ClassNotFoundException {
+    public BillOfMaterials type1Calc(int length, int width) throws SQLException, ClassNotFoundException {
 
         ArrayList<Material> materialHolder = new ArrayList<>();
         int finalPrice = 0;
@@ -78,11 +78,7 @@ public class Calculator {
         MaterialFacade.setMaterialSizeIds(materialHolder);
         MaterialFacade.setLinkMaterialSizeIds(materialHolder);
 
-        for (Material material : materialHolder) {
-            finalPrice += material.getSum();
-        }
-
-        return new BillOfMaterials(orderId, materialHolder, finalPrice);
+        return new BillOfMaterials(materialHolder);
     }
 
     public int calcNumberOfTrapezPlates(int width) {
