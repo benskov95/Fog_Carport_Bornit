@@ -6,6 +6,8 @@
 package PresentationLayer;
 
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.OrderException;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
@@ -45,9 +47,12 @@ public class FrontController extends HttpServlet {
             } else {
                 request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
             }
-        } catch ( UnsupportedEncodingException | LoginSampleException ex ) {
+        } catch (UnsupportedEncodingException | LoginSampleException ex) {
             request.setAttribute( "error", ex.getMessage() );
             request.getRequestDispatcher( "index.jsp" ).forward( request, response );
+        } catch (OrderException e){
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/flatorder.jsp").forward(request,response);
         }
     }
 

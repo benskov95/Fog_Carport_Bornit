@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.EmployeeMapper;
 import DBAccess.InitializeMapper;
 
 import java.sql.SQLException;
@@ -31,6 +32,9 @@ public class LogicFacade {
 
     public static ArrayList<Integer> getSLList() throws LoginSampleException, SQLException, ClassNotFoundException {
         return InitializeMapper.getShedLength();
+    }
+    public static Employee employeeLogin (int employee_id, String password) throws LoginSampleException {
+        return EmployeeMapper.login(employee_id, password);
     }
 
 }

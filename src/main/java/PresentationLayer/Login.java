@@ -29,8 +29,8 @@ public class Login extends Command {
             phoneNumber = Integer.parseInt(request.getParameter("phoneNumber"));
             orderId = Integer.parseInt(request.getParameter("orderId"));
         } catch (Exception e) {
-            request.setAttribute("loginError", "FEJL: En af felterne havde et bogstav i sig, eller intet overhovedet.");
-            return destination;
+            throw new LoginSampleException("Du mangler noget");
+
         }
 
         if (phoneNumber != 0 && orderId != 0) {
@@ -38,7 +38,7 @@ public class Login extends Command {
             customer = CustomerMapper.getCustomer(phoneNumber);
 
             if (order == null || customer == null) {
-                request.setAttribute("loginError", "FEJL: Der blev ikke fundet nogen ordre med dette telefonnummer og ordrenummer i databasen. Prøv igen.");
+               throw new LoginSampleException("FEJL: Der blev ikke fundet nogen ordre med dette telefonnummer og ordrenummer i databasen. Prøv igen.");
             } else {
                 session.setAttribute( "customer", customer);
                 session.setAttribute("order", order);

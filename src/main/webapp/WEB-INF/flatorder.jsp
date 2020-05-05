@@ -7,6 +7,7 @@
 
 
 <title>Fladt tag</title>
+<p class="lead" style="color: red">${requestScope.error}</p>
 
     <h3 style="font-family: Roboto Condensed; text-transform: uppercase"><img style="float: right; margin-left: 10px;"src="Images/fladttag.gif"
              height="87" width="165" class="img-responsive">Quick-Byg tilbud - carport med fladt tag</h3>

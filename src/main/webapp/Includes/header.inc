@@ -50,10 +50,28 @@
                                         <button type="submit" class="btn btn-primary">Log ind</button>
                                     </form>
                                     <li class="nav-item">
-                                                        <a class="nav-link" href="FrontController?target=allOrders"
-                                                           style="font-family: Bebas Neue; font-size: 32px; color: white">Forhandler Login</a>
-                                                    </li>
-                                </div>
+                                          <button type="button" class="btn" data-toggle="modal" data-target="#login"
+                                                                 style="font-family: Bebas Neue; font-size: 32px; color: white; background-color: #0C2069">Forhandler Login</button>
+                                                         <div id="login" class="modal fade" role="dialog">
+                                                             <div class="modal-dialog">
+                                                                 <div class="modal-content">
+                                                                     <div class="modal-header">
+                                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                         <br>
+                                                                     </div>
+                                                                     <div class="modal-body">
+                                                                         <h3 style="font-family: Roboto Condensed; font-size: 32px">LOG IND</h3>
+                                                                         <br>
+                                                                         <form action="FrontController" method="post">
+                                                                             <input type="hidden" name="target" value="employeeLogin">
+                                                                             <div class="form-group">
+                                                                                 <label for="employeeId">Employee ID</label>
+                                                                                 <input type="text" class="form-control" id="employeeId" name="employeeId">
+                                                                                 <label for="password">Password</label>
+                                                                                 <input type="text" class="form-control" id="password" name="password">
+                                                                             </div>
+                                                                             <button type="submit" class="btn btn-primary">Log ind</button>
+                                                                         </form>
                                 <div class="modal-footer">
                                 </div>
                             </div>

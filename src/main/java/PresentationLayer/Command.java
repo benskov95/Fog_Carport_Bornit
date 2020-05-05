@@ -20,6 +20,7 @@ abstract class Command {
         commands.put("allOrders", new AllOrders());
         commands.put("updateorder", new UpdateOrder());
         commands.put("deleteorder", new DeleteOrder());
+        commands.put("employeeLogin", new EmployeeLogin());
     }
 
     static Command from(HttpServletRequest request) {
@@ -31,6 +32,6 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws LoginSampleException, SQLException, ClassNotFoundException;
+            throws LoginSampleException, SQLException, ClassNotFoundException, FunctionLayer.OrderException;
 
 }

@@ -23,8 +23,7 @@
 <div class="row">
     <div class="col-md-3"></div>
     <div class="col-md-6">
-
-        <p class="lead" style="color: red">${requestScope.loginError}</p>
+        <p class="lead" style="color: red">${requestScope.error}</p>
         <p class="lead">
         <p style="font-weight: bold; font-size: 20px">QUICKBYG TILBUD</p>
         <p>
