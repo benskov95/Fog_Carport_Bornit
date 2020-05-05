@@ -17,7 +17,7 @@ public class BomPage extends Command {
         Order order = (Order) session.getAttribute("order");
         BillOfMaterials bom = BomFacade.getBillOfMaterials(order.getOrder_id());
 
-        MaterialMapper.setUnitTypes(bom.getMaterials());
+        MaterialFacade.setUnitTypes(bom.getMaterials());
         ArrayList<Material> woodAndRoofPlates = new ArrayList<>();
         ArrayList<Material> bracketsAndScrews = new ArrayList<>();
 

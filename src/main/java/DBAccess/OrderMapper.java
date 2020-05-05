@@ -37,7 +37,7 @@ public class OrderMapper {
                     ps1.setInt(4, order.getShed_width());
                     ps1.setInt(5, order.getShed_length());
                     ps1.setInt(6, order.getPhone());
-                    ps.setInt(7, order.getTotalPrice());
+                    ps1.setInt(7, order.getTotalPrice());
                     ps1.setInt(8, order.getStatus_id());
                     ps1.executeUpdate();
 

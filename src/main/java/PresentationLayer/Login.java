@@ -29,7 +29,7 @@ public class Login extends Command {
             phoneNumber = Integer.parseInt(request.getParameter("phoneNumber"));
             orderId = Integer.parseInt(request.getParameter("orderId"));
         } catch (Exception e) {
-            throw new LoginSampleException("Du mangler noget");
+            throw new LoginSampleException("Der gik noget galt. Sørg for, at begge felter er udfyldt og at der ikke bruges bogstaver.");
 
         }
 
