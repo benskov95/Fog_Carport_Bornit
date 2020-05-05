@@ -16,7 +16,7 @@ public class OrderMapper {
 
         int generatedId = 0;
         String sqlCustomer = "INSERT INTO fog.customer (phone, name, address, email, zip_code) VALUES (?,?,?,?,?)";
-        String sqlOrder = "INSERT INTO fog.order (cp_id, carport_width, carport_length, shed_width, shed_length, phone, status_id ) VALUES (?,?,?,?,?,?,?)";
+        String sqlOrder = "INSERT INTO fog.order (cp_id, carport_width, carport_length, shed_width, shed_length, phone, total_price, status_id ) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
             Connection con = Connector.connection();
@@ -37,7 +37,8 @@ public class OrderMapper {
                     ps1.setInt(4, order.getShed_width());
                     ps1.setInt(5, order.getShed_length());
                     ps1.setInt(6, order.getPhone());
-                    ps1.setInt(7, order.getStatus_id());
+                    ps.setInt(7, order.getTotalPrice());
+                    ps1.setInt(8, order.getStatus_id());
                     ps1.executeUpdate();
 
                     ResultSet idResultset = ps1.getGeneratedKeys();
@@ -80,10 +81,14 @@ public class OrderMapper {
                 int shed_width = resultSet.getInt("shed_width");
                 int shed_length = resultSet.getInt("shed_length");
                 int phoneNumber = resultSet.getInt("phone");
+                int totalPrice = resultSet.getInt("total_price");
                 int status_id = resultSet.getInt("status_id");
 
+                if (status_id == 1) {
+                    totalPrice = 0;
+                }
 
-                return new Order(order_id, cp_id, date, carport_width, carport_length, shed_width, shed_length, phoneNumber, status_id);
+                return new Order(order_id, cp_id, date, carport_width, carport_length, shed_width, shed_length, phoneNumber, totalPrice, status_id);
             }
         } catch (SQLException e) {
             System.out.println("Fejl i connection til database");
@@ -95,7 +100,7 @@ public class OrderMapper {
 
     public static void deleteOrder(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
 
-        String sql = "DELETE FROM fog.order\n" +
+        String sql = "DELETE FROM fog.order " +
                 "WHERE order_id = ?";
         Connection con = Connector.connection();
         try {
@@ -151,6 +156,7 @@ public class OrderMapper {
         return null;
 
     }
+
     public static ArrayList<Order> getAllOrderByStatus (int status_id) throws SQLException, ClassNotFoundException {
 
         ArrayList<Order> orderlist = new ArrayList<>();
@@ -172,10 +178,11 @@ public class OrderMapper {
                 int shed_width = resultSet.getInt("shed_width");
                 int shed_length = resultSet.getInt("shed_length");
                 int phone = resultSet.getInt("phone");
+                int totalPrice = resultSet.getInt("total_price");
                 int statusid = resultSet.getInt("status_id");
 
 
-                Order order = new Order(order_id,cp_id,date,carport_width,carport_length,shed_width,shed_length,phone,statusid);
+                Order order = new Order(order_id,cp_id,date,carport_width,carport_length,shed_width,shed_length,phone,totalPrice,statusid);
                 orderlist.add(order);
             }
         } catch (SQLException e) {

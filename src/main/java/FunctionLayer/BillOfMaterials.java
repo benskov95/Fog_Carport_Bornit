@@ -6,19 +6,21 @@ public class BillOfMaterials {
 
     private int orderId;
     private ArrayList<Material> materials;
-    private int finalPrice;
+    private int totalPrice;
 
-    public BillOfMaterials(int orderId, ArrayList<Material> materials, int finalPrice) {
-        this.orderId = orderId;
+    public BillOfMaterials(ArrayList<Material> materials) {
         this.materials = materials;
-        this.finalPrice = finalPrice;
+        calcTotalPrice();
     }
 
-    public int calcFinalPrice() {
+    public BillOfMaterials() {
+    }
+
+    public void calcTotalPrice() {
         for (Material material : this.materials) {
-            this.finalPrice += material.getSum();
+            this.totalPrice += material.getSum();
         }
-        return finalPrice;
+        this.setTotalPrice(this.totalPrice);
     }
 
     public void addMaterial(Material material) {
@@ -44,11 +46,11 @@ public class BillOfMaterials {
         this.materials = materials;
     }
 
-    public int getFinalPrice() {
-        return finalPrice;
+    public int getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setFinalPrice(int finalPrice) {
-        this.finalPrice = finalPrice;
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

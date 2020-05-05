@@ -4,9 +4,7 @@ import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class FlatOrder extends Command {
     @Override
@@ -24,11 +22,12 @@ public class FlatOrder extends Command {
         int telephone = Integer.parseInt(request.getParameter("telephone"));
         String email = request.getParameter("email");
 
-        Order order = new Order(1, carportWidth, carportLength, shedWidth, shedLength, telephone);
+        BillOfMaterials bom = calculator.type1Calc(carportLength, carportWidth);
+        Order order = new Order(1, carportWidth, carportLength, shedWidth, shedLength, bom.getTotalPrice(), telephone);
         Customer customer = new Customer(telephone, name, address, email, postalCodeCity);
-        int orderId = OrderFacade.insertOrder(customer, order);
 
-        BillOfMaterials bom = calculator.type1Calc(carportLength, carportWidth, orderId);
+        int orderId = OrderFacade.insertOrder(customer, order);
+        bom.setOrderId(orderId);
         BomFacade.insertBillOfMaterials(bom);
 
         request.setAttribute("orderId", orderId);

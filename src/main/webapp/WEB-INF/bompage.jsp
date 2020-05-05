@@ -4,10 +4,7 @@
 
 <title>Stykliste</title>
 
-Læs materialerne ind i to forskellige arraylists, afhængigt af unit id -
-ellers kan materialerne ikke adskilles i de to kategorier.
-
-<h1 style="font-family: Roboto">Stykliste for ordre nr. 123</h1>
+<h1 style="font-family: Roboto">Stykliste for ordre nr. ${sessionScope.order.order_id}</h1>
 <p class="lead">Her kan du se styklisten til din carport.</p>
 
 <a href="FrontController?target=redirect&destination=myorder" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
@@ -39,33 +36,19 @@ ellers kan materialerne ikke adskilles i de to kategorier.
     </thead>
 
     <tbody>
-    <tr>
-        <td>32</td>
-        <td>25x200 mm. trykimp. bræt</td>
-        <td>360 cm</td>
-        <td>4</td>
-        <td>stk</td>
-        <td>Understernbrædder til for & bag ende</td>
-    </tr>
-    <tr>
-        <td>65</td>
-        <td>38x73 mm. lægte ubh.</td>
-        <td>420 cm</td>
-        <td>1</td>
-        <td>stk</td>
-        <td>Til z på bagside af dør</td>
 
-    </tr>
+    <c:forEach var="categoryOneMaterial" items="${sessionScope.woodAndRoofPlates}">
     <tr>
-        <td>38</td>
-        <td>45x195 mm. spærtræ ubh.</td>
-        <td>600 cm</td>
-        <td>15</td>
-        <td>stk</td>
-        <td>Spær, monteres på rem</td>
+        <td>${categoryOneMaterial.materialId}</td>
+        <td>${categoryOneMaterial.materialName}</td>
+        <td>${categoryOneMaterial.size}</td>
+        <td>${categoryOneMaterial.quantity}</td>
+        <td>${categoryOneMaterial.unit}</td>
+        <td>${categoryOneMaterial.carportPartDescription}</td>
     </tr>
+    </c:forEach>
+
     </tbody>
-
 
     <thead>
     <tr>
@@ -79,23 +62,22 @@ ellers kan materialerne ikke adskilles i de to kategorier.
     </thead>
 
     <tbody>
+
+    <c:forEach var="categoryTwoMaterial" items="${sessionScope.bracketsAndScrews}">
     <tr>
-        <td>91</td>
-        <td>Plastmo bundskruer 200 stk.</td>
-        <td></td>
-        <td>3</td>
-        <td>pakke</td>
-        <td>Skruer til tagplader</td>
+        <td>${categoryTwoMaterial.materialId}</td>
+        <td>${categoryTwoMaterial.materialName}</td>
+        <td>${categoryTwoMaterial.size}</td>
+        <td>${categoryTwoMaterial.quantity}</td>
+        <td>${categoryTwoMaterial.unit}</td>
+        <td>${categoryTwoMaterial.carportPartDescription}</td>
     </tr>
+    </c:forEach>
+
     <tr>
-        <td>92</td>
-        <td>Hulbånd 1x20 mm. 10 mtr.</td>
-        <td></td>
-        <td>2</td>
-        <td>rulle</td>
-        <td>Til vindkryds på spær</td>
-    </tr>
+
     </tbody>
+
 </table>
 
 <%@include file="../Includes/footer.inc"%>

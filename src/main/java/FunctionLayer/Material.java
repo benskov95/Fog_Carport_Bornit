@@ -7,6 +7,7 @@ public class Material {
     private int materialId;
     private String materialName;
     private int unitId;
+    private String unit;
     private int price;
     private int materialSizeId;
     private int quantity;
@@ -29,6 +30,15 @@ public class Material {
         this.materialId = materialId;
         this.size = size;
         this.quantity = quantity;
+    }
+
+    public Material(int materialId, String materialName, int size, int quantity, int unitId, String carportPartDescription) {
+        this.materialId = materialId;
+        this.materialName = materialName;
+        this.size = size;
+        this.quantity = quantity;
+        this.unitId = unitId;
+        this.carportPartDescription = carportPartDescription;
     }
 
     public Material() {
@@ -129,5 +139,13 @@ public class Material {
 
     public void setCarportPartDescription(String carportPartDescription) {
         this.carportPartDescription = carportPartDescription;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

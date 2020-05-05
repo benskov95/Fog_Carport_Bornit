@@ -26,9 +26,9 @@ public class CarportPartsMapper {
 
                 int carPortPartId = resultSet.getInt("pk_carport_part_id");
                 int materialId = resultSet.getInt("material_id");
-                String beskrivelse = resultSet.getString("beskrivelse");
+                String description = resultSet.getString("description");
                 int carPortId = resultSet.getInt("carport_id");
-                carportPartsArrayList.add(new CarPortPart(carPortPartId, materialId, beskrivelse, carPortId));
+                carportPartsArrayList.add(new CarPortPart(carPortPartId, materialId, description, carPortId));
 
             }
         } catch (SQLException e) {
@@ -84,7 +84,7 @@ public class CarportPartsMapper {
                 ps.setInt(1, material.getCarportPartId());
                 ResultSet resultSet = ps.executeQuery();
                 if (resultSet.next()) {
-                    material.setCarportPartDescription(resultSet.getString("beskrivelse"));
+                    material.setCarportPartDescription(resultSet.getString("description"));
 
                 }
             } catch (SQLException e) {

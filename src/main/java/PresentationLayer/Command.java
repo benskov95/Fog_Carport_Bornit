@@ -17,6 +17,7 @@ abstract class Command {
         commands.put("flatorder", new FlatOrder());
         commands.put("redirect", new Redirect());
         commands.put("myorder", new MyOrder());
+        commands.put("bompage", new BomPage());
         commands.put("allOrders", new AllOrders());
         commands.put("updateorder", new UpdateOrder());
         commands.put("deleteorder", new DeleteOrder());

@@ -12,9 +12,10 @@ public class Order {
     private int shed_width;
     private int shed_length;
     private int phone;
+    private int totalPrice;
     private int status_id = 1;
 
-    public Order(int order_id, int carport_id, Date date, int carport_width, int carport_length, int shed_width, int shed_length, int phone, int status_id) {
+    public Order(int order_id, int carport_id, Date date, int carport_width, int carport_length, int shed_width, int shed_length, int phone, int totalPrice, int status_id) {
         this.order_id = order_id;
         this.carport_id = carport_id;
         this.date = date;
@@ -23,15 +24,17 @@ public class Order {
         this.shed_width = shed_width;
         this.shed_length = shed_length;
         this.phone = phone;
+        this.totalPrice = totalPrice;
         this.status_id = status_id;
     }
 
-    public Order(int carport_id, int carport_width, int carport_length, int shed_width, int shed_length, int phone) {
+    public Order(int carport_id, int carport_width, int carport_length, int shed_width, int shed_length, int totalPrice, int phone) {
         this.carport_id = carport_id;
         this.carport_width = carport_width;
         this.carport_length = carport_length;
         this.shed_width = shed_width;
         this.shed_length = shed_length;
+        this.totalPrice = totalPrice;
         this.phone = phone;
     }
 
@@ -114,4 +117,11 @@ public class Order {
         this.phone = phone;
     }
 
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }
