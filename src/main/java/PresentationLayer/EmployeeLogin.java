@@ -21,11 +21,13 @@ public class EmployeeLogin extends Command {
         String password = request.getParameter( "password" );
         Employee employee = LogicFacade.employeeLogin(employee_id, password);
 
-        if (employee.getRole().equals("admin")) {
+        if (employee.getRoleId() == 1) {
+            LogicFacade.setEmployeeRole(employee);
             session.setAttribute("orderlist", OrderFacade.getAllOrdersByStatusId(1));
 
         }
-        if (employee.getRole().equals("warehouse")){
+        if (employee.getRoleId() == 2) {
+            LogicFacade.setEmployeeRole(employee);
             session.setAttribute("orderlist" , OrderFacade.getAllOrdersByStatusId(3));
         }
 
