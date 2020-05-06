@@ -15,7 +15,20 @@ public class BomPage extends Command {
 
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
-        BillOfMaterials bom = BomFacade.getBillOfMaterials(order.getOrder_id());
+        int orderId = 0;
+        BillOfMaterials bom = new BillOfMaterials();
+        try {
+            orderId = Integer.parseInt(request.getParameter("billofmaterials"));
+            session.setAttribute("warehouse_orderId", orderId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (orderId != 0) {
+            bom = BomFacade.getBillOfMaterials(orderId);
+        } else {
+            bom = BomFacade.getBillOfMaterials(order.getOrder_id());
+        }
 
         MaterialFacade.setUnitTypes(bom.getMaterials());
         ArrayList<Material> woodAndRoofPlates = new ArrayList<>();
