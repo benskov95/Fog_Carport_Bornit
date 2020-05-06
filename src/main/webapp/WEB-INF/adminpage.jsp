@@ -38,7 +38,7 @@
             <td>${orders.shed_width}</td>
             <td>${orders.shed_length}</td>
             <td>${orders.date}</td>
-            <td>Mangler i tabel</td>
+            <td>${orders.totalPrice}</td>
             <td>${orders.phone}</td>
 
             <td>

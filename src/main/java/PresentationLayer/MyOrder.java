@@ -16,6 +16,8 @@ public class MyOrder extends Command {
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
 
+
+
         return "myorder";
     }
 }
