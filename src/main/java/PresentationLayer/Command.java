@@ -16,6 +16,7 @@ abstract class Command {
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put("login", new Login());
+        commands.put("logout", new Logout());
         commands.put("flatorder", new FlatOrder());
         commands.put("redirect", new Redirect());
         commands.put("myorder", new MyOrder());

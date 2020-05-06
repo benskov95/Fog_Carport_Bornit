@@ -47,7 +47,7 @@
         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             Carport detaljer
         </a>
-        <a href="FrontController?target=redirect&destination=index" class="btn btn-danger" role="button" aria-pressed="true">Log ud</a>
+        <a href="FrontController?target=logout" class="btn btn-danger" role="button" aria-pressed="true">Log ud</a>
     </p>
     <div class="collapse" id="collapseExample">
         <div class="card card-body" style="width: 8rem; text-align: center">

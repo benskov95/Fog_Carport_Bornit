@@ -60,7 +60,7 @@
 </table>
 
 <p>
-    <a href="FrontController?target=redirect&destination=index" class="btn btn-danger" role="button"
+    <a href="FrontController?target=logout" class="btn btn-danger" role="button"
        aria-pressed="true">Log ud</a>
 </p>
 
