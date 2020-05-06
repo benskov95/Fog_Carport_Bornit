@@ -76,4 +76,19 @@ public class BomMapper {
         }
             return bom;
     }
+
+    public static void deleteBom(int orderId) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM fog.bill_of_materials " +
+                "WHERE order_id = ?";
+        Connection con = Connector.connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, orderId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+    }
 }
+

@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../Includes/header.inc" %>
 <title>Title</title>
-
+<p class="lead" style="color: red">${requestScope.error}</p>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -38,14 +38,18 @@
             <td>${orders.shed_width}</td>
             <td>${orders.shed_length}</td>
             <td>${orders.date}</td>
-            <td>Mangler i tabel</td>
+            <td>
+                <form name="update" action="FrontController" method="POST">
+                    <input type="hidden" name="target" value="updateorder"><input class="form-control" name="totalprice"
+                                                                                  size="20" type="text"
+                                                                            value="${orders.totalPrice}">
+            </td>
             <td>${orders.phone}</td>
 
             <td>
-                <form name="update" action="FrontController" method="POST">
-                    <input type="hidden" name="target" value="updateorder">
-                    <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
-                    </button>
+
+                <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
+                </button>
                 </form>
                 <form name="delete" action="FrontController" method="POST">
                     <input type="hidden" name="target" value="deleteorder">

@@ -15,13 +15,25 @@ public class UpdateOrder extends Command{
 
         HttpSession session = request.getSession();
 
-        int order_id = Integer.parseInt(request.getParameter("accept"));
+        int total_price = 0;
+        try {
+            total_price = Integer.parseInt(request.getParameter("totalprice"));
+            int order_id = Integer.parseInt(request.getParameter("accept"));
 
-        OrderFacade.updateStatus(order_id,2);
+            OrderFacade.updateTotalPrice(order_id,total_price);
 
-        session.setAttribute("orderlist", OrderFacade.getAllOrdersByStatusId(1));
+            OrderFacade.updateStatus(order_id,2);
+
+            session.setAttribute("orderlist", OrderFacade.getAllOrdersByStatusId(1));
 
 
-        return "adminpage";
+            return "adminpage";
+
+        } catch (NumberFormatException e) {
+           request.setAttribute("error", "Du har tastet forkert i total prisen");
+           return  "adminpage";
+        }
+
+
     }
 }

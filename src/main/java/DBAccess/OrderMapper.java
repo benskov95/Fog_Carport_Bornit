@@ -215,7 +215,25 @@ public class OrderMapper {
     }
 
 
+    public static void updateTotalPrice(int order_id, int totalPrice) {
+        String sql = "update fog.order set total_price = ? where order_id = ?";
 
+        try{
+            Connection con = Connector.connection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1,totalPrice);
+            ps.setInt(2,order_id);
+            ps.executeUpdate();
+        }
+
+        catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+
+        }
+
+    }
 
 }
 
