@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../Includes/header.inc"%>
 
+
 <title>Mine Ordrer</title>
 
 <h1 class="display-4" style="font-family: Roboto,sans-serif">Hej ${sessionScope.customer.name}</h1>
@@ -34,8 +35,16 @@
         <td>${sessionScope.order.date}</td>
         <td>${sessionScope.order.totalPrice} kr.</td>
         <td>${sessionScope.status}</td>
-        <td><a href="FrontController?target=redirect&destination=checkout" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Bestil</a>
-            <a href="FrontController?target=redirect&destination=myorder" class="btn btn-danger btn-sm" role="button" aria-pressed="true">Afslå</a></td>
+        <td >
+            <form action="FrontController?target=redirect&destination=checkout" method="post">
+                <input type="submit" class="btn btn-primary btn-sm" value="Bestil"
+                ${sessionScope.statusId eq 2 ? '' : 'disabled' }>
+            </form>
+            <form action="FrontController?target=redirect&destination=myorder" method="post">
+            <input type="submit"  class="btn btn-danger btn-sm" value="Afslå"
+            ${sessionScope.statusId eq 2 ? '' : 'disabled' }>
+            </form>
+        </td >
     </tr>
     </tbody>
 </table>
@@ -44,7 +53,7 @@
         <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
             Carport detaljer
         </a>
-        <a href="FrontController?target=redirect&destination=index" class="btn btn-danger" role="button" aria-pressed="true">Log ud</a>
+        <a href="FrontController?target=logout" class="btn btn-danger" role="button" aria-pressed="true">Log ud</a>
     </p>
     <div class="collapse" id="collapseExample">
         <div class="card card-body" style="width: 8rem; text-align: center">

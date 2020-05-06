@@ -46,6 +46,7 @@ public class Login extends Command {
                 String carportType = OrderFacade.getCarportType(order.getCarport_id());
                 String orderStatus = OrderFacade.getOrderStatus(order.getStatus_id());
                 session.setAttribute("carportType", carportType);
+                session.setAttribute("statusId", order.getStatus_id());
                 session.setAttribute("status", orderStatus);
 
                 destination = "myorder";

@@ -17,7 +17,7 @@
 <header>
     <div class="container responsive-header">
         <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #0C2069; max-height: 126px">
-            <a class="navbar-brand" href="FrontController?target=redirect&destination=index">
+            <a class="navbar-brand" href="#">
                 <img src="Images/logo-fog.png" alt="logo" style="margin-left: -15px">
             </a>
 

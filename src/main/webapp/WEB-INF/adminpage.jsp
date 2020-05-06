@@ -38,12 +38,16 @@
             <td>${orders.shed_width}</td>
             <td>${orders.shed_length}</td>
             <td>${orders.date}</td>
+
             <td>
                 <form name="update" action="FrontController" method="POST">
                     <input type="hidden" name="target" value="updateorder"><input class="form-control" name="totalprice"
                                                                                   size="20" type="text"
                                                                             value="${orders.totalPrice}">
             </td>
+
+
+
             <td>${orders.phone}</td>
 
             <td>
@@ -64,7 +68,7 @@
 </table>
 
 <p>
-    <a href="FrontController?target=redirect&destination=index" class="btn btn-danger" role="button"
+    <a href="FrontController?target=logout" class="btn btn-danger" role="button"
        aria-pressed="true">Log ud</a>
 </p>
 
