@@ -5,8 +5,6 @@
 
 <title>Administrator</title>
 
-
-<title>Title</title>
 <p class="lead" style="color: red">${requestScope.error}</p>
 
 <table class="table table-striped">
