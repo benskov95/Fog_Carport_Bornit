@@ -40,22 +40,23 @@
             <td>${orders.date}</td>
 
             <td>
-                <form name="update" action="FrontController" method="POST">
+                <form onsubmit="return confirm('Er du sikker på prisen er korrekt?')" name="update" action="FrontController" method="POST">
                     <input type="hidden" name="target" value="updateorder"><input class="form-control" name="totalprice"
                                                                                   size="20" type="text"
                                                                             value="${orders.totalPrice}">
             </td>
 
-
-
             <td>${orders.phone}</td>
+
+
 
             <td>
 
                 <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
                 </button>
                 </form>
-                <form name="delete" action="FrontController" method="POST">
+
+                <form onsubmit="return confirm('Er du sikker på du vil slette ordre nr:' + ${orders.order_id})" name="delete" action="FrontController" method="POST" id="delete">
                     <input type="hidden" name="target" value="deleteorder">
                     <button type="submit" class="btn btn-danger btn-sm" name="delete" value="${orders.order_id}">Slet
                     </button>
@@ -72,6 +73,14 @@
        aria-pressed="true">Log ud</a>
 </p>
 
+<%--<script>--%>
+<%--function show_alert() {--%>
+<%--if(!confirm("Do you really want to do this?")) {--%>
+<%--return false;--%>
+<%--}--%>
+<%--this.form.submit();--%>
+<%--}--%>
+<%--</script>--%>
 
 <%@include file="../Includes/footer.inc" %>
 
