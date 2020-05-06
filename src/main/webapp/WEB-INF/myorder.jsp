@@ -35,10 +35,16 @@
         <td>${sessionScope.order.date}</td>
         <td>${sessionScope.order.totalPrice} kr.</td>
         <td>${sessionScope.status}</td>
-        <td ><a href = "FrontController?target=redirect&destination=checkout" class="btn btn-primary btn-sm"
-            role = "button" aria - pressed = "true" > Bestil </a >
-            <a href = "FrontController?target=redirect&destination=myorder" class="btn btn-danger btn-sm"
-            role = "button" aria - pressed = "true" > Afslå </a ></td >
+        <td >
+            <form action="FrontController?target=redirect&destination=checkout" method="post">
+                <input type="submit" class="btn btn-primary btn-sm" value="Bestil"
+                ${sessionScope.statusId eq 2 ? '' : 'disabled' }>
+            </form>
+            <form action="FrontController?target=redirect&destination=myorder" method="post">
+            <input type="submit"  class="btn btn-danger btn-sm" value="Afslå"
+            ${sessionScope.statusId eq 2 ? '' : 'disabled' }>
+            </form>
+        </td >
     </tr>
     </tbody>
 </table>
