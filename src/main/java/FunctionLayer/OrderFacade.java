@@ -33,4 +33,7 @@ public class OrderFacade {
     public static void updateStatus (int order_id, int status_id) throws LoginSampleException {
         OrderMapper.updateStatus(order_id,status_id);
     }
+    public static void updateTotalPrice(int order_id, int totalPrice) {
+        OrderMapper.updateTotalPrice (order_id, totalPrice);
+    }
 }
