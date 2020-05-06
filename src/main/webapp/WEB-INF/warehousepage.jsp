@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../Includes/header.inc" %>
 
-<title>Title</title>
+<title>Lager</title>
 
 <table class="table table-striped">
     <thead>
@@ -32,7 +32,7 @@
             <td>${orders.shed_width}</td>
             <td>${orders.shed_length}</td>
             <td>${orders.date}</td>
-            <td>${orders.totalPrice}</td>
+            <td>${orders.totalPrice} kr.</td>
             <td>${orders.phone}</td>
             <td>
                 <form action="FrontController" method="post"><input type="hidden" name="target" value="bompage">
