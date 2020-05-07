@@ -28,6 +28,7 @@ public class Svg {
         svg.append(String.format(headerTemplate, height, width, viewbox));
     }
 
+
     public void addRamme(double x, double y, double height, double width) {
         svg.append(String.format(rammeTemplate,x,y,height,width));
 
