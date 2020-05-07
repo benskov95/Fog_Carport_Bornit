@@ -16,7 +16,8 @@ public class BomPage extends Command {
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
         int orderId = 0;
-        BillOfMaterials bom = new BillOfMaterials();
+        BillOfMaterials bom;
+
         try {
             orderId = Integer.parseInt(request.getParameter("billofmaterials"));
             session.setAttribute("warehouse_orderId", orderId);

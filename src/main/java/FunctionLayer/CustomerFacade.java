@@ -14,4 +14,8 @@ public class CustomerFacade {
     public static Customer getCustomer(int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
         return CustomerMapper.getCustomer(phone);
     }
+
+    public static void deleteCustomer(int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
+        CustomerMapper.deleteCustomer(phone);
+    }
 }

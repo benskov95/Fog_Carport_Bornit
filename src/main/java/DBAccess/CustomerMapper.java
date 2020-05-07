@@ -66,8 +66,20 @@ public class CustomerMapper {
         return null;
     }
 
+    public static void deleteCustomer(int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
 
-
+        String sql = "DELETE FROM fog.customer " +
+                "WHERE phone = ?";
+        Connection con = Connector.connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, phone);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
     }
+}
 
 

@@ -17,14 +17,9 @@ public class Checkout extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException, ClassNotFoundException, OrderException, ServletException, IOException {
 
         HttpSession session = request.getSession();
-
-
-
-       Order order = (Order) session.getAttribute("order");
-
+        Order order = (Order) session.getAttribute("order");
 
         OrderFacade.updateStatus(order.getOrder_id(),3);
-
 
         return "checkoutpage";
     }

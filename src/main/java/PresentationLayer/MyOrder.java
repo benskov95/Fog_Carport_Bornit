@@ -1,8 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.Order;
-import FunctionLayer.OrderFacade;
+import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +14,14 @@ public class MyOrder extends Command {
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
 
+        int orderId = order.getOrder_id();
+        int phone = order.getPhone();
+        request.setAttribute("deletedOrderId", orderId);
 
+        BomFacade.deleteBom(orderId);
+        OrderFacade.deleteOrder(orderId);
+        CustomerFacade.deleteCustomer(phone);
 
-        return "myorder";
+        return "declinedorder";
     }
 }
