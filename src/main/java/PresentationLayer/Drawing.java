@@ -22,11 +22,13 @@ public class Drawing extends Command {
         int amountOfRafters = 0;
         int amountOfPosts = 0;
         int temp = 0;
+        int placementOfThirdBeam = width / 2;
 
         double rafterWidth = 4.5;
         int permanentYValue = 35;
         double widthWithRafterWidth = width + rafterWidth;
         double finalWidth = widthWithRafterWidth - permanentYValue;
+        int sbr = calc.calcSpaceBetweenRafters(length);
 
         //Tegning ytre del med piler og mål
         Svg svgOuterDrawing = new Svg(900,800,"0,0,900,800",0,0);
@@ -51,9 +53,14 @@ public class Drawing extends Command {
         //remme
         svg.addRect(0,35,4.5,length);
         svg.addRect(0,width-35,4.5,length);
+
+
+        if (width > 600) {
+            svg.addRect(0, placementOfThirdBeam, 4.5, length);
+        }
         //spær --Loope igjennom?
 
-        int sbr = calc.calcSpaceBetweenRafters(length);
+
         for (Material material : bom.getMaterials()) {
             if (material.getCarportPartId() == 59 || material.getCarportPartId() == 35){
                 amountOfRafters = material.getQuantity();
@@ -85,26 +92,36 @@ public class Drawing extends Command {
             }
         }
 
-        int testY = permanentYValue - 3;
-        int hmm = permanentYValue + 3;
-        int testWidth = width - hmm;
+        int yForPosts = permanentYValue - 3;
+        int yForPostsWidth = permanentYValue + 3;
+        int widthForPosts = width - yForPostsWidth;
         int sbrTo = sbr / 2;
-        int sbrMulti = 60;
-        int idk = length - sbrTo;
-        int tempx = 0;
+        double spaceBetweenStartAndPosts = sbr * 1.5;
+        int finalPostsSpace = length - sbrTo;
+        double test = finalPostsSpace - spaceBetweenStartAndPosts;
+        double testTo = test / 2;
+        double check = spaceBetweenStartAndPosts + testTo;
 
-        svg.addRect(sbrMulti,testY,9.7,9.7);
-        svg.addRect(sbrMulti,testWidth,9.7,9.7);
-        svg.addRect(idk,testY,9.7,9.7);
-        svg.addRect(idk,testWidth,9.7,9.7);
+        svg.addRect(spaceBetweenStartAndPosts,yForPosts,9.7,9.7);
+        svg.addRect(spaceBetweenStartAndPosts,widthForPosts,9.7,9.7);
+        svg.addRect(finalPostsSpace,yForPosts,9.7,9.7);
+        svg.addRect(finalPostsSpace,widthForPosts,9.7,9.7);
 
-//        while (amountOfPosts > 1) {
-//
-//        svg.addRect(sbrTo,testY,9.7,9.7);
-//        svg.addRect(sbrTo,testWidth,9.7,9.7);
-//        amountOfPosts--;
-//
-//        }
+        amountOfPosts -= 4;
+
+        if (width > 600) {
+            svg.addRect(spaceBetweenStartAndPosts, placementOfThirdBeam,9.7,9.7);
+            svg.addRect(finalPostsSpace, placementOfThirdBeam,9.7,9.7);
+            amountOfPosts -= 2;
+        }
+
+        while (amountOfPosts != 0) {
+
+        svg.addRect(check,yForPosts,9.7,9.7);
+        svg.addRect(check,widthForPosts,9.7,9.7);
+        amountOfPosts--;
+
+        }
 
 
 

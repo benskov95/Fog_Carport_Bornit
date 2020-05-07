@@ -10,9 +10,14 @@ public class Calculator {
     public BillOfMaterials type1Calc(int length, int width) throws SQLException, ClassNotFoundException {
 
         ArrayList<Material> materialHolder = new ArrayList<>();
-        int finalPrice = 0;
 
-        int numberOfBeams = 2;
+        int numberOfBeams;
+        if (width > 600) {
+            numberOfBeams = 3;
+        } else {
+            numberOfBeams = 2;
+        }
+
         int numberOfPerforatedBands = 2;
         int numberOfFasciaScrewPacks = 1;
 
@@ -361,7 +366,7 @@ public class Calculator {
             numberOfPosts += 2;
         }
         if (width > 600) {
-            numberOfPosts += 1;
+            numberOfPosts += 2;
         }
 
         return numberOfPosts;
