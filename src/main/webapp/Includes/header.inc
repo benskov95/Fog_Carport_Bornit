@@ -11,22 +11,72 @@
 </head>
 
 <link href='https://fonts.googleapis.com/css?family=Bebas Neue' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto Condensed' rel='stylesheet'>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
 <header>
     <div class="container responsive-header">
         <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #0C2069; max-height: 126px">
-            <a class="navbar-brand" href="index.jsp">
+            <a class="navbar-brand" href="#">
                 <img src="Images/logo-fog.png" alt="logo" style="margin-left: -15px">
             </a>
+
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#"
+                    <a class="nav-link" href="FrontController?target=redirect&destination=index"
                        style="font-family: Bebas Neue; font-size: 32px; color: white">Quickbyg</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"
-                       style="font-family: Bebas Neue; font-size: 32px; color: white">Se
-                        ordre</a>
+                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal"
+                            style="font-family: Bebas Neue; font-size: 32px; color: white; background-color: #0C2069">Se ordre</button>
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <br>
+                                </div>
+                                <div class="modal-body">
+                                    <h3 style="font-family: Roboto Condensed; font-size: 32px">LOG IND</h3>
+                                    <br>
+                                    <form action="FrontController" method="post">
+                                        <input type="hidden" name="target" value="login">
+                                        <div class="form-group">
+                                            <label for="phoneNumber">Telefon nr.</label>
+                                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                                            <label for="orderId">Ordre nr.</label>
+                                            <input type="text" class="form-control" id="orderId" name="orderId">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Log ind</button>
+                                    </form>
+                                    <li class="nav-item">
+                                          <button type="button" class="btn" data-toggle="modal" data-target="#login"
+                                                                 style="font-family: Bebas Neue; font-size: 32px; color: white; background-color: #0C2069">Forhandler Login</button>
+                                                         <div id="login" class="modal fade" role="dialog">
+                                                             <div class="modal-dialog">
+                                                                 <div class="modal-content">
+                                                                     <div class="modal-header">
+                                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                         <br>
+                                                                     </div>
+                                                                     <div class="modal-body">
+                                                                         <h3 style="font-family: Roboto Condensed; font-size: 32px">LOG IND</h3>
+                                                                         <br>
+                                                                         <form action="FrontController" method="post">
+                                                                             <input type="hidden" name="target" value="employeeLogin">
+                                                                             <div class="form-group">
+                                                                                 <label for="employeeId">Employee ID</label>
+                                                                                 <input type="text" class="form-control" id="employeeId" name="employeeId">
+                                                                                 <label for="password">Password</label>
+                                                                                 <input type="password" class="form-control" id="password" name="password">
+                                                                             </div>
+                                                                             <button type="submit" class="btn btn-primary">Log ind</button>
+                                                                         </form>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </nav>

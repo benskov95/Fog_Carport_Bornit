@@ -6,8 +6,11 @@
 package PresentationLayer;
 
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.OrderException;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +34,7 @@ public class FrontController extends HttpServlet {
      @throws IOException if an I/O error occurs
      */
     protected void processRequest( HttpServletRequest request, HttpServletResponse response )
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException, ClassNotFoundException {
 
         try {
             request.setCharacterEncoding("UTF-8");
@@ -44,9 +47,12 @@ public class FrontController extends HttpServlet {
             } else {
                 request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
             }
-        } catch ( UnsupportedEncodingException | LoginSampleException ex ) {
+        } catch (UnsupportedEncodingException | LoginSampleException ex) {
             request.setAttribute( "error", ex.getMessage() );
             request.getRequestDispatcher( "index.jsp" ).forward( request, response );
+        } catch (OrderException e){
+            request.setAttribute("error", e.getMessage());
+            request.getRequestDispatcher("/WEB-INF/flatorder.jsp").forward(request,response);
         }
     }
 
@@ -62,7 +68,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        processRequest( request, response );
+        try {
+            processRequest( request, response );
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**
@@ -76,7 +86,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException {
-        processRequest( request, response );
+        try {
+            processRequest( request, response );
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     /**

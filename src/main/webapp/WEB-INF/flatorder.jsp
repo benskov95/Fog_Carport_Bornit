@@ -1,8 +1,13 @@
+<%@ page import="CarportUtil.Initializer" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../Includes/header.inc" %>
-<link href='https://fonts.googleapis.com/css?family=Roboto Condensed' rel='stylesheet'>
-<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+
+
+
+<title>Fladt tag</title>
+<p class="lead" style="color: red">${requestScope.error}</p>
 
     <h3 style="font-family: Roboto Condensed; text-transform: uppercase"><img style="float: right; margin-left: 10px;"src="Images/fladttag.gif"
              height="87" width="165" class="img-responsive">Quick-Byg tilbud - carport med fladt tag</h3>
@@ -32,24 +37,9 @@
                 </label>
                 <select class="form-control" name="carportwidth" id="carportwidth">
                     <option selected="selected" value="">Vælg bredde</option>
-                    <option value="240">240 cm</option>
-                    <option value="270">270 cm</option>
-                    <option value="300">300 cm</option>
-                    <option value="330">330 cm</option>
-                    <option value="360">360 cm</option>
-                    <option value="390">390 cm</option>
-                    <option value="420">420 cm</option>
-                    <option value="450">450 cm</option>
-                    <option value="480">480 cm</option>
-                    <option value="510">510 cm</option>
-                    <option value="540">540 cm</option>
-                    <option value="570">570 cm</option>
-                    <option value="600">600 cm</option>
-                    <option value="630">630 cm</option>
-                    <option value="660">660 cm</option>
-                    <option value="690">690 cm</option>
-                    <option value="720">720 cm</option>
-                    <option value="750">750 cm</option>
+                    <c:forEach var="size" items="${applicationScope.CWList}">
+                        <option value="${size}">${size} cm</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
@@ -61,25 +51,9 @@
                 </label>
                 <select class="form-control" name="carportlength" id="carportlength">
                     <option selected="selected" value="">Vælg længde</option>
-                    <option value="240">240 cm</option>
-                    <option value="270">270 cm</option>
-                    <option value="300">300 cm</option>
-                    <option value="330">330 cm</option>
-                    <option value="360">360 cm</option>
-                    <option value="390">390 cm</option>
-                    <option value="420">420 cm</option>
-                    <option value="450">450 cm</option>
-                    <option value="480">480 cm</option>
-                    <option value="510">510 cm</option>
-                    <option value="540">540 cm</option>
-                    <option value="570">570 cm</option>
-                    <option value="600">600 cm</option>
-                    <option value="630">630 cm</option>
-                    <option value="660">660 cm</option>
-                    <option value="690">690 cm</option>
-                    <option value="720">720 cm</option>
-                    <option value="750">750 cm</option>
-                    <option value="780">780 cm</option>
+                    <c:forEach var="size" items="${applicationScope.CLList}">
+                        <option value="${size}">${size} cm</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
@@ -116,24 +90,9 @@
                 <select class="form-control" name="shedwidth"
                         id="shedwidth">
                     <option selected="selected" value="0">Ønsker ikke redskabsrum</option>
-                    <option value="210">210 cm</option>
-                    <option value="240">240 cm</option>
-                    <option value="270">270 cm</option>
-                    <option value="300">300 cm</option>
-                    <option value="330">330 cm</option>
-                    <option value="360">360 cm</option>
-                    <option value="390">390 cm</option>
-                    <option value="420">420 cm</option>
-                    <option value="450">450 cm</option>
-                    <option value="480">480 cm</option>
-                    <option value="510">510 cm</option>
-                    <option value="540">540 cm</option>
-                    <option value="570">570 cm</option>
-                    <option value="600">600 cm</option>
-                    <option value="630">630 cm</option>
-                    <option value="660">660 cm</option>
-                    <option value="690">690 cm</option>
-                    <option value="720">720 cm</option>
+                    <c:forEach var="size" items="${applicationScope.SWList}">
+                        <option value="${size}">${size} cm</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
@@ -146,25 +105,9 @@
                 <select class="form-control" name="shedlength"
                         id="shedlength">
                     <option selected="selected" value="0">Ønsker ikke redskabsrum</option>
-                    <option value="150">150 cm</option>
-                    <option value="180">180 cm</option>
-                    <option value="210">210 cm</option>
-                    <option value="240">240 cm</option>
-                    <option value="270">270 cm</option>
-                    <option value="300">300 cm</option>
-                    <option value="330">330 cm</option>
-                    <option value="360">360 cm</option>
-                    <option value="390">390 cm</option>
-                    <option value="420">420 cm</option>
-                    <option value="450">450 cm</option>
-                    <option value="480">480 cm</option>
-                    <option value="510">510 cm</option>
-                    <option value="540">540 cm</option>
-                    <option value="570">570 cm</option>
-                    <option value="600">600 cm</option>
-                    <option value="630">630 cm</option>
-                    <option value="660">660 cm</option>
-                    <option value="690">690 cm</option>
+                    <c:forEach var="size" items="${applicationScope.SLList}">
+                        <option value="${size}">${size} cm</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
