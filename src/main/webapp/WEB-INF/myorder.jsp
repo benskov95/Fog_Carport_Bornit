@@ -62,12 +62,12 @@
             <c:choose>
                 <c:when test="${sessionScope.order.status_id == 3 || sessionScope.order.status_id == 4}">
                     <a href="FrontController?target=bompage">Stykliste</a>
-                    <a href="FrontController?target=redirect&destination=carportplan">Tegning</a>
+                    <a href="FrontController?target=drawing">Tegning</a>
                 </c:when>
                 <c:otherwise>
 
 
-                    <a href="FrontController?target=redirect&destination=carportplan">Tegning</a>
+                    <a href="FrontController?target=drawing">Tegning</a>
                 </c:otherwise>
             </c:choose>
 

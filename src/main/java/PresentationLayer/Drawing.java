@@ -6,6 +6,7 @@ import FunctionLayer.Svg;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class Drawing extends Command {
     @Override
@@ -33,7 +34,8 @@ public class Drawing extends Command {
         svg.addRect(0,0,600,4.5);
         svg.addRect(775.5,0,600,4.5);
         //hulbånd
-        svg.addPerfiratedBand(55, 35, 55, 569.5);
+        svg.addPerfiratedBand(55, 35, 600, 569.5);
+        svg.addPerfiratedBand(55, 569.5, 600, 35);
         //stolper
         svg.addRect(110,32,9.7,9.7);
         svg.addRect(420,32,9.7,9.7);
@@ -42,8 +44,8 @@ public class Drawing extends Command {
         svg.addRect(420,562,9.7,9.7);
         svg.addRect(730,562,9.7,9.7);
 
-
-        request.setAttribute("svgdrawing", svg.toString());
-        return "drawing";
+        HttpSession session = request.getSession();
+        session.setAttribute("svgdrawing", svg.toString());
+        return "carportplan";
     }
 }
