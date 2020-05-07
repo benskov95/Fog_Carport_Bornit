@@ -14,11 +14,14 @@
                 <br>
                 <br>
                 <h2>
-                    Hvis du skulle have lyst til at
+                    Hvis du skulle få lyst til at
                     <br>
-                    lave en ny ordre, så kan du bare
+                    lave en ny bestilling, så kan
                     <br>
-                    bestille igen. Fortsat god dag.
+                    du bare bestille igen.
+                    <br>
+                    <br>
+                    Fortsat god dag.
                 </h2>
                 <br>
                 <br>
