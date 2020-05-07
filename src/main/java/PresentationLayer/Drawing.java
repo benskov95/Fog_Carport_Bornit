@@ -45,8 +45,8 @@ public class Drawing extends Command {
         svg.addRect(730,562,9.7,9.7);
 
         HttpSession session = request.getSession();
-        session.setAttribute("outedrawing",svgOuterDrawing.toString());
-        session.setAttribute("svgdrawing", svg.toString());
+        String svgFinal = svg.toString().replace(",", ".");
+        session.setAttribute("svgdrawing", svgFinal);
         return "carportplan";
     }
 }
