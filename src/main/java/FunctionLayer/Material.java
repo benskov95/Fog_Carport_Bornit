@@ -17,6 +17,16 @@ public class Material {
     private String carportPartDescription;
     private int sum;
 
+    public Material(int materialId, String materialName, int unitId, int quantity, int size, int carportPartId, String carportPartDescription) {
+        this.materialId = materialId;
+        this.materialName = materialName;
+        this.unitId = unitId;
+        this.quantity = quantity;
+        this.size = size;
+        this.carportPartId = carportPartId;
+        this.carportPartDescription = carportPartDescription;
+    }
+
     public Material(int materialId, String materialName, int unitId, int price, int materialSizeId, int quantity) {
         this.materialId = materialId;
         this.materialName = materialName;

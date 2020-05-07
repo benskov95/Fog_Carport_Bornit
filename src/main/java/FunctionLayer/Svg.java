@@ -58,6 +58,9 @@ public class Svg {
     public void addText (double x, double y, String measurements) {
         svg.append(String.format(textTemplate, x, y, measurements));
     }
+    public void addOuterDrawing (Svg outer){
+        svg.append(outer);
+    }
 
 
 

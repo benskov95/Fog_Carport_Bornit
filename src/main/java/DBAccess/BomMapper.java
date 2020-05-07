@@ -67,8 +67,9 @@ public class BomMapper {
                     int quantity = resultSet.getInt("quantity");
                     int unitId = resultSet.getInt("unit_id");
                     String description = resultSet.getString("description");
+                    int carportpart_id = resultSet.getInt("bom_carport_part_id");
 
-                    bom.addMaterial(new Material(materialId, name, size, quantity, unitId, description));
+                    bom.addMaterial(new Material(materialId, name,unitId, quantity, size , carportpart_id,description ));
                 }
 
             } catch (Exception e) {

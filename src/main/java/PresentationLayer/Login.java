@@ -18,6 +18,7 @@ public class Login extends Command {
         int orderId;
         Order order;
         Customer customer;
+        BillOfMaterials bom;
         String destination = "index";
 
         try {
@@ -31,10 +32,12 @@ public class Login extends Command {
         if (phoneNumber != 0 && orderId != 0) {
             order = OrderFacade.getMyOrder(orderId, phoneNumber);
             customer = CustomerMapper.getCustomer(phoneNumber);
+            bom = BomFacade.getBillOfMaterials(orderId);
 
             if (order == null || customer == null) {
                throw new LoginSampleException("FEJL: Der blev ikke fundet nogen ordre med dette telefonnummer og ordrenummer i databasen. Prøv igen.");
             } else {
+                session.setAttribute("bom", bom);
                 session.setAttribute( "customer", customer);
                 session.setAttribute("order", order);
 
