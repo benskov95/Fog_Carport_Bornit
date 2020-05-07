@@ -7,10 +7,12 @@
 
 
 
-<%--<h1 style="font-family: Roboto,sans-serif">Carport tegning for ordre nr. 123</h1>--%>
-<%--<p class="lead">Her ses din carports dimensioner fra fugleperspektiv.</p>--%>
-<%--<a href="FrontController?target=redirect&destination=myorder" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>--%>
+<h1 style="font-family: Roboto,sans-serif">Carport tegning for ordre nr. 123</h1>
+<p class="lead">Her ses din carports dimensioner fra fugleperspektiv.</p>
+
 ${sessionScope.outedrawing}
 ${sessionScope.svgdrawing}
+
+<a href="FrontController?target=redirect&destination=myorder" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
 
 <%@include file="../Includes/footer.inc"%>

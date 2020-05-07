@@ -20,7 +20,14 @@ public class Drawing extends Command {
         int width = order.getCarport_width();
         int length = order.getCarport_length();
         int amountOfRafters = 0;
+        int amountOfPosts = 0;
         int temp = 0;
+
+        double rafterWidth = 4.5;
+        int permanentYValue = 35;
+        double widthWithRafterWidth = width + rafterWidth;
+        double finalWidth = widthWithRafterWidth - permanentYValue;
+
         //Tegning ytre del med piler og mål
         Svg svgOuterDrawing = new Svg(900,800,"0,0,900,800",0,0);
         //pilehodedefinisjon
@@ -37,23 +44,26 @@ public class Drawing extends Command {
 
 
 
-        Svg svg = new Svg(800, 600, "0,0,800,600",75,10);
+        Svg svg = new Svg(800, 800, "0,0,800,800",75,10);
 
         //ramme
         svg.addRamme(0,0,width,length);
         //remme
         svg.addRect(0,35,4.5,length);
-        svg.addRect(0,565,4.5,length);
+        svg.addRect(0,width-35,4.5,length);
         //spær --Loope igjennom?
 
         int sbr = calc.calcSpaceBetweenRafters(length);
         for (Material material : bom.getMaterials()) {
             if (material.getCarportPartId() == 59 || material.getCarportPartId() == 35){
                 amountOfRafters = material.getQuantity();
+                break;
             }
 
         }
+
         svg.addRect(0,0,width,4.5);
+
         while (amountOfRafters > 1){
             temp += sbr;
             svg.addRect(temp,0,width,4.5);
@@ -62,16 +72,39 @@ public class Drawing extends Command {
 //        svg.addRect(length-4.5,0,width,4.5);
 
 
+
         //hulbånd
-        svg.addPerfiratedBand(sbr, length-sbr, 210, 569.5);
-        svg.addPerfiratedBand(sbr, 569.5, 210, length-sbr);
+        svg.addPerfiratedBand(sbr, 35, length-sbr, finalWidth);
+        svg.addPerfiratedBand(sbr, finalWidth, length-sbr, 35);
+
         //stolper
-        svg.addRect(110,32,9.7,9.7);
-        svg.addRect(420,32,9.7,9.7);
-        svg.addRect(730,32,9.7,9.7);
-        svg.addRect(110,562,9.7,9.7);
-        svg.addRect(420,562,9.7,9.7);
-        svg.addRect(730,562,9.7,9.7);
+        for (Material material : bom.getMaterials()) {
+            if (material.getCarportPartId() == 60 || material.getCarportPartId() == 36) {
+                amountOfPosts = material.getQuantity();
+                break;
+            }
+        }
+
+        int testY = permanentYValue - 3;
+        int hmm = permanentYValue + 3;
+        int testWidth = width - hmm;
+        int sbrTo = sbr / 2;
+        int sbrMulti = 60;
+        int idk = length - sbrTo;
+        int tempx = 0;
+
+        svg.addRect(sbrMulti,testY,9.7,9.7);
+        svg.addRect(sbrMulti,testWidth,9.7,9.7);
+        svg.addRect(idk,testY,9.7,9.7);
+        svg.addRect(idk,testWidth,9.7,9.7);
+
+//        while (amountOfPosts > 1) {
+//
+//        svg.addRect(sbrTo,testY,9.7,9.7);
+//        svg.addRect(sbrTo,testWidth,9.7,9.7);
+//        amountOfPosts--;
+//
+//        }
 
 
 
