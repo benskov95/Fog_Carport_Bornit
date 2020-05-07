@@ -36,8 +36,8 @@
         <td>${sessionScope.order.totalPrice} kr.</td>
         <td>${sessionScope.status}</td>
         <td >
-            <form action="FrontController?target=redirect&destination=checkout" method="post">
-                <input type="submit" class="btn btn-primary btn-sm" value="Bestil"
+            <form action="FrontController?target=checkout" method="post">
+                <input type="submit" class="btn btn-primary btn-sm" name="bestil" value="Bestil"
                 ${sessionScope.statusId eq 2 ? '' : 'disabled' }>
             </form>
             <form action="FrontController?target=redirect&destination=myorder" method="post">
@@ -57,8 +57,20 @@
     </p>
     <div class="collapse" id="collapseExample">
         <div class="card card-body" style="width: 8rem; text-align: center">
-            <a href="FrontController?target=bompage">Stykliste</a>
-            <a href="FrontController?target=redirect&destination=carportplan">Tegning</a>
+
+
+            <c:choose>
+                <c:when test="${sessionScope.order.status_id == 3 || sessionScope.order.status_id == 4}">
+                    <a href="FrontController?target=bompage">Stykliste</a>
+                    <a href="FrontController?target=redirect&destination=carportplan">Tegning</a>
+                </c:when>
+                <c:otherwise>
+
+
+                    <a href="FrontController?target=redirect&destination=carportplan">Tegning</a>
+                </c:otherwise>
+            </c:choose>
+
         </div>
     </div>
 

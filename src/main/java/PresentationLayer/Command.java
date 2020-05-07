@@ -26,6 +26,7 @@ abstract class Command {
         commands.put("deleteorder", new DeleteOrder());
         commands.put("employeeLogin", new EmployeeLogin());
         commands.put("shiporder", new ShipOrder());
+        commands.put("checkout", new Checkout());
 
     }
 
