@@ -1,14 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Tha-Y
-  Date: 04-05-2020
-  Time: 11:03
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="../Includes/header.inc" %>
-<title>Title</title>
+
+
+<title>Administrator</title>
+
+<p class="lead" style="color: red">${requestScope.error}</p>
 
 <table class="table table-striped">
     <thead>
@@ -38,16 +35,25 @@
             <td>${orders.shed_width}</td>
             <td>${orders.shed_length}</td>
             <td>${orders.date}</td>
-            <td>Mangler i tabel</td>
-            <td>${orders.phone}</td>
+            <td>${orders.totalPrice} kr.</td>
 
             <td>
-                <form name="update" action="FrontController" method="POST">
-                    <input type="hidden" name="target" value="updateorder">
-                    <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
-                    </button>
+                <form onsubmit="return confirm('Er du sikker på prisen er korrekt?')" name="update" action="FrontController" method="POST">
+                    <input type="hidden" name="target" value="updateorder"><input class="form-control" name="totalprice"
+                                                                                  size="20" type="text"
+                                                                            value="${orders.totalPrice}">
+            </td>
+
+            <td>${orders.phone}</td>
+
+
+            <td>
+
+                <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
+                </button>
                 </form>
-                <form name="delete" action="FrontController" method="POST">
+
+                <form onsubmit="return confirm('Er du sikker på du vil slette ordre nr:' + ${orders.order_id})" name="delete" action="FrontController" method="POST" id="delete">
                     <input type="hidden" name="target" value="deleteorder">
                     <button type="submit" class="btn btn-danger btn-sm" name="delete" value="${orders.order_id}">Slet
                     </button>
@@ -60,10 +66,18 @@
 </table>
 
 <p>
-    <a href="FrontController?target=redirect&destination=index" class="btn btn-danger" role="button"
+    <a href="FrontController?target=logout" class="btn btn-danger" role="button"
        aria-pressed="true">Log ud</a>
 </p>
 
+<%--<script>--%>
+<%--function show_alert() {--%>
+<%--if(!confirm("Do you really want to do this?")) {--%>
+<%--return false;--%>
+<%--}--%>
+<%--this.form.submit();--%>
+<%--}--%>
+<%--</script>--%>
 
 <%@include file="../Includes/footer.inc" %>
 

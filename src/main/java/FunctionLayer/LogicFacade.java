@@ -37,4 +37,8 @@ public class LogicFacade {
         return EmployeeMapper.login(employee_id, password);
     }
 
+    public static void setEmployeeRole(Employee employee) throws SQLException, ClassNotFoundException {
+        EmployeeMapper.setEmployeeRole(employee);
+    }
+
 }

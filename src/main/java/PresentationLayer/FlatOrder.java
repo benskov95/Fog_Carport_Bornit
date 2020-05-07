@@ -12,21 +12,18 @@ public class FlatOrder extends Command {
 
         Calculator calculator = new Calculator();
 
+        int carportWidth;
+        int carportLength;
+        int shedWidth;
+        int shedLength;
 
-        int carportWidth = 0;
-        int carportLength = 0;
-
-        int shedWidth = 0;
-        int shedLength = 0;
-        String name = null;
-        String address = null;
-        String postalCodeCity = null;
-        int telephone = 0;
-        String email = null;
-
+        String name;
+        String address;
+        String postalCodeCity;
+        int telephone;
+        String email;
 
         try {
-
             carportWidth = Integer.parseInt(request.getParameter("carportwidth"));
             carportLength = Integer.parseInt(request.getParameter("carportlength"));
         } catch (Exception e) {

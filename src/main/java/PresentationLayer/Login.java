@@ -29,7 +29,7 @@ public class Login extends Command {
             phoneNumber = Integer.parseInt(request.getParameter("phoneNumber"));
             orderId = Integer.parseInt(request.getParameter("orderId"));
         } catch (Exception e) {
-            throw new LoginSampleException("Du mangler noget");
+            throw new LoginSampleException("Der gik noget galt. Sørg for, at begge felter er udfyldt og at der ikke bruges bogstaver.");
 
         }
 
@@ -46,6 +46,7 @@ public class Login extends Command {
                 String carportType = OrderFacade.getCarportType(order.getCarport_id());
                 String orderStatus = OrderFacade.getOrderStatus(order.getStatus_id());
                 session.setAttribute("carportType", carportType);
+                session.setAttribute("statusId", order.getStatus_id());
                 session.setAttribute("status", orderStatus);
 
                 destination = "myorder";

@@ -13,7 +13,7 @@ public class BomMapper {
 
     public static void insertBillOfMaterials(BillOfMaterials bom) throws SQLException, ClassNotFoundException {
 
-        String sql = "INSERT INTO fog.bill_of_materials (order_id, material_id, material_size_id, quantity, sum) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO fog.bill_of_materials (order_id, material_id, material_size_id, bom_carport_part_id, quantity, sum) VALUES (?,?,?,?,?,?)";
 
         Connection con = Connector.connection();
 
@@ -23,8 +23,9 @@ public class BomMapper {
                 ps.setInt(1, bom.getOrderId());
                 ps.setInt(2, material.getMaterialId());
                 ps.setInt(3, material.getMaterialSizeId());
-                ps.setInt(4, material.getQuantity());
-                ps.setInt(5, material.getSum());
+                ps.setInt(4, material.getCarportPartId());
+                ps.setInt(5, material.getQuantity());
+                ps.setInt(6, material.getSum());
                 ps.executeUpdate();
 
             } catch (Exception e) {
@@ -35,17 +36,20 @@ public class BomMapper {
 
     public static BillOfMaterials getBillOfMaterials(int orderId) throws SQLException, ClassNotFoundException {
 
-        String sql = "select b.order_id, b.material_id, m.name, s.size, b.quantity, m.unit_id, c.description " +
-                     "from fog.bill_of_materials b " +
-                     "inner join materials m " +
-                     "on b.material_id = m.material_id " +
-                     "inner join link_material_size l " +
-                     "on b.material_size_id = l.pk_link_material_size " +
-                     "inner join carport_parts c " +
-                     "on b.material_id = c.material_id " +
-                     "inner join size s " +
-                     "on l.link_size_id = s.size_id " +
-                     "where b.order_id = ?";
+        String sql = "select b.bom_id, b.bom_carport_part_id, b.order_id, b.material_id, " +
+                    "m.name, s.size, b.quantity, m.unit_id, c.description " +
+                    "from fog.bill_of_materials b " +
+                    "inner join materials m " +
+                    "on b.material_id = m.material_id " +
+                    "inner join link_material_size l " +
+                    "on b.material_size_id = l.pk_link_material_size " +
+                    "inner join carport_parts c " +
+                    "on b.bom_carport_part_id = c.pk_carport_part_id " +
+                    "inner join size s " +
+                    "on l.link_size_id = s.size_id " +
+                    "where b.order_id = ? " +
+                    "group by b.bom_id " +
+                    "order by b.bom_id";
 
         BillOfMaterials bom = new BillOfMaterials();
         bom.setOrderId(orderId);
@@ -72,4 +76,19 @@ public class BomMapper {
         }
             return bom;
     }
+
+    public static void deleteBom(int orderId) throws SQLException, ClassNotFoundException {
+        String sql = "DELETE FROM fog.bill_of_materials " +
+                "WHERE order_id = ?";
+        Connection con = Connector.connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, orderId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+    }
 }
+

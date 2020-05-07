@@ -1,5 +1,7 @@
 package PresentationLayer;
 
+import DBAccess.BomMapper;
+import FunctionLayer.BomFacade;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.OrderFacade;
 
@@ -15,7 +17,7 @@ public class DeleteOrder extends Command {
         HttpSession session = request.getSession();
 
         int order_id = Integer.parseInt(request.getParameter("delete"));
-
+        BomFacade.deleteBom(order_id);
         OrderFacade.deleteOrder(order_id);
 
         session.setAttribute("orderlist", OrderFacade.getAllOrdersByStatusId(1));

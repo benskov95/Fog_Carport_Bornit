@@ -5,12 +5,13 @@ public class Employee {
 
     private int employee_id;
     private String password;
+    private int roleId;
     private String role;
 
-    public Employee(int employee_id, String password, String role) {
+    public Employee(int employee_id, String password, int roleId) {
         this.employee_id = employee_id;
         this.password = password;
-        this.role = role;
+        this.roleId = roleId;
     }
 
     public int getEmployee_id() {
@@ -27,6 +28,14 @@ public class Employee {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getRole() {

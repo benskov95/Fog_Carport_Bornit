@@ -13,4 +13,7 @@ public class BomFacade {
     public static BillOfMaterials getBillOfMaterials(int orderId) throws SQLException, ClassNotFoundException {
         return BomMapper.getBillOfMaterials(orderId);
     }
+    public static void deleteBom (int orderId) throws SQLException, ClassNotFoundException {
+        BomMapper.deleteBom(orderId);
+    }
 }

@@ -29,16 +29,19 @@ CREATE TABLE `bill_of_materials` (
   `order_id` int(11) NOT NULL,
   `material_id` int(11) NOT NULL,
   `material_size_id` int(11) NOT NULL,
+  `bom_carport_part_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `sum` int(11) NOT NULL,
   PRIMARY KEY (`bom_id`),
   KEY `fk_order_id_idx` (`order_id`),
   KEY `fk_material_id_idx` (`material_id`),
   KEY `fk_id_size_idx` (`material_size_id`),
+  KEY `fk_bom_carport_part_id_idx` (`bom_carport_part_id`),
+  CONSTRAINT `fk_bom_carport_part_id` FOREIGN KEY (`bom_carport_part_id`) REFERENCES `carport_parts` (`pk_carport_part_id`),
   CONSTRAINT `fk_material_id` FOREIGN KEY (`material_id`) REFERENCES `materials` (`material_id`),
   CONSTRAINT `fk_material_size_id` FOREIGN KEY (`material_size_id`) REFERENCES `link_material_size` (`pk_link_material_size`),
   CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +50,7 @@ CREATE TABLE `bill_of_materials` (
 
 LOCK TABLES `bill_of_materials` WRITE;
 /*!40000 ALTER TABLE `bill_of_materials` DISABLE KEYS */;
-INSERT INTO `bill_of_materials` VALUES (1,8,38,115,2,78),(2,8,92,188,2,418),(3,8,95,191,1,159),(4,8,46,124,7,245),(5,8,38,115,13,507),(6,8,32,86,4,220),(7,8,32,92,4,220),(8,8,20,46,2,64),(9,8,20,52,4,128),(10,8,1,6,2,42),(11,8,1,12,4,84),(12,8,69,186,8,320),(13,8,69,181,8,320),(14,8,91,187,1,220),(15,8,93,189,13,234),(16,8,94,190,13,234),(17,8,96,192,2,538),(18,8,97,193,18,342),(19,8,98,194,14,140);
+INSERT INTO `bill_of_materials` VALUES (20,9,38,114,58,2,78),(21,9,92,188,65,2,418),(22,9,95,191,68,1,159),(23,9,46,124,60,6,210),(24,9,38,114,59,16,624),(25,9,32,86,54,4,220),(26,9,32,92,55,4,220),(27,9,20,46,56,2,64),(28,9,20,52,57,4,128),(29,9,1,6,61,2,42),(30,9,1,12,62,4,84),(31,9,69,186,63,8,320),(32,9,69,181,63,8,320),(33,9,91,187,64,1,220),(34,9,93,189,66,16,288),(35,9,94,190,67,16,288),(36,9,96,192,69,2,538),(37,9,97,193,70,16,304),(38,9,98,194,71,12,120);
 /*!40000 ALTER TABLE `bill_of_materials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +128,7 @@ CREATE TABLE `carport_parts` (
 
 LOCK TABLES `carport_parts` WRITE;
 /*!40000 ALTER TABLE `carport_parts` DISABLE KEYS */;
-INSERT INTO `carport_parts` VALUES (27,32,'understernbrædder til for & bag ende',2),(28,32,'understernbrædder til siderne',2),(29,20,'oversternbrædder til forenden',2),(30,20,'oversternbrædder til siderne',2),(31,65,'til z på bagside af dør',2),(32,54,'løsholter til skur gavle',2),(33,54,'løsholter til skur sider',2),(34,38,'Remme i sider, sadles ned i stolper',2),(35,38,'Spær, monteres på rem',2),(36,46,'Stolper nedgraves 90 cm. i jord',2),(37,1,'til beklædning af skur 1 på 2',2),(38,1,'vandbrædt på stern i sider',2),(39,1,'vandbrædt på stern i forende',2),(40,69,'tagplader monteres på spær',2),(41,91,'Skruer til tagplader',2),(42,92,'Til vindkryds på spær',2),(43,93,'Til montering af spær på rem',2),(44,94,'Til montering af spær på rem',2),(45,95,'Til montering af stern&vandbrædt',2),(46,96,'Til montering af universalbeslag + hulbånd',2),(47,97,'Til montering af rem på stolper',2),(48,98,'Til montering af rem på stolper',2),(49,99,'til montering af yderste beklædning',2),(50,100,'til montering af inderste beklædning',2),(51,101,'Til lås på dør i skur',2),(52,102,'Til skurdør',2),(53,103,'Til montering af løsholter i skur',2),(54,32,'understernbrædder til for & bag ende',1),(55,32,'understernbrædder til siderne',1),(56,20,'oversternbrædder til forenden',1),(57,20,'oversternbrædder til siderne',1),(58,38,'Remme i sider, sadles ned i stolper',1),(59,38,'Spær, monteres på rem',1),(60,46,'Stolper nedgraves 90 cm. i jord',1),(61,1,'vandbrædt på stern i sider',1),(62,1,'vandbrædt på stern i forende',1),(63,69,'tagplader monteres på spær',1),(64,91,'Skruer til tagplader',1),(65,92,'Til vindkryds på spær',1),(66,93,'Til montering af spær på rem',1),(67,94,'Til montering af spær på rem',1),(68,95,'Til montering af stern&vandbrædt',1),(69,96,'Til montering af universalbeslag + hulbånd',1),(70,97,'Til montering af rem på stolper',1),(71,98,'Til montering af rem på stolper',1);
+INSERT INTO `carport_parts` VALUES (27,32,'understernbrædder til for & bag ende',2),(28,32,'understernbrædder til siderne',2),(29,20,'oversternbrædder til forenden',2),(30,20,'oversternbrædder til siderne',2),(31,65,'til z på bagside af dør',2),(32,54,'løsholter til skur gavle',2),(33,54,'løsholter til skur sider',2),(34,38,'Remme i sider, sadles ned i stolper',2),(35,38,'Spær, monteres på rem',2),(36,46,'Stolper nedgraves 90 cm. i jord',2),(37,1,'til beklædning af skur 1 på 2',2),(38,1,'vandbrædt på stern i sider',2),(39,1,'vandbrædt på stern i forende',2),(40,69,'tagplader monteres på spær',2),(41,91,'Skruer til tagplader',2),(42,92,'Til vindkryds på spær',2),(43,93,'Til montering af spær på rem',2),(44,94,'Til montering af spær på rem',2),(45,95,'Til montering af stern&vandbrædt',2),(46,96,'Til montering af universalbeslag + hulbånd',2),(47,97,'Til montering af rem på stolper',2),(48,98,'Til montering af rem på stolper',2),(49,99,'til montering af yderste beklædning',2),(50,100,'til montering af inderste beklædning',2),(51,101,'Til lås på dør i skur',2),(52,102,'Til skurdør',2),(53,103,'Til montering af løsholter i skur',2),(54,32,'understernbrædder til for & bag ende',1),(55,32,'understernbrædder til siderne',1),(56,20,'oversternbrædder til forenden',1),(57,20,'oversternbrædder til siderne',1),(58,38,'Remme i sider, sadles ned i stolper',1),(59,38,'Spær, monteres på rem',1),(60,46,'Stolper nedgraves 90 cm. i jord',1),(61,1,'vandbrædt på stern i sider',1),(62,1,'vandbrædt på stern i forende',1),(63,69,'tagplader monteres på spær',1),(64,91,'Skruer til tagplader',1),(65,92,'Til vindkryds på spær',1),(66,93,'Til montering af spær på rem',1),(67,94,'Til montering af spær på rem',1),(68,95,'Til montering af stern & vandbrædt',1),(69,96,'Til montering af universalbeslag + hulbånd',1),(70,97,'Til montering af rem på stolper',1),(71,98,'Til montering af rem på stolper',1);
 /*!40000 ALTER TABLE `carport_parts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +180,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1337,'Henrik','Sologade 30','henrik@glenrik.com','4000 Roskilde'),(2381921,'hans','gretevej 23','masodm@a','3700 rønne'),(12381932,'Timmy','Solvej 409','g@g.dk','3700 Rønne'),(19029312,'Bobby','Gladegade 84','bob@swop.com','3700 Rønne'),(19202122,'Ivar','Gammelgade 11','rynkeby@gammeldansk.dk','3700 Rønne'),(42425675,'Pelle','Køkkenvej 55','someone@robin.com','fkaælfkælsa'),(81928321,'Joe','Hahagade 13','hmm@ja.dk','3700 Rønne'),(123454321,'Leif','Grædegade 25','krølle@bølle.dk','BOINGHOLM');
+INSERT INTO `customer` VALUES (1337,'Henrik','Sologade 30','henrik@glenrik.com','4000 Roskilde'),(2381921,'hans','gretevej 23','masodm@a','3700 rønne'),(12381932,'Timmy','Solvej 409','g@g.dk','3700 Rønne'),(19029312,'Bobby','Gladegade 84','bob@swop.com','3700 Rønne'),(19202122,'Ivar','Gammelgade 11','rynkeby@gammeldansk.dk','3700 Rønne'),(42425675,'Pelle','Køkkenvej 55','someone@robin.com','fkaælfkælsa'),(81928321,'Joe','Hahagade 13','hmm@ja.dk','3700 Rønne'),(92117373,'Troels','Trampergade 69','troelspådet@live.dk','3700 Rønne '),(123454321,'Leif','Grædegade 25','krølle@bølle.dk','BOINGHOLM');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -287,7 +290,7 @@ CREATE TABLE `materials` (
 
 LOCK TABLES `materials` WRITE;
 /*!40000 ALTER TABLE `materials` DISABLE KEYS */;
-INSERT INTO `materials` VALUES (1,'19x100 mm. trykimp. Bræt',3,21),(8,'25x50 mm. trykimp. Bræt',3,18),(20,'25x125mm. trykimp. Bræt',3,32),(26,'25x150mm. trykimp. Bræt',3,32),(32,'25x200mm. trykimp. Bræt',3,55),(38,'45x195 mm. spærtræ ubh.',3,39),(46,'97x97 mm. trykimp. Stolpe',3,35),(54,'45x95 mm. Reglar ub.',3,16),(65,'38x73 mm. Lægte ubh.',3,23),(69,'Plastmo Ecolite blåtonet',3,40),(75,'Plasttrapezplader',3,0),(76,'Betontagsten - Rød',3,15),(77,'Betontagsten - Teglrød',3,15),(78,'Betontagsten - Brun',3,15),(79,'Betontagsten - Sort',3,15),(80,'Eternittag B6 - Grå',3,15),(81,'Eternittag B6 - Sort',3,15),(82,'Eternittag B6 - Mokka(brun)',3,15),(83,'Eternittag B6 - Rødbrun',3,15),(84,'Eternittag B6 - Teglrød',3,15),(85,'Eternittag B7 - Grå',3,15),(86,'Eternittag B7 - Sort',3,15),(87,'Eternittag B7 - Mokka(brun)',3,15),(88,'Eternittag B7 - Rødbrun',3,15),(89,'Eternittag B7 - Teglrød',3,15),(90,'Eternittag B7 - Rødflammet',3,15),(91,'Plastmo Bundskruer 200 stk.',1,220),(92,'Hulbånd 1x20 mm.',2,209),(93,'Universal 190mm højre',3,18),(94,'Universal 190mm venstre',3,18),(95,'4,5x60 mm. skruer 200 stk.',1,159),(96,'4x50 mm. beslagskruer 250 stk.',1,269),(97,'Bræddebolte 10x120 mm.',3,19),(98,'Firkantskiver 40x40x11 mm.',3,10),(99,'4,5x70 mm. skruer',1,199),(100,'4,5x50 mm. skruer',1,69),(101,'Stalddørsgreb 50x75',4,189),(102,'T hængsel 390 mm.',3,120),(103,'Vinkelbeslag 35',3,6),(104,'B & C Toplægteholder',3,50),(105,'B & C rygstensbeslag',3,50),(106,'B & C tagstens bindere og nakkekroge',1,50),(107,'5x40 mm. beslagskruer',1,269),(108,'5x100 mm. skruer',1,100);
+INSERT INTO `materials` VALUES (1,'19x100 mm. trykimp. Bræt',3,21),(8,'25x50 mm. trykimp. Bræt',3,18),(20,'25x125mm. trykimp. Bræt',3,32),(26,'25x150mm. trykimp. Bræt',3,32),(32,'25x200mm. trykimp. Bræt',3,55),(38,'45x195 mm. spærtræ ubh.',3,39),(46,'97x97 mm. trykimp. Stolpe',3,35),(54,'45x95 mm. Reglar ub.',3,16),(65,'38x73 mm. Lægte ubh.',3,23),(69,'Plastmo Ecolite blåtonet',3,40),(75,'Plasttrapezplader',3,0),(76,'Betontagsten - Rød',3,15),(77,'Betontagsten - Teglrød',3,15),(78,'Betontagsten - Brun',3,15),(79,'Betontagsten - Sort',3,15),(80,'Eternittag B6 - Grå',3,15),(81,'Eternittag B6 - Sort',3,15),(82,'Eternittag B6 - Mokka(brun)',3,15),(83,'Eternittag B6 - Rødbrun',3,15),(84,'Eternittag B6 - Teglrød',3,15),(85,'Eternittag B7 - Grå',3,15),(86,'Eternittag B7 - Sort',3,15),(87,'Eternittag B7 - Mokka(brun)',3,15),(88,'Eternittag B7 - Rødbrun',3,15),(89,'Eternittag B7 - Teglrød',3,15),(90,'Eternittag B7 - Rødflammet',3,15),(91,'Plastmo Bundskruer 200 stk.',1,220),(92,'Hulbånd 1x20 mm.',2,209),(93,'Universal 190mm højre',3,18),(94,'Universal 190mm venstre',3,18),(95,'4,5x60 mm. skruer 200 stk.',1,159),(96,'4x50 mm. beslagskruer 250 stk.',1,269),(97,'Bræddebolte 10x120 mm.',3,19),(98,'Firkantskiver 40x40x11 mm.',3,10),(99,'4,5x70 mm. skruer 400 stk.',1,199),(100,'4,5x50 mm. skruer 300 stk.',1,69),(101,'Stalddørsgreb 50x75',4,189),(102,'T hængsel 390 mm.',3,120),(103,'Vinkelbeslag 35',3,6),(104,'B & C Toplægteholder',3,50),(105,'B & C rygstensbeslag',3,50),(106,'B & C tagstens bindere og nakkekroge',1,50),(107,'5x40 mm. beslagskruer 250 stk.',1,269),(108,'5x100 mm. skruer',1,100);
 /*!40000 ALTER TABLE `materials` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,7 +319,7 @@ CREATE TABLE `order` (
   CONSTRAINT `fk_cp_id` FOREIGN KEY (`cp_id`) REFERENCES `carport` (`carport_id`),
   CONSTRAINT `fk_phone` FOREIGN KEY (`phone`) REFERENCES `customer` (`phone`),
   CONSTRAINT `fk_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -325,7 +328,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,1,'2020-05-01 10:52:08',270,630,0,0,42425675,0,1),(2,1,'2020-05-01 14:00:52',300,540,0,0,123454321,0,1),(3,1,'2020-05-03 13:54:52',360,450,0,0,1337,0,1),(4,1,'2020-05-03 14:02:38',600,780,0,0,19202122,0,1),(5,1,'2020-05-03 14:05:21',450,600,0,0,81928321,0,1),(6,1,'2020-05-03 14:07:19',510,360,0,0,19029312,0,1),(7,1,'2020-05-04 07:40:55',330,300,0,0,12381932,0,1),(8,1,'2020-05-05 07:35:45',630,660,0,0,2381921,0,1);
+INSERT INTO `order` VALUES (1,1,'2020-05-01 10:52:08',270,630,0,0,42425675,0,1),(2,1,'2020-05-01 14:00:52',300,540,0,0,123454321,0,1),(3,1,'2020-05-03 13:54:52',360,450,0,0,1337,0,1),(4,1,'2020-05-03 14:02:38',600,780,0,0,19202122,0,1),(5,1,'2020-05-03 14:05:21',450,600,0,0,81928321,0,1),(6,1,'2020-05-03 14:07:19',510,360,0,0,19029312,0,1),(7,1,'2020-05-04 07:40:55',330,300,0,0,12381932,0,1),(8,1,'2020-05-05 07:35:45',630,660,0,0,2381921,0,1),(9,1,'2020-05-05 14:56:06',600,780,0,0,92117373,4645,1);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -506,4 +509,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-05 13:17:21
+-- Dump completed on 2020-05-05 16:58:40

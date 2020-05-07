@@ -37,7 +37,7 @@ public class OrderMapper {
                     ps1.setInt(4, order.getShed_width());
                     ps1.setInt(5, order.getShed_length());
                     ps1.setInt(6, order.getPhone());
-                    ps.setInt(7, order.getTotalPrice());
+                    ps1.setInt(7, order.getTotalPrice());
                     ps1.setInt(8, order.getStatus_id());
                     ps1.executeUpdate();
 
@@ -215,7 +215,25 @@ public class OrderMapper {
     }
 
 
+    public static void updateTotalPrice(int order_id, int totalPrice) {
+        String sql = "update fog.order set total_price = ? where order_id = ?";
 
+        try{
+            Connection con = Connector.connection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1,totalPrice);
+            ps.setInt(2,order_id);
+            ps.executeUpdate();
+        }
+
+        catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+
+        }
+
+    }
 
 }
 

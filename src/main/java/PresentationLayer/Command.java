@@ -2,8 +2,10 @@ package PresentationLayer;
 
 import FunctionLayer.LoginSampleException;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +16,7 @@ abstract class Command {
     private static void initCommands() {
         commands = new HashMap<>();
         commands.put("login", new Login());
+        commands.put("logout", new Logout());
         commands.put("flatorder", new FlatOrder());
         commands.put("redirect", new Redirect());
         commands.put("myorder", new MyOrder());
@@ -23,6 +26,9 @@ abstract class Command {
         commands.put("deleteorder", new DeleteOrder());
         commands.put("employeeLogin", new EmployeeLogin());
         commands.put("drawing", new Drawing());
+        commands.put("shiporder", new ShipOrder());
+        commands.put("checkout", new Checkout());
+
     }
 
     static Command from(HttpServletRequest request) {
@@ -34,6 +40,6 @@ abstract class Command {
     }
 
     abstract String execute(HttpServletRequest request, HttpServletResponse response)
-            throws LoginSampleException, SQLException, ClassNotFoundException, FunctionLayer.OrderException;
+            throws LoginSampleException, SQLException, ClassNotFoundException, FunctionLayer.OrderException, ServletException, IOException;
 
 }
