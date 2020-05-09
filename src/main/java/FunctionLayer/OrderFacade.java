@@ -15,6 +15,10 @@ public class OrderFacade {
         return OrderMapper.getMyOrder(orderId, phone);
     }
 
+    public static Order getOrderForWarehouse(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
+        return OrderMapper.getOrderForWarehouse(orderId);
+    }
+
     public static void deleteOrder(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
         OrderMapper.deleteOrder(orderId);
     }

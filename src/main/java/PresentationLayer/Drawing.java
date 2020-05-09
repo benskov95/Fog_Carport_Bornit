@@ -24,9 +24,12 @@ public class Drawing extends Command {
         int temp = 0;
         int placementOfThirdBeam = width / 2;
 
-        double rafterWidth = 4.5;
+        double rafterWoodWidth = 4.5;
         int permanentYValue = 35;
-        double widthWithRafterWidth = width + rafterWidth;
+        double postWidth = 9.7;
+        double postLength = 9.7;
+
+        double widthWithRafterWidth = width + rafterWoodWidth;
         double finalWidth = widthWithRafterWidth - permanentYValue;
         int sbr = calc.calcSpaceBetweenRafters(length);
 
@@ -41,9 +44,8 @@ public class Drawing extends Command {
         svgOuterDrawing.addTextRotated("30,300", width + " cm");
         svgOuterDrawing.addText(502, 670, length + " cm");
 
+//        session.setAttribute("svgOuterDrawing", svgOuterDrawing.toString());
        //Tegning indre del, selve Carport
-
-
 
 
         Svg svg = new Svg(800, 800, "0,0,800,800",75,10);
@@ -51,15 +53,11 @@ public class Drawing extends Command {
         //ramme
         svg.addRamme(0,0,width,length);
         //remme
-        svg.addRect(0,35,4.5,length);
-        svg.addRect(0,width-35,4.5,length);
+        svg.addRect(0,35,rafterWoodWidth,length);
+        svg.addRect(0,width-35,rafterWoodWidth,length);
 
 
-        if (width > 600) {
-            svg.addRect(0, placementOfThirdBeam, 4.5, length);
-        }
         //spær --Loope igjennom?
-
 
         for (Material material : bom.getMaterials()) {
             if (material.getCarportPartId() == 59 || material.getCarportPartId() == 35){
@@ -69,20 +67,18 @@ public class Drawing extends Command {
 
         }
 
-        svg.addRect(0,0,width,4.5);
+        svg.addRect(0,0,width,rafterWoodWidth);
 
         while (amountOfRafters > 1){
             temp += sbr;
-            svg.addRect(temp,0,width,4.5);
+            svg.addRect(temp,0,width,rafterWoodWidth);
             amountOfRafters--;
         }
-//        svg.addRect(length-4.5,0,width,4.5);
-
 
 
         //hulbånd
-        svg.addPerfiratedBand(sbr, 35, length-sbr, finalWidth);
-        svg.addPerfiratedBand(sbr, finalWidth, length-sbr, 35);
+        svg.addPerfiratedBand(sbr, permanentYValue, length-sbr, finalWidth);
+        svg.addPerfiratedBand(sbr, finalWidth, length-sbr, permanentYValue);
 
         //stolper
         for (Material material : bom.getMaterials()) {
@@ -98,33 +94,38 @@ public class Drawing extends Command {
         int sbrTo = sbr / 2;
         double spaceBetweenStartAndPosts = sbr * 1.5;
         int finalPostsSpace = length - sbrTo;
-        double test = finalPostsSpace - spaceBetweenStartAndPosts;
-        double testTo = test / 2;
-        double check = spaceBetweenStartAndPosts + testTo;
+        double tempForAdditionalPosts = finalPostsSpace - spaceBetweenStartAndPosts;
+        double secondTemp = tempForAdditionalPosts / 2;
+        double xForAdditionalPosts = spaceBetweenStartAndPosts + secondTemp;
 
-        svg.addRect(spaceBetweenStartAndPosts,yForPosts,9.7,9.7);
-        svg.addRect(spaceBetweenStartAndPosts,widthForPosts,9.7,9.7);
-        svg.addRect(finalPostsSpace,yForPosts,9.7,9.7);
-        svg.addRect(finalPostsSpace,widthForPosts,9.7,9.7);
+        svg.addRect(spaceBetweenStartAndPosts,yForPosts,postLength,postWidth);
+        svg.addRect(spaceBetweenStartAndPosts,widthForPosts,postLength,postWidth);
+        svg.addRect(finalPostsSpace,yForPosts,postLength,postWidth);
+        svg.addRect(finalPostsSpace,widthForPosts,postLength,postWidth);
 
         amountOfPosts -= 4;
 
         if (width > 600) {
-            svg.addRect(spaceBetweenStartAndPosts, placementOfThirdBeam,9.7,9.7);
-            svg.addRect(finalPostsSpace, placementOfThirdBeam,9.7,9.7);
+            svg.addRect(0, placementOfThirdBeam, rafterWoodWidth, length); // En tredje rem tilføjes hvis bredden på carporten er større end 6 meter.
+            svg.addRect(spaceBetweenStartAndPosts, placementOfThirdBeam - 3,postLength,postWidth); // Har tilføjet -3 til placementOfThirdBeam fordi stolperne ikke ligger lige på remmen ellers.
+            svg.addRect(finalPostsSpace, placementOfThirdBeam - 3,postLength,postWidth);
             amountOfPosts -= 2;
         }
 
+        // Nu kan der tages højde for, hvis der skal tilføjes endnu flere stolper
+        // (dvs. hvis carporten er længere end makslængden (780). Får nok ikke brug
+        // for det, men så er funktionaliteten der da hvis man nogensinde udvider længevalget.
+
+        // Man ville så også skulle ændre bredden på viewboxen for at kunne se dem.
+
         while (amountOfPosts != 0) {
 
-        svg.addRect(check,yForPosts,9.7,9.7);
-        svg.addRect(check,widthForPosts,9.7,9.7);
-        amountOfPosts--;
+        svg.addRect(xForAdditionalPosts,yForPosts,postLength,postWidth);
+        svg.addRect(xForAdditionalPosts,widthForPosts,postLength,postWidth);
+        xForAdditionalPosts += finalPostsSpace;
+        amountOfPosts -= 2;
 
         }
-
-
-
 
         String svgFinal = svg.toString().replace(",", ".");
         session.setAttribute("svgdrawing", svgFinal);

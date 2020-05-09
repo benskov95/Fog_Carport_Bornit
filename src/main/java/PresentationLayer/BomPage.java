@@ -11,25 +11,25 @@ import java.util.ArrayList;
 
 public class BomPage extends Command {
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException, ClassNotFoundException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, LoginSampleException {
 
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
         int orderId = 0;
         BillOfMaterials bom;
 
-        try {
-            orderId = Integer.parseInt(request.getParameter("billofmaterials"));
-            session.setAttribute("warehouse_orderId", orderId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            try {
+                orderId = Integer.parseInt(request.getParameter("billofmaterials"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        if (orderId != 0) {
-            bom = BomFacade.getBillOfMaterials(orderId);
-        } else {
+            if (orderId != 0) {
+                bom = BomFacade.getBillOfMaterials(orderId);
+                session.setAttribute("order", OrderFacade.getOrderForWarehouse(orderId));
+            } else {
             bom = BomFacade.getBillOfMaterials(order.getOrder_id());
-        }
+            }
 
         MaterialFacade.setUnitTypes(bom.getMaterials());
         ArrayList<Material> woodAndRoofPlates = new ArrayList<>();

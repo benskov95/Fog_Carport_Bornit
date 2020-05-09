@@ -21,6 +21,11 @@ public class Login extends Command {
         BillOfMaterials bom;
         String destination = "index";
 
+        if (session.getAttribute("order") != null) {
+            session.setAttribute("order", null);
+            session.setAttribute("employee", null);
+        }
+
         try {
             phoneNumber = Integer.parseInt(request.getParameter("phoneNumber"));
             orderId = Integer.parseInt(request.getParameter("orderId"));

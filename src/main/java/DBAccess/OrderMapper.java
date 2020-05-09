@@ -98,6 +98,42 @@ public class OrderMapper {
 
     }
 
+    public static Order getOrderForWarehouse(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
+
+        Connection con = Connector.connection();
+        String sqlOrders = "SELECT * from fog.order WHERE order_id = ?";
+        try  (  PreparedStatement ps = con.prepareStatement(sqlOrders)) {
+
+            ps.setInt(1,orderId);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                int order_id = resultSet.getInt("order_id");
+                int cp_id = resultSet.getInt("cp_id");
+                Date date = resultSet.getDate("date");
+                int carport_width = resultSet.getInt("carport_width");
+                int carport_length = resultSet.getInt("carport_length");
+                int shed_width = resultSet.getInt("shed_width");
+                int shed_length = resultSet.getInt("shed_length");
+                int phoneNumber = resultSet.getInt("phone");
+                int totalPrice = resultSet.getInt("total_price");
+                int status_id = resultSet.getInt("status_id");
+
+                if (status_id == 1) {
+                    totalPrice = 0;
+                }
+
+                return new Order(order_id, cp_id, date, carport_width, carport_length, shed_width, shed_length, phoneNumber, totalPrice, status_id);
+            }
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
     public static void deleteOrder(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
 
         String sql = "DELETE FROM fog.order " +
