@@ -38,11 +38,11 @@
         <td >
             <form action="FrontController?target=checkout" method="post">
                 <input type="submit" class="btn btn-primary btn-sm" name="bestil" value="Bestil"
-                ${sessionScope.statusId eq 2 ? '' : 'disabled' }>
+                ${sessionScope.order.status_id eq 2 ? '' : 'disabled' }>
             </form>
             <form action="FrontController?target=myorder" method="post">
             <input type="submit"  class="btn btn-danger btn-sm" value="Afslå"
-            ${sessionScope.statusId eq 2 ? '' : 'disabled' }>
+            ${sessionScope.order.status_id eq 2 ? '' : 'disabled' }>
             </form>
         </td >
     </tr>

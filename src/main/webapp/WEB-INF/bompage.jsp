@@ -4,7 +4,7 @@
 
 <title>Stykliste</title>
 
-<h1 style="font-family: Roboto">Stykliste for ordre nr. ${sessionScope.order.order_id}${sessionScope.warehouse_orderId}</h1>
+<h1 style="font-family: Roboto">Stykliste for ordre nr. ${sessionScope.order.order_id}</h1>
 <p class="lead">Her kan du se styklisten til din carport.</p>
 
 <a href="FrontController?target=redirect&destination=orderpage" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
