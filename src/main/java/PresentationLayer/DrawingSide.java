@@ -35,7 +35,7 @@ public class DrawingSide extends Command {
         //pilehodedefinisjon
         svgOuterDrawing.addDefs();
         //pile
-        svgOuterDrawing.addLine(30, 10, 30, height);
+        svgOuterDrawing.addLine(30, 10, 30, height+10);
         svgOuterDrawing.addLine(75, height+60, length+75, height+60);
         //txt
         svgOuterDrawing.addTextRotated("15, " + arrowTextY, height + " cm");

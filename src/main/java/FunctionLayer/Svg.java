@@ -45,7 +45,7 @@ public class Svg {
         svg.append(String.format(Locale.ROOT,rectTemplate, x, y, height, width));
     }
 
-    public void addPerfiratedBand(double x1, double y1, double x2, double y2) {
+    public void addPerforatedBand(double x1, double y1, double x2, double y2) {
         svg.append(String.format(Locale.ROOT,perfiratedBandTemplate, x1, y1, x2, y2));
     }
 

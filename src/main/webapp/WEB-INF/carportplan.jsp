@@ -7,12 +7,13 @@
 
 
 
-<h1 style="font-family: Roboto,sans-serif">Carport tegning for ordre nr. 123</h1>
-<p class="lead">Her ses din carports dimensioner fra fugleperspektiv.</p>
+<h1 style="font-family: Roboto,sans-serif">Carport tegning for ordre nr. ${sessionScope.order.order_id}</h1>
+<p class="lead">Her ses din carports dimensioner ovenfra.</p>
 <a href="FrontController?target=carportplanside" class="btn btn-primary" role="button" aria-pressed="true">Se fra siden</a>
 <a href="FrontController?target=redirect&destination=myorder" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
 
-${sessionScope.outedrawing}
+<br>
+<br>
 ${sessionScope.svgdrawing}
 
 

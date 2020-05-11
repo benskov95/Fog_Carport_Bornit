@@ -26,12 +26,12 @@ public class Drawing extends Command {
         int arrowTextX = (length/2) + 75;
 
         double rafterWoodWidth = 4.5;
-        int permanentYValue = 35;
+        int eaves = 35; // udhæng
         double postWidth = 9.7;
         double postLength = 9.7;
 
         double widthWithRafterWidth = width + rafterWoodWidth;
-        double finalWidth = widthWithRafterWidth - permanentYValue;
+        double finalWidth = widthWithRafterWidth - eaves;
         int sbr = calc.calcSpaceBetweenRafters(length);
 
         //Tegning ytre del med piler og mål
@@ -45,7 +45,6 @@ public class Drawing extends Command {
         svgOuterDrawing.addTextRotated("15, " + placementOfThirdBeam, width + " cm");
         svgOuterDrawing.addText(arrowTextX, width+85, length + " cm");
 
-//        session.setAttribute("svgOuterDrawing", svgOuterDrawing.toString());
        //Tegning indre del, selve Carport
 
 
@@ -54,8 +53,8 @@ public class Drawing extends Command {
         //ramme
         svg.addRamme(0,0,width,length);
         //remme
-        svg.addRect(0,35,rafterWoodWidth,length);
-        svg.addRect(0,width-35,rafterWoodWidth,length);
+        svg.addRect(0,eaves,rafterWoodWidth,length);
+        svg.addRect(0,width-eaves,rafterWoodWidth,length);
 
 
         //spær --Loope igjennom?
@@ -78,8 +77,8 @@ public class Drawing extends Command {
 
 
         //hulbånd
-        svg.addPerfiratedBand(sbr, permanentYValue, length-sbr, finalWidth);
-        svg.addPerfiratedBand(sbr, finalWidth, length-sbr, permanentYValue);
+        svg.addPerforatedBand(sbr, eaves, length-sbr, finalWidth);
+        svg.addPerforatedBand(sbr, finalWidth, length-sbr, eaves);
 
         //stolper
         for (Material material : bom.getMaterials()) {
@@ -89,8 +88,8 @@ public class Drawing extends Command {
             }
         }
 
-        int yForPosts = permanentYValue - 3;
-        int yForPostsWidth = permanentYValue + 3;
+        int yForPosts = eaves - 3;
+        int yForPostsWidth = eaves + 3;
         int widthForPosts = width - yForPostsWidth;
         int sbrTo = sbr / 2;
         double spaceBetweenStartAndPosts = sbr * 1.5;

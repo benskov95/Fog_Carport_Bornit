@@ -53,7 +53,7 @@ public class Calculator {
         materialHolder.add(new Material(38, width, numberOfBeams));
         materialHolder.add(new Material(92, 0, numberOfPerforatedBands));
         materialHolder.add(new Material(95, 0, numberOfFasciaScrewPacks));
-        materialHolder.add(new Material(46, 300, posts)); // Kun en højde?
+        materialHolder.add(new Material(46, 300, posts));
         materialHolder.add(new Material(38, width, rafters));
 
         materialHolder.add(new Material(32, underFasciaFrontBackLength, underFasciaFrontBackQuantity));
@@ -84,6 +84,112 @@ public class Calculator {
         MaterialFacade.setLinkMaterialSizeIds(materialHolder);
 
         return new BillOfMaterials(materialHolder);
+    }
+
+    public BillOfMaterials type2Calc(int length, int width, int shedLength, int shedWidth) throws SQLException, ClassNotFoundException {
+
+        ArrayList<Material> materialHolder = new ArrayList<>();
+
+        int numberOfBeams;
+        if (width > 600) {
+            numberOfBeams = 3;
+        } else {
+            numberOfBeams = 2;
+        }
+
+        int numberOfPerforatedBands = 2;
+        int numberOfFasciaScrewPacks = 1;
+        int lath = 1; // Lægte FREDERIK, altid 420 lang.
+
+        int posts = calcNumberOfPosts(length, width);
+        int rafters = calcNumberOfRafters(length);
+
+        int underFasciaFrontBackQuantity = calcNumberOfFascia(width, true, false); // Understernbrædder til for og bagende.
+        int underFasciaFrontBackLength = fasciaLength(false);
+
+        int underFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Understernbrædder til siderne.
+        int underFasciaSidesLength = fasciaLength(true);
+
+        int overFasciaFrontQuantity = calcNumberOfFascia(width, false, false); // Oversternbrædder til forenden.
+        int overFasciaFrontLength = fasciaLength(false);
+
+        int overFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Oversternbrædder til siderne.
+        int overFasciaSidesLength = fasciaLength(true);
+
+        int waterFasciaFrontQuantity = calcNumberOfFascia(width, false, false); // Vandbræt til front.
+        int waterFasciaFrontLength = fasciaLength(false);
+
+        int waterFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Vandbræt til siderne.
+        int waterFasciaSidesLength = fasciaLength(true);
+
+        int plates = calcNumberOfTrapezPlates(width);
+        int plateSizesAndQuantity = calcLengthOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
+        int bottomScrews = calcNumberOfBottomScrewPacks(plates);
+        int brackets = calcNumberOfUniversalBrackets(rafters);
+        int bracketScrews = calcNumberOfBracketScrewPacks(brackets);
+        int carriageBolts = calcNumberOfCarriageBolts(posts, numberOfBeams);
+        int squareWashers = calcNumberOfSquareWashers(posts);
+
+        materialHolder.add(new Material(38, width, numberOfBeams));
+        materialHolder.add(new Material(92, 0, numberOfPerforatedBands));
+        materialHolder.add(new Material(95, 0, numberOfFasciaScrewPacks));
+        materialHolder.add(new Material(46, 300, posts));
+        materialHolder.add(new Material(38, width, rafters));
+
+        materialHolder.add(new Material(32, underFasciaFrontBackLength, underFasciaFrontBackQuantity));
+        materialHolder.add(new Material(32, underFasciaSidesLength, underFasciaSidesQuantity));
+
+        materialHolder.add(new Material(20, overFasciaFrontLength,  overFasciaFrontQuantity));
+        materialHolder.add(new Material(20, overFasciaSidesLength, overFasciaSidesQuantity));
+
+        materialHolder.add(new Material(1, waterFasciaFrontLength, waterFasciaFrontQuantity));
+        materialHolder.add(new Material(1, waterFasciaSidesLength, waterFasciaSidesQuantity));
+
+        materialHolder.add(new Material(69, primaryRoofPlateLength, plateSizesAndQuantity));
+        if (secondaryRoofPlateLength != 0) {
+            materialHolder.add(new Material(69, secondaryRoofPlateLength, plateSizesAndQuantity));
+        }
+
+        materialHolder.add(new Material(91, 0, bottomScrews));
+        materialHolder.add(new Material(93, 0, brackets));
+        materialHolder.add(new Material(94, 0, brackets));
+        materialHolder.add(new Material(96, 0, bracketScrews));
+        materialHolder.add(new Material(97, 0, carriageBolts));
+        materialHolder.add(new Material(98, 0, squareWashers));
+
+        CarportPartsFacade.getCarportPartIds(materialHolder, 2);
+        CarportPartsFacade.getCarportPartDescriptions(materialHolder);
+        MaterialFacade.setMaterialValues(materialHolder);
+        MaterialFacade.setMaterialSizeIds(materialHolder);
+        MaterialFacade.setLinkMaterialSizeIds(materialHolder);
+
+        return new BillOfMaterials(materialHolder);
+    }
+
+    public static int calcNumberOfStuds(int shedMeasurement) throws SQLException, ClassNotFoundException { // Løsholter
+
+        int initialWidth = shedMeasurement;
+        ArrayList<Integer> studSizes = MaterialFacade.getMaterialLengths(54);
+        boolean stop = false;
+        int res = 0;
+
+        for (Integer integer : studSizes) {
+            while (shedMeasurement != 0) {
+                shedMeasurement -= integer;
+                if (shedMeasurement <= 0 && shedMeasurement >= -30) {
+                    res = integer;
+                    stop = true;
+                    break;
+                } else if (shedMeasurement < 0) {
+                    shedMeasurement = initialWidth;
+                    break;
+                }
+            }
+            if (stop) {
+                break;
+            }
+        }
+        return res;
     }
 
     public int calcNumberOfTrapezPlates(int width) {

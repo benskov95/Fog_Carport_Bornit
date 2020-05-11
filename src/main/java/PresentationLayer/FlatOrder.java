@@ -57,8 +57,18 @@ public class FlatOrder extends Command {
         }
 
 
-        BillOfMaterials bom = calculator.type1Calc(carportLength, carportWidth);
-        Order order = new Order(1, carportWidth, carportLength, shedWidth, shedLength, bom.getTotalPrice(), telephone);
+        BillOfMaterials bom;
+        Order order;
+
+        if (shedLength > 0 && shedWidth > 0) {
+            bom = calculator.type2Calc(carportLength, carportWidth, shedLength, shedWidth);
+            order = new Order(2, carportWidth, carportLength, shedWidth, shedLength, bom.getTotalPrice(), telephone);
+        } else {
+            bom = calculator.type1Calc(carportLength, carportWidth);
+            order = new Order(1, carportWidth, carportLength, shedWidth, shedLength, bom.getTotalPrice(), telephone);
+        }
+
+
         Customer customer = new Customer(telephone, name, address, email, postalCodeCity);
 
         int orderId = OrderFacade.insertOrder(customer, order);
