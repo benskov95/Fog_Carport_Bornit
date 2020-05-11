@@ -23,6 +23,7 @@ public class Drawing extends Command {
         int amountOfPosts = 0;
         int temp = 0;
         int placementOfThirdBeam = width / 2;
+        int arrowTextX = (length/2) + 75;
 
         double rafterWoodWidth = 4.5;
         int permanentYValue = 35;
@@ -38,11 +39,11 @@ public class Drawing extends Command {
         //pilehodedefinisjon
         svgOuterDrawing.addDefs();
         //pile
-        svgOuterDrawing.addLine(10, 10, 10, width);
-        svgOuterDrawing.addLine(75, width+75, length+75, width+75);
+        svgOuterDrawing.addLine(30, 10, 30, width);
+        svgOuterDrawing.addLine(75, width+60, length+75, width+60);
         //txt
-        svgOuterDrawing.addTextRotated("30,300", width + " cm");
-        svgOuterDrawing.addText(502, 670, length + " cm");
+        svgOuterDrawing.addTextRotated("15, " + placementOfThirdBeam, width + " cm");
+        svgOuterDrawing.addText(arrowTextX, width+85, length + " cm");
 
 //        session.setAttribute("svgOuterDrawing", svgOuterDrawing.toString());
        //Tegning indre del, selve Carport
