@@ -34,12 +34,12 @@ public class Drawing extends Command {
         int sbr = calc.calcSpaceBetweenRafters(length);
 
         //Tegning ytre del med piler og mål
-        Svg svgOuterDrawing = new Svg(900,800,"0,0,900,800",0,0);
+        Svg svgOuterDrawing = new Svg(1000,1000,"0,0,1000,1000",0,0);
         //pilehodedefinisjon
         svgOuterDrawing.addDefs();
         //pile
-        svgOuterDrawing.addLine(40, 10, 40, 610);
-        svgOuterDrawing.addLine(75, 650, 855, 650);
+        svgOuterDrawing.addLine(10, 10, 10, width);
+        svgOuterDrawing.addLine(75, width+75, length+75, width+75);
         //txt
         svgOuterDrawing.addTextRotated("30,300", width + " cm");
         svgOuterDrawing.addText(502, 670, length + " cm");
@@ -127,8 +127,9 @@ public class Drawing extends Command {
 
         }
 
-        String svgFinal = svg.toString().replace(",", ".");
-        session.setAttribute("svgdrawing", svgFinal);
+        svgOuterDrawing.addInnerDrawing(svg);
+
+        session.setAttribute("svgdrawing", svgOuterDrawing.toString());
         return "carportplan";
     }
 }
