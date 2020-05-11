@@ -28,6 +28,8 @@ abstract class Command {
         commands.put("drawing", new Drawing());
         commands.put("shiporder", new ShipOrder());
         commands.put("checkout", new Checkout());
+        commands.put("carportplanside", new DrawingSide());
+
 
     }
 
