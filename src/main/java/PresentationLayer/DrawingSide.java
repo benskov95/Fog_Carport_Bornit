@@ -18,27 +18,28 @@ public class DrawingSide extends Command {
 
         int height = 210;
         int length = order.getCarport_length();
-        int amountOfPosts = 0;
-        int amountofPostsSide = amountOfPosts/2;
+        int arrowTextY = height/2;
+        int arrowTextX = (length/2) + 75;
 
         double rafterWidth = 4.5;
         int underFasciaHeight = 20;
         double overFasciaheight = 12.5;
+        double postWidth = 9.7;
         int permanentYValue = 35;
         double widthWithRafterWidth = height + rafterWidth;
-        double finalWidth = widthWithRafterWidth - permanentYValue;
         int sbr = calc.calcSpaceBetweenRafters(length);
 
+
         //Tegning ytre del med piler og mål
-        Svg svgOuterDrawing = new Svg(900,400,"0,0,900,400",0,0);
+        Svg svgOuterDrawing = new Svg(1000,1000,"0,0,1000,1000",0,0);
         //pilehodedefinisjon
         svgOuterDrawing.addDefs();
         //pile
-        svgOuterDrawing.addLine(40, 10, 40, 220);
-        svgOuterDrawing.addLine(75, 260, 855, 260);
+        svgOuterDrawing.addLine(30, 10, 30, height);
+        svgOuterDrawing.addLine(75, height+60, length+75, height+60);
         //txt
-        svgOuterDrawing.addTextRotated("30,105", "210 cm");
-        svgOuterDrawing.addText(502, 670, "780 cm");
+        svgOuterDrawing.addTextRotated("15, " + arrowTextY, height + " cm");
+        svgOuterDrawing.addText(arrowTextX, height+85, length + " cm");
 
         //Tegning indre del, selve Carport
         Svg svg = new Svg(800, 210, "0,0,780,210",75,10);
@@ -46,8 +47,7 @@ public class DrawingSide extends Command {
         //ramme
         svg.addRamme(0,0,height,length);
         //stolper
-        int testY = permanentYValue - 3;
-        int hmm = permanentYValue + 3;
+
         int sbrTo = sbr / 2;
         double spaceBetweenStartAndPosts = sbr * 1.5;
         int finalPostsSpace = length - sbrTo;
@@ -55,19 +55,12 @@ public class DrawingSide extends Command {
         double testTo = test / 2;
         double check = spaceBetweenStartAndPosts + testTo;
 
-//        for (Material material : bom.getMaterials()) {
-//            if (material.getCarportPartId() == 60 || material.getCarportPartId() == 36) {
-//                amountOfPosts = material.getQuantity();
-//                amountOfPosts = amountofPostsSide;
-//                break;
-//            }
-//        }
 
-        svg.addRect(spaceBetweenStartAndPosts,0,height,9.7);
-        svg.addRect(finalPostsSpace,0,height,9.7);
+        svg.addRect(spaceBetweenStartAndPosts,0,height,postWidth);
+        svg.addRect(finalPostsSpace,0,height,postWidth);
 
         if (length > 300) {
-            svg.addRect(check,0,height,9.7);
+            svg.addRect(check,0,height,postWidth);
         }
 
         //understærn
@@ -76,11 +69,11 @@ public class DrawingSide extends Command {
         svg.addRect(0,0,overFasciaheight,length);
 
 
+        svgOuterDrawing.addInnerDrawing(svg);
 
 
 
-        String svgFinalSide = svg.toString().replace(",", ".");
-        session.setAttribute("svgdrawingside", svgFinalSide);
+        session.setAttribute("svgdrawingside", svgOuterDrawing.toString());
         return "carportplanside";
     }
 }

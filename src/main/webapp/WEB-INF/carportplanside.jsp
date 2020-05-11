@@ -11,7 +11,7 @@
 <p class="lead">Her ses din carports dimensioner fra siden.</p>
 <a href="FrontController?target=redirect&destination=carportplan" class="btn btn-primary" role="button" aria-pressed="true">Se ovenfra</a>
 <a href="FrontController?target=redirect&destination=myorder" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
-
+<br>
 ${sessionScope.svgdrawingside}
 
 
