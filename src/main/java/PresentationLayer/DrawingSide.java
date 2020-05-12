@@ -28,6 +28,9 @@ public class DrawingSide extends Command {
         int permanentYValue = 35;
         double widthWithRafterWidth = height + rafterWidth;
         int sbr = calc.calcSpaceBetweenRafters(length);
+        int shedWidth = order.getShed_width();
+        int shedLength = order.getShed_length();
+        double beamHeight = 19.5;
 
 
         //Tegning ytre del med piler og mål
@@ -56,17 +59,26 @@ public class DrawingSide extends Command {
         double check = spaceBetweenStartAndPosts + testTo;
 
 
-        svg.addRect(spaceBetweenStartAndPosts,0,height,postWidth);
-        svg.addRect(finalPostsSpace,0,height,postWidth);
+        svg.addRect(spaceBetweenStartAndPosts+5,0,height,postWidth);
+        svg.addRect(finalPostsSpace+5,0,height,postWidth);
 
         if (length > 300) {
-            svg.addRect(check,0,height,postWidth);
+            svg.addRect(check+5,0,height,postWidth);
         }
 
         //understærn
-        svg.addRect(0,0,underFasciaHeight,length);
+        svg.addRect(2.5,0,underFasciaHeight,length+2.5);
         //overstærn
-        svg.addRect(0,0,overFasciaheight,length);
+        svg.addRect(0,0,overFasciaheight,length+5);
+
+        //remme
+        svg.addRect(5,underFasciaHeight,beamHeight, length);
+
+
+        //skur
+        if (shedWidth != 0) {
+
+        }
 
 
         svgOuterDrawing.addInnerDrawing(svg);
