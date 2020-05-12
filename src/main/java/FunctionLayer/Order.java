@@ -1,6 +1,7 @@
 package FunctionLayer;
 
 import java.sql.Date;
+import java.sql.SQLException;
 
 public class Order {
 
@@ -14,6 +15,7 @@ public class Order {
     private int phone;
     private int totalPrice;
     private int status_id = 1;
+    private String status;
 
     public Order(int order_id, int carport_id, Date date, int carport_width, int carport_length, int shed_width, int shed_length, int phone, int totalPrice, int status_id) {
         this.order_id = order_id;
@@ -123,5 +125,13 @@ public class Order {
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getStatus() throws SQLException, ClassNotFoundException {
+        return OrderFacade.getOrderStatus(this.status_id);
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -13,7 +13,6 @@ public class AllOrders extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException, ClassNotFoundException {
 
         HttpSession session = request.getSession();
-
         session.setAttribute("orderlist", OrderFacade.getAllOrdersByStatusId(1));
 
         return "adminpage";

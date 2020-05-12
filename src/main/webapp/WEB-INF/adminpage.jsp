@@ -17,8 +17,8 @@
         <th scope="col">Skur bredde</th>
         <th scope="col">Skur længde</th>
         <th scope="col">Dato</th>
-        <th scope="col">Pris</th>
-        <th scope="col">Telefon</th>
+        <th scope="col">Samlet materialepris</th>
+        <th scope="col">Totalpris</th>
         <th scope="col">Status</th>
         <th></th>
     </tr>
@@ -42,16 +42,18 @@
                     <input type="hidden" name="target" value="updateorder"><input class="form-control" name="totalprice"
                                                                                   size="20" type="text"
                                                                             value="${orders.totalPrice}">
+
+<%--                    Der skal være et form closing tag her, men det kan der ikke være før--%>
+<%--                    der bliver lavet om på godkend knappen også.--%>
             </td>
 
-            <td>${orders.phone}</td>
+            <td>${orders.status}</td>
 
 
             <td>
 
                 <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
                 </button>
-                </form>
 
                 <form onsubmit="return confirm('Er du sikker på du vil slette ordre nr:' + ${orders.order_id})" name="delete" action="FrontController" method="POST" id="delete">
                     <input type="hidden" name="target" value="deleteorder">

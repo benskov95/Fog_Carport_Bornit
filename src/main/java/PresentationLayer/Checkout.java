@@ -1,9 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.Order;
-import FunctionLayer.OrderException;
-import FunctionLayer.OrderFacade;
+import FunctionLayer.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +15,12 @@ public class Checkout extends Command {
 
         HttpSession session = request.getSession();
         Order order = (Order) session.getAttribute("order");
+        Customer customer = (Customer) session.getAttribute("customer");
 
         OrderFacade.updateStatus(order.getOrder_id(),3);
+        order = OrderFacade.getMyOrder(order.getOrder_id(), customer.getPhone());
+
+        session.setAttribute("order", order);
 
         return "checkoutpage";
     }

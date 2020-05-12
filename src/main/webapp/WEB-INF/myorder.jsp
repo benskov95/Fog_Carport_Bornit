@@ -34,7 +34,7 @@
         <td>${sessionScope.order.shed_length}</td>
         <td>${sessionScope.order.date}</td>
         <td>${sessionScope.order.totalPrice} kr.</td>
-        <td>${sessionScope.status}</td>
+        <td>${sessionScope.order.status}</td>
         <td >
             <form action="FrontController?target=checkout" method="post">
                 <input type="submit" class="btn btn-primary btn-sm" name="bestil" value="Bestil"
