@@ -21,26 +21,26 @@ public class Calculator {
         int numberOfPerforatedBands = 2;
         int numberOfFasciaScrewPacks = 1;
 
-        int posts = calcNumberOfPosts(length, width);
+        int posts = calcNumberOfPosts(length, width, 0, 0);
         int rafters = calcNumberOfRafters(length);
 
-        int underFasciaFrontBackQuantity = calcNumberOfFascia(width, true, false); // Understernbrædder til for og bagende.
-        int underFasciaFrontBackLength = fasciaLength(false);
+        int underFasciaFrontBackLength = calcFasciaLength(32, width);
+        int underFasciaFrontBackQuantity = calcNumberOfFascia(width, underFasciaFrontBackLength, true); // Understernbrædder til for og bagende.
 
-        int underFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Understernbrædder til siderne.
-        int underFasciaSidesLength = fasciaLength(true);
+        int underFasciaSidesLength = calcFasciaLength(32, length);
+        int underFasciaSidesQuantity = calcNumberOfFascia(length, underFasciaSidesLength, true); // Understernbrædder til siderne.
 
-        int overFasciaFrontQuantity = calcNumberOfFascia(width, false, false); // Oversternbrædder til forenden.
-        int overFasciaFrontLength = fasciaLength(false);
+        int overFasciaFrontLength = calcFasciaLength(20, width);
+        int overFasciaFrontQuantity = calcNumberOfFascia(width, overFasciaFrontLength, false); // Oversternbrædder til forenden.
 
-        int overFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Oversternbrædder til siderne.
-        int overFasciaSidesLength = fasciaLength(true);
+        int overFasciaSidesLength = calcFasciaLength(20, length);
+        int overFasciaSidesQuantity = calcNumberOfFascia(length, overFasciaSidesLength, true); // Oversternbrædder til siderne.
 
-        int waterFasciaFrontQuantity = calcNumberOfFascia(width, false, false); // Vandbræt til front.
-        int waterFasciaFrontLength = fasciaLength(false);
+        int waterFasciaFrontLength = calcFasciaLength(1, width);
+        int waterFasciaFrontQuantity = calcNumberOfFascia(width, waterFasciaFrontLength, false); // Vandbræt til front.
 
-        int waterFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Vandbræt til siderne.
-        int waterFasciaSidesLength = fasciaLength(true);
+        int waterFasciaSidesLength = calcFasciaLength(1, length);
+        int waterFasciaSidesQuantity = calcNumberOfFascia(length, waterFasciaSidesLength, true); // Vandbræt til siderne.
 
         int plates = calcNumberOfTrapezPlates(width);
         int plateSizesAndQuantity = calcLengthOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
@@ -62,8 +62,8 @@ public class Calculator {
         materialHolder.add(new Material(20, overFasciaFrontLength,  overFasciaFrontQuantity));
         materialHolder.add(new Material(20, overFasciaSidesLength, overFasciaSidesQuantity));
 
-        materialHolder.add(new Material(1, waterFasciaFrontLength, waterFasciaFrontQuantity));
         materialHolder.add(new Material(1, waterFasciaSidesLength, waterFasciaSidesQuantity));
+        materialHolder.add(new Material(1, waterFasciaFrontLength, waterFasciaFrontQuantity));
 
         materialHolder.add(new Material(69, primaryRoofPlateLength, plateSizesAndQuantity));
         if (secondaryRoofPlateLength != 0) {
@@ -100,26 +100,26 @@ public class Calculator {
         int numberOfPerforatedBands = 2;
         int numberOfFasciaScrewPacks = 1;
 
-        int posts = calcNumberOfPosts(length, width);
+        int posts = calcNumberOfPosts(length, width, shedLength, shedWidth);
         int rafters = calcNumberOfRafters(length);
 
-        int underFasciaFrontBackQuantity = calcNumberOfFascia(width, true, false); // Understernbrædder til for og bagende.
-        int underFasciaFrontBackLength = fasciaLength(false);
+        int underFasciaFrontBackLength = calcFasciaLength(32, width);
+        int underFasciaFrontBackQuantity = calcNumberOfFascia(width, underFasciaFrontBackLength, true); // Understernbrædder til for og bagende.
 
-        int underFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Understernbrædder til siderne.
-        int underFasciaSidesLength = fasciaLength(true);
+        int underFasciaSidesLength = calcFasciaLength(32, length);
+        int underFasciaSidesQuantity = calcNumberOfFascia(length, underFasciaSidesLength, true); // Understernbrædder til siderne.
 
-        int overFasciaFrontQuantity = calcNumberOfFascia(width, false, false); // Oversternbrædder til forenden.
-        int overFasciaFrontLength = fasciaLength(false);
+        int overFasciaFrontLength = calcFasciaLength(20, width);
+        int overFasciaFrontQuantity = calcNumberOfFascia(width, overFasciaFrontLength, false); // Oversternbrædder til forenden.
 
-        int overFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Oversternbrædder til siderne.
-        int overFasciaSidesLength = fasciaLength(true);
+        int overFasciaSidesLength = calcFasciaLength(20, length);
+        int overFasciaSidesQuantity = calcNumberOfFascia(length, overFasciaSidesLength, true); // Oversternbrædder til siderne.
 
-        int waterFasciaFrontQuantity = calcNumberOfFascia(width, false, false); // Vandbræt til front.
-        int waterFasciaFrontLength = fasciaLength(false);
+        int waterFasciaFrontLength = calcFasciaLength(1, width);
+        int waterFasciaFrontQuantity = calcNumberOfFascia(width, waterFasciaFrontLength, false); // Vandbræt til front.
 
-        int waterFasciaSidesQuantity = calcNumberOfFascia(length, true, true); // Vandbræt til siderne.
-        int waterFasciaSidesLength = fasciaLength(true);
+        int waterFasciaSidesLength = calcFasciaLength(1, length);
+        int waterFasciaSidesQuantity = calcNumberOfFascia(length, waterFasciaSidesLength, true); // Vandbræt til siderne.
 
         int plates = calcNumberOfTrapezPlates(width);
         int plateSizesAndQuantity = calcLengthOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
@@ -147,10 +147,11 @@ public class Calculator {
 
 
         materialHolder.add(new Material(38, width, numberOfBeams));
+        materialHolder.add(new Material(38, width, rafters));
+        materialHolder.add(new Material(38, lengthOfShedBeams, numberOfShedBeams));
         materialHolder.add(new Material(92, 0, numberOfPerforatedBands));
         materialHolder.add(new Material(95, 0, numberOfFasciaScrewPacks));
         materialHolder.add(new Material(46, 300, posts));
-        materialHolder.add(new Material(38, width, rafters));
 
         materialHolder.add(new Material(32, underFasciaFrontBackLength, underFasciaFrontBackQuantity));
         materialHolder.add(new Material(32, underFasciaSidesLength, underFasciaSidesQuantity));
@@ -158,8 +159,9 @@ public class Calculator {
         materialHolder.add(new Material(20, overFasciaFrontLength,  overFasciaFrontQuantity));
         materialHolder.add(new Material(20, overFasciaSidesLength, overFasciaSidesQuantity));
 
-        materialHolder.add(new Material(1, waterFasciaFrontLength, waterFasciaFrontQuantity));
+        materialHolder.add(new Material(1, 210, numberOfCladdingPlanks));
         materialHolder.add(new Material(1, waterFasciaSidesLength, waterFasciaSidesQuantity));
+        materialHolder.add(new Material(1, waterFasciaFrontLength, waterFasciaFrontQuantity));
 
         materialHolder.add(new Material(69, primaryRoofPlateLength, plateSizesAndQuantity));
         if (secondaryRoofPlateLength != 0) {
@@ -174,16 +176,14 @@ public class Calculator {
         materialHolder.add(new Material(98, 0, squareWashers));
 
         materialHolder.add(new Material(65, 420, lath));
-        materialHolder.add(new Material(95, 0, numberOfOuterCladdingScrewPacks));
+        materialHolder.add(new Material(99, 0, numberOfOuterCladdingScrewPacks));
         materialHolder.add(new Material(100, 0, numberOfInnerCladdingScrewPacks));
         materialHolder.add(new Material(101, 0, numberOfBarnDoorLatch));
         materialHolder.add(new Material(102, 0, numberOfTHinges));
         materialHolder.add(new Material(103, 0, numberOfAngleBrackets));
 
-        materialHolder.add(new Material(38, lengthOfShedBeams, numberOfShedBeams));
-        materialHolder.add(new Material(54, lengthOfStudsForSides, numberOfStudsForSides));
         materialHolder.add(new Material(54, lengthOfStudsForGables, numberOfStudsForGables));
-        materialHolder.add(new Material(1, 210, numberOfCladdingPlanks));
+        materialHolder.add(new Material(54, lengthOfStudsForSides, numberOfStudsForSides));
 
 
         CarportPartsFacade.getCarportPartIds(materialHolder, 2);
@@ -195,24 +195,24 @@ public class Calculator {
         return new BillOfMaterials(materialHolder);
     }
 
-    public static int calcOptimalLengthOfMaterial(int shedMeasurement, int materialId) throws SQLException, ClassNotFoundException { // Løsholter
+    public static int calcOptimalLengthOfMaterial(int measurement, int materialId) throws SQLException, ClassNotFoundException { // Løsholter
 
-        int initialWidth = shedMeasurement;
+        int initialWidth = measurement;
         ArrayList<Integer> studSizes = MaterialFacade.getMaterialLengths(materialId);
         boolean stop = false;
         int res = 0;
         int count = 0;
 
         for (Integer integer : studSizes) {
-            while (shedMeasurement != 0) {
-                shedMeasurement -= integer;
+            while (measurement != 0) {
+                measurement -= integer;
                 count++;
-                if (shedMeasurement <= 0 && shedMeasurement >= -30 && count < 3) {
+                if (measurement <= 0 && measurement >= -30 && count < 3) {
                     res = integer;
                     stop = true;
                     break;
-                } else if (shedMeasurement <= 0) {
-                    shedMeasurement = initialWidth;
+                } else if (measurement <= 0) {
+                    measurement = initialWidth;
                     break;
                 }
             }
@@ -282,12 +282,6 @@ public class Calculator {
 
 
         public int calcLengthOfTrapezPlates(int length, int width, ArrayList<Integer> measurements){
-
-        // todo - Skriver bare en todo for at gøre det her tydeligt: Da metoden potentielt
-        // todo - kan regne flere værdier ud (hvis der bruges mere end én pladestørrelse)
-        // todo - tænker jeg, at de skal settes - evt. på en variabel, der er erklæret i
-        // todo - denne klase, som så kan bruges i type1Calc metoden når al styklisteinfo
-        // todo - skal smides op til databasen.
 
             final int overhang = 5;
             final int overlap = 20;
@@ -500,31 +494,14 @@ public class Calculator {
         }
 
 
-    public int fasciaLength(boolean isSides) {
-
-        int fasciaSize;
-
-        if (isSides) {
-            fasciaSize = 540;
-        } else {
-            fasciaSize = 360;
-        }
-
-        return fasciaSize;
+    public int calcFasciaLength(int materialId, int measurement) throws SQLException, ClassNotFoundException {
+        return calcOptimalLengthOfMaterial(measurement, materialId);
     }
 
 
-    public int calcNumberOfFascia(int measurement, boolean doMultiply, boolean isSides) { // doMultiply bruges primært til at gange siderne på carporten. Fascia = sternbræt.
+    public int calcNumberOfFascia(int measurement, int fasciaLength, boolean doMultiply) { // doMultiply bruges primært til at gange siderne på carporten. Fascia = sternbræt.
 
-        double fasciaSize;
-
-        if (isSides) {
-            fasciaSize = 540;
-        } else {
-            fasciaSize = 360;
-        }
-
-        int fasciaNumber = (int) Math.ceil(measurement/ fasciaSize);
+        int fasciaNumber = (int) Math.ceil(measurement/ fasciaLength);
 
         if (doMultiply) {
             return fasciaNumber * 2;
@@ -534,14 +511,31 @@ public class Calculator {
 
     }
 
-    public int calcNumberOfPosts(int length, int width) {
+    public int calcNumberOfPosts(int length, int width, int shedLength, int shedWidth) {
         int numberOfPosts = 4;
+        int eaves = 35;
+        boolean check = false;
 
         if (length > 600) {
             numberOfPosts += 2;
         }
         if (width > 600) {
             numberOfPosts += 2;
+        }
+
+        if (shedLength != 0 && shedWidth != 0) {
+            if (shedWidth < 300 && shedWidth > 0) {
+                numberOfPosts += 3;
+                check = true;
+            }
+            if (shedWidth < (width - 2 * eaves) && width > 300) {
+                numberOfPosts += 5;
+                check = true;
+            }
+            if (!check) {
+                numberOfPosts += 4;
+            }
+
         }
 
         return numberOfPosts;

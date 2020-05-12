@@ -137,6 +137,10 @@ public class Drawing extends Command {
         xForAdditionalPosts += finalPostsSpace;
         amountOfPosts -= 2;
 
+        if (amountOfPosts < 0) {
+            break;
+        }
+
         }
 
         double yForShedPostLowerCorners = eaves+shedWidth-3-postWidth;

@@ -54,7 +54,6 @@ public class CarportPartsMapper {
 
                 int dbMaterialId = resultSet.getInt("material_id");
 
-
                 for (Material material : materials) {
 
                     if (dbMaterialId == material.getMaterialId() && material.getCarportPartId() == 0) {

@@ -19,7 +19,7 @@ public class ShipOrder extends Command {
 
         OrderFacade.updateStatus(order_id, 4);
 
-        session.setAttribute("orderlist", OrderFacade.getAllOrdersByStatusId(3));
+        session.setAttribute("orders", OrderFacade.getAllOrdersByStatusId(3));
 
         return "warehousepage";
     }
