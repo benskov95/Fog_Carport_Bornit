@@ -99,7 +99,6 @@ public class Calculator {
 
         int numberOfPerforatedBands = 2;
         int numberOfFasciaScrewPacks = 1;
-        int lath = 1; // Lægte FREDERIK, altid 420 lang.
 
         int posts = calcNumberOfPosts(length, width);
         int rafters = calcNumberOfRafters(length);
@@ -130,6 +129,23 @@ public class Calculator {
         int carriageBolts = calcNumberOfCarriageBolts(posts, numberOfBeams);
         int squareWashers = calcNumberOfSquareWashers(posts);
 
+        int lath = 1; // Lægte, altid 420 lang - til z på bagside af dør.
+        int numberOfOuterCladdingScrewPacks = 2;
+        int numberOfInnerCladdingScrewPacks = 2;
+        int numberOfBarnDoorLatch = 1;
+        int numberOfTHinges = 1;
+
+        int lengthOfShedBeams = calcLengthOfBeamsForShed(shedLength, 38);
+        int numberOfShedBeams = calcNumberOfBeamsForShed(shedLength, lengthOfShedBeams);
+        int lengthOfStudsForSides = calcOptimalLengthOfMaterial(shedLength, 54);
+        int lengthOfStudsForGables = calcOptimalLengthOfMaterial(shedWidth, 54);
+
+        int numberOfStudsForSides = determineNumberOfStuds(shedLength, 54);
+        int numberOfStudsForGables = determineNumberOfStuds(shedWidth, 54);
+        int numberOfAngleBrackets = (numberOfStudsForSides + numberOfStudsForGables) * 2;
+        int numberOfCladdingPlanks = calcNumberOfCladdingPlanks(shedWidth, shedLength);
+
+
         materialHolder.add(new Material(38, width, numberOfBeams));
         materialHolder.add(new Material(92, 0, numberOfPerforatedBands));
         materialHolder.add(new Material(95, 0, numberOfFasciaScrewPacks));
@@ -157,6 +173,19 @@ public class Calculator {
         materialHolder.add(new Material(97, 0, carriageBolts));
         materialHolder.add(new Material(98, 0, squareWashers));
 
+        materialHolder.add(new Material(65, 420, lath));
+        materialHolder.add(new Material(95, 0, numberOfOuterCladdingScrewPacks));
+        materialHolder.add(new Material(100, 0, numberOfInnerCladdingScrewPacks));
+        materialHolder.add(new Material(101, 0, numberOfBarnDoorLatch));
+        materialHolder.add(new Material(102, 0, numberOfTHinges));
+        materialHolder.add(new Material(103, 0, numberOfAngleBrackets));
+
+        materialHolder.add(new Material(38, lengthOfShedBeams, numberOfShedBeams));
+        materialHolder.add(new Material(54, lengthOfStudsForSides, numberOfStudsForSides));
+        materialHolder.add(new Material(54, lengthOfStudsForGables, numberOfStudsForGables));
+        materialHolder.add(new Material(1, 210, numberOfCladdingPlanks));
+
+
         CarportPartsFacade.getCarportPartIds(materialHolder, 2);
         CarportPartsFacade.getCarportPartDescriptions(materialHolder);
         MaterialFacade.setMaterialValues(materialHolder);
@@ -166,21 +195,23 @@ public class Calculator {
         return new BillOfMaterials(materialHolder);
     }
 
-    public static int calcNumberOfStuds(int shedMeasurement) throws SQLException, ClassNotFoundException { // Løsholter
+    public static int calcOptimalLengthOfMaterial(int shedMeasurement, int materialId) throws SQLException, ClassNotFoundException { // Løsholter
 
         int initialWidth = shedMeasurement;
-        ArrayList<Integer> studSizes = MaterialFacade.getMaterialLengths(54);
+        ArrayList<Integer> studSizes = MaterialFacade.getMaterialLengths(materialId);
         boolean stop = false;
         int res = 0;
+        int count = 0;
 
         for (Integer integer : studSizes) {
             while (shedMeasurement != 0) {
                 shedMeasurement -= integer;
-                if (shedMeasurement <= 0 && shedMeasurement >= -30) {
+                count++;
+                if (shedMeasurement <= 0 && shedMeasurement >= -30 && count < 3) {
                     res = integer;
                     stop = true;
                     break;
-                } else if (shedMeasurement < 0) {
+                } else if (shedMeasurement <= 0) {
                     shedMeasurement = initialWidth;
                     break;
                 }
@@ -188,8 +219,46 @@ public class Calculator {
             if (stop) {
                 break;
             }
+            count = 0;
         }
         return res;
+    }
+
+    public static int calcLengthOfBeamsForShed(int shedMeasurement, int materialId) throws SQLException, ClassNotFoundException { // Hvad er den til? Ingen ved det.
+        shedMeasurement *= 2;
+        return calcOptimalLengthOfMaterial(shedMeasurement, materialId);
+    }
+
+    public static int calcNumberOfBeamsForShed(int shedLength, int beamLength) {
+        int splitBeam = beamLength / 2;
+        if (shedLength == splitBeam) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    public static int determineNumberOfStuds(int shedMeasurement, int materialId) throws SQLException, ClassNotFoundException {
+        int length = calcOptimalLengthOfMaterial(shedMeasurement, materialId);
+        int plankCaseOne = shedMeasurement - (length * 2);
+        int plankCaseTwo = shedMeasurement - length;
+        int res;
+
+        if (plankCaseOne <=0 && plankCaseOne >= -30) {
+            res = 12;
+        } else if (plankCaseTwo <= 0 && plankCaseTwo > -30) {
+            res = 6;
+        } else {
+            res = 4;
+        }
+
+        return res;
+    }
+
+    public static int calcNumberOfCladdingPlanks(int shedWidth, int shedLength) {
+        double boardWidthWithOverlap = 7.5;
+        int circumference = (shedWidth * 2) + (shedLength * 2);
+        return (int) Math.ceil(circumference / boardWidthWithOverlap);
     }
 
     public int calcNumberOfTrapezPlates(int width) {
