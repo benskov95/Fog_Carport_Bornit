@@ -16,9 +16,9 @@ public class DrawingSide extends Command {
         Order order = (Order) session.getAttribute("order");
         BillOfMaterials bom = (BillOfMaterials) session.getAttribute("bom");
 
-        int height = 210;
+        int carportHeight = 210;
         int length = order.getCarport_length();
-        int arrowTextY = height/2;
+        int arrowTextY = carportHeight/2;
         int arrowTextX = (length/2) + 75;
 
         double rafterWidth = 4.5;
@@ -26,11 +26,13 @@ public class DrawingSide extends Command {
         double overFasciaheight = 12.5;
         double postWidth = 9.7;
         int permanentYValue = 35;
-        double widthWithRafterWidth = height + rafterWidth;
+        double widthWithRafterWidth = carportHeight + rafterWidth;
         int sbr = calc.calcSpaceBetweenRafters(length);
         int shedWidth = order.getShed_width();
         int shedLength = order.getShed_length();
         double beamHeight = 19.5;
+        double fasciaWidth = 2.5;
+        double fasciaWidthTo = fasciaWidth*2;
 
 
         //Tegning ytre del med piler og mål
@@ -38,17 +40,17 @@ public class DrawingSide extends Command {
         //pilehodedefinisjon
         svgOuterDrawing.addDefs();
         //pile
-        svgOuterDrawing.addLine(30, 10, 30, height+10);
-        svgOuterDrawing.addLine(75, height+60, length+75, height+60);
+        svgOuterDrawing.addLine(30, 10, 30, carportHeight+10);
+        svgOuterDrawing.addLine(75, carportHeight+60, length+75, carportHeight+60);
         //txt
-        svgOuterDrawing.addTextRotated("15, " + arrowTextY, height + " cm");
-        svgOuterDrawing.addText(arrowTextX, height+85, length + " cm");
+        svgOuterDrawing.addTextRotated("15, " + arrowTextY, carportHeight + " cm");
+        svgOuterDrawing.addText(arrowTextX, carportHeight+85, length + " cm");
 
         //Tegning indre del, selve Carport
-        Svg svg = new Svg(800, 210, "0,0,780,210",75,10);
+        Svg svg = new Svg(800, carportHeight, "0,0,780,210",75,10);
 
         //ramme
-        svg.addRamme(0,0,height,length);
+        svg.addRamme(0,0,carportHeight,length);
         //stolper
 
         int sbrTo = sbr / 2;
@@ -59,20 +61,20 @@ public class DrawingSide extends Command {
         double check = spaceBetweenStartAndPosts + testTo;
 
 
-        svg.addRect(spaceBetweenStartAndPosts+5,0,height,postWidth);
-        svg.addRect(finalPostsSpace+5,0,height,postWidth);
+        svg.addRect(spaceBetweenStartAndPosts+fasciaWidthTo,0,carportHeight,postWidth);
+        svg.addRect(finalPostsSpace+fasciaWidthTo,0,carportHeight,postWidth);
 
         if (length > 300) {
-            svg.addRect(check+5,0,height,postWidth);
+            svg.addRect(check+fasciaWidthTo,0,carportHeight,postWidth);
         }
 
         //understærn
-        svg.addRect(2.5,0,underFasciaHeight,length+2.5);
+        svg.addRect(fasciaWidth,0,underFasciaHeight,length+fasciaWidth);
         //overstærn
-        svg.addRect(0,0,overFasciaheight,length+5);
+        svg.addRect(0,0,overFasciaheight,length+fasciaWidthTo);
 
         //remme
-        svg.addRect(5,underFasciaHeight,beamHeight, length);
+        svg.addRect(fasciaWidthTo,underFasciaHeight,beamHeight, length);
 
 
         //skur

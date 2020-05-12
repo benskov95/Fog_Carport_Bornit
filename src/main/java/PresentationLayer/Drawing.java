@@ -142,7 +142,7 @@ public class Drawing extends Command {
         double yForShedPostLowerCorners = eaves+shedWidth-3-postWidth;
         double yForShedMiddlePosts = (shedWidth + eaves) / 2;
 
-//        if(shedWidth != 0) {
+      if(shedWidth != 0) {
             // Ramme for skuret
             svg.addRectNoFill(shedStart, yForPosts, shedWidth, shedLength);
 
@@ -155,7 +155,7 @@ public class Drawing extends Command {
                 svg.addRect(shedStart, yForShedMiddlePosts, postLength, postWidth);
                 svg.addRect(finalPostsSpace, yForShedMiddlePosts, postLength, postLength);
             }
-//        }
+       }
 
         svgOuterDrawing.addInnerDrawing(svg);
 
