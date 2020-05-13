@@ -36,6 +36,10 @@ public class FlatOrder extends Command {
             throw new OrderException("Du mangler bredde eller længde på skur");
         }
 
+        if (shedLength >= carportLength || shedWidth >= carportWidth) {
+            throw new OrderException("Skuret må ikke være længere eller bredere end carporten.");
+        }
+
         name = request.getParameter("name");
         address = request.getParameter("address");
         postalCodeCity = request.getParameter("postalcode");

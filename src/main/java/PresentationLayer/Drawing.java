@@ -144,8 +144,8 @@ public class Drawing extends Command {
         }
 
         double beamWidth = 4.5;
-        double offset = 3; //Det er den samme som er satt til 3 andre steder evt. postwidth/4?
-        double yForShedStart = width-eaves-shedWidth; //+offset+beamWidth
+        double offset = 3; //Det er den samme som er satt til 3 andre steder evt. bytte til postwidth/4? eller beamwidt/2?
+        double yForShedStart = width-eaves-shedWidth;
         double yForShedPostsUpperCorners = yForShedStart-offset;
         double yForShedMiddlePosts = yForShedStart+(shedWidth / 2);
         double xForShedPostsLeft = finalPostsSpace-shedLength+postWidth;
@@ -153,10 +153,6 @@ public class Drawing extends Command {
 
         if(shedWidth != 0) {
             // Ramme for skuret
-
-
-           // svg.addRectNoFill(shedStart, yForShedStart, shedWidth+beamWidth, shedLength);
-
             svg.addRectThickerLine(xForShedPostsLeft,yForShedStart, beamWidth, shedLength);
             svg.addRectThickerLine(xForShedPostsLeft,yForShedStart+beamWidth, shedWidth, beamWidth);
             svg.addRectThickerLine(xForShedPostsLeft, yForShedStart+shedWidth, beamWidth, shedLength);
@@ -168,17 +164,15 @@ public class Drawing extends Command {
             svg.addRect(xForShedPostsLeft,widthForPosts, postLength, postWidth);
             svg.addRect(finalPostsSpace, widthForPosts, postLength, postWidth);
 
-//            svg.addRect(shedStart, yForShedPostsUpperCorners, postLength, postWidth);
-//            svg.addRect(shedStart, yForShedPostLowerCorners, postLength, postWidth);
-//            svg.addRect(finalPostsSpace,yForShedPostLowerCorners, postLength,postWidth);
-//            svg.addRect(finalPostsSpace,yForShedPostsUpperCorners,postLength,postWidth);
-
-
 
             if (shedWidth > 300) {
                 svg.addRect(xForShedPostsLeft, yForShedMiddlePosts, postLength, postWidth);
                 svg.addRect(finalPostsSpace, yForShedMiddlePosts, postLength, postLength);
             }
+
+//            if (shedLength > 300) {
+//                svg.addRect();
+//            }
         }
 
         svgOuterDrawing.addInnerDrawing(svg);

@@ -62,6 +62,14 @@ public class Material {
         }
     }
 
+    public void beamCarportPartIdHelper(int carportPartId, ArrayList<Material> materials) {
+        for (Material material : materials) {
+            if (material.getMaterialId() == 38 && material.getCarportPartId() == 0 && material.getQuantity() <= 3) {
+                material.setCarportPartId(carportPartId);
+            }
+        }
+    }
+
     public String getMaterialName() {
         return materialName;
     }

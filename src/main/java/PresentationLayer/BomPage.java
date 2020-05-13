@@ -29,6 +29,13 @@ public class BomPage extends Command {
                 session.setAttribute("order", OrderFacade.getOrderForWarehouse(orderId));
             } else {
             bom = BomFacade.getBillOfMaterials(order.getOrder_id());
+
+            for (Material material : bom.getMaterials()) {
+                if (material.getMaterialId() == 38 && material.getQuantity() <= 2 && material.getSize() <= order.getShed_length()) {
+                    String current = material.getCarportPartDescription();
+                    material.setCarportPartDescription(current + " (skur del)");
+                }
+            }
             }
 
         MaterialFacade.setUnitTypes(bom.getMaterials());
