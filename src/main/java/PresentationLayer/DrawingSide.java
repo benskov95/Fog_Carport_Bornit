@@ -20,6 +20,7 @@ public class DrawingSide extends Command {
         int length = order.getCarport_length();
         int arrowTextY = carportHeight/2;
         int arrowTextX = (length/2) + 75;
+        double offset = 4.5;
 
         double rafterWidth = 4.5;
         int underFasciaHeight = 20;
@@ -78,9 +79,38 @@ public class DrawingSide extends Command {
 
 
         //skur
+
         if (shedWidth != 0) {
 
-        }
+           int numberOfCladdingPlanks = calcNumberOfCladdingPlanks(shedLength);
+           int underPlank = (int) Math.ceil( numberOfCladdingPlanks/2);
+           int overPlank = (int) Math.floor(numberOfCladdingPlanks/2);
+           double firstUnderPlankX = finalPostsSpace+offset;
+           double firstOverPlankX = finalPostsSpace- 2.5;
+           double firstPlankY = underFasciaHeight;
+           double plankWidth = 10;
+           double plankHeight = carportHeight-underFasciaHeight;
+
+            for (int i = 0; i < underPlank ; i++) {
+
+           svg.addRect(firstUnderPlankX,firstPlankY,plankHeight,plankWidth );
+           firstUnderPlankX -=15;
+            }
+
+            for (int i = 0; i < overPlank ; i++) {
+
+                svg.addRect(firstOverPlankX,firstPlankY,plankHeight,plankWidth );
+                firstOverPlankX -=15;
+            }
+
+
+
+
+
+            }
+
+
+
 
 
         svgOuterDrawing.addInnerDrawing(svg);
@@ -89,5 +119,10 @@ public class DrawingSide extends Command {
 
         session.setAttribute("svgdrawingside", svgOuterDrawing.toString());
         return "carportplanside";
+    }
+    public static int calcNumberOfCladdingPlanks(int shedLength){
+        double boardWidthWithOverlap = 7.5;
+        int circumference =  shedLength;
+        return (int) Math.ceil(circumference / boardWidthWithOverlap);
     }
 }
