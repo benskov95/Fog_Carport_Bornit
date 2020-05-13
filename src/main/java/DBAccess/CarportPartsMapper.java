@@ -62,6 +62,9 @@ public class CarportPartsMapper {
                         if (dbMaterialId == 69) {
                             material.roofCarportPartIdHelper(partId, materials);
                         }
+                        if (dbMaterialId == 38) {
+                            material.beamCarportPartIdHelper(partId, materials);
+                        }
                         break;
                 }
             }

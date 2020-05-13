@@ -51,7 +51,7 @@
                                     </form>
                                     <li class="nav-item">
                                           <button type="button" class="btn" data-toggle="modal" data-target="#login"
-                                                                 style="font-family: Bebas Neue; font-size: 32px; color: white; background-color: #0C2069">Forhandler Login</button>
+                                                                 style="font-family: Bebas Neue; font-size: 32px; color: white; background-color: #0C2069;">Forhandler Login</button>
                                                          <div id="login" class="modal fade" role="dialog">
                                                              <div class="modal-dialog">
                                                                  <div class="modal-content">
