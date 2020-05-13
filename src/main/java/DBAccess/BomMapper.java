@@ -1,9 +1,6 @@
 package DBAccess;
 
-import FunctionLayer.BillOfMaterials;
-import FunctionLayer.Customer;
-import FunctionLayer.Material;
-import FunctionLayer.Order;
+import FunctionLayer.*;
 import com.mysql.cj.protocol.Resultset;
 
 import java.sql.*;

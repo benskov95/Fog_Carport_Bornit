@@ -1,5 +1,6 @@
 package CarportUtil;
 
+import FunctionLayer.Log;
 import FunctionLayer.LogicFacade;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public class Initializer {
         try {
             CWList = LogicFacade.getCWList();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.severe("Kan ikke hente Carport bredde listen");
         }
 
         return CWList;
@@ -31,7 +32,7 @@ public class Initializer {
         try {
             CLList = LogicFacade.getCLList();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.severe("Kan ikke hente Carport længde listen");
         }
 
         return  CLList;
@@ -41,7 +42,7 @@ public class Initializer {
         try {
             SWList = LogicFacade.getSWList();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.severe("Kan ikke hente Skur bredde listen");
         }
 
         return SWList;
@@ -51,7 +52,7 @@ public class Initializer {
         try {
             SLList = LogicFacade.getSLList();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.severe("Kan ikke hente Skur længde listen");
         }
 
         return SLList;

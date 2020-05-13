@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
  */
 public class Redirect extends Command {
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+    String execute(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
         String destination = request.getParameter("destination");

@@ -5,12 +5,15 @@
  */
 package PresentationLayer;
 
+import FunctionLayer.Log;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.OrderException;
+import com.mysql.cj.result.SqlDateValueFactory;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import javax.naming.CommunicationException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,11 +52,21 @@ public class FrontController extends HttpServlet {
             }
         } catch (UnsupportedEncodingException | LoginSampleException ex) {
             request.setAttribute( "error", ex.getMessage() );
+            Log.info("processRequest " + ex.getMessage());
             request.getRequestDispatcher( "index.jsp" ).forward( request, response );
+
+
         } catch (OrderException e){
             request.setAttribute("error", e.getMessage());
+            Log.info("processRequest " + e.getMessage());
             request.getRequestDispatcher("/WEB-INF/flatorder.jsp").forward(request,response);
+        }catch (SQLException ex){
+            request.setAttribute("error", ex.getMessage());
+            Log.severe(ex.getMessage());
+            request.getRequestDispatcher("index.jsp").forward(request,response);
+
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

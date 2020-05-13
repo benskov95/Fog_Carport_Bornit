@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.Log;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.OrderFacade;
 
@@ -30,6 +31,7 @@ public class UpdateOrder extends Command{
             return "adminpage";
 
         } catch (NumberFormatException e) {
+            Log.info("Update order " + e.getMessage());
            request.setAttribute("error", "Du har tastet forkert i total prisen");
            return  "adminpage";
         }

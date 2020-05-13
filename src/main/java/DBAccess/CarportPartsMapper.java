@@ -2,6 +2,7 @@ package DBAccess;
 
 import FunctionLayer.CarPortPart;
 import FunctionLayer.Customer;
+import FunctionLayer.Log;
 import FunctionLayer.Material;
 
 import java.sql.Connection;

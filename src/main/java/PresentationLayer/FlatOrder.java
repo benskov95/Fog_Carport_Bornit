@@ -52,7 +52,7 @@ public class FlatOrder extends Command {
                 throw new OrderException("Ugyldigt telefon nummer");
             }
 
-        } catch (Exception e) {
+        } catch (OrderException e) {
             throw new OrderException(e.getMessage());
         }
 

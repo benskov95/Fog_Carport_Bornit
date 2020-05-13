@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class InitializeMapper {
 
-    public static ArrayList<Integer> getCarportWidth() throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static ArrayList<Integer> getCarportWidth() throws SQLException, ClassNotFoundException {
 
         ArrayList<Integer> CWList = new ArrayList<>();
 
@@ -29,7 +29,7 @@ public class InitializeMapper {
         return CWList;
     }
 
-    public static ArrayList<Integer> getCarportLength() throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static ArrayList<Integer> getCarportLength() throws SQLException, ClassNotFoundException {
 
         ArrayList<Integer> CLList = new ArrayList<>();
 
