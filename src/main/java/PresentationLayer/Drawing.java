@@ -28,7 +28,7 @@ public class Drawing extends Command {
         int shedLength = order.getShed_length();
 
         double rafterWoodWidth = 4.5;
-        int eaves = 35; // udhæng
+        int eaves = 30; // udhæng
         double postWidth = 9.7;
         double postLength = 9.7;
 
@@ -51,13 +51,13 @@ public class Drawing extends Command {
         //pilehodedefinisjon
         svgOuterDrawing.addDefs();
         //pile
-        svgOuterDrawing.addLine(30, 10, 30, width);
+        svgOuterDrawing.addLine(30, 10, 30, width+10);
         svgOuterDrawing.addLine(75, width+60, length+75, width+60);
         //txt
         svgOuterDrawing.addTextRotated("15, " + placementOfThirdBeam, width + " cm");
         svgOuterDrawing.addText(arrowTextX, width+85, length + " cm");
 
-       //Tegning indre del, selve Carport
+        //Tegning indre del, selve Carport
 
 
         Svg svg = new Svg(800, 800, "0,0,800,800",75,10);
@@ -132,38 +132,58 @@ public class Drawing extends Command {
 
         while (amountOfPosts != 0) {
 
-        svg.addRect(xForAdditionalPosts,yForPosts,postLength,postWidth);
-        svg.addRect(xForAdditionalPosts,widthForPosts,postLength,postWidth);
-        xForAdditionalPosts += finalPostsSpace;
-        amountOfPosts -= 2;
+            svg.addRect(xForAdditionalPosts,yForPosts,postLength,postWidth);
+            svg.addRect(xForAdditionalPosts,widthForPosts,postLength,postWidth);
+            xForAdditionalPosts += finalPostsSpace;
+            amountOfPosts -= 2;
 
-        if (amountOfPosts < 0) {
-            break;
+            if (amountOfPosts < 0) {
+                break;
+            }
+
         }
 
-        }
+        double beamWidth = 4.5;
+        double offset = 3; //Det er den samme som er satt til 3 andre steder evt. postwidth/4?
+        double yForShedStart = width-eaves-shedWidth; //+offset+beamWidth
+        double yForShedPostsUpperCorners = yForShedStart-offset;
+        double yForShedMiddlePosts = yForShedStart+(shedWidth / 2);
+        double xForShedPostsLeft = finalPostsSpace-shedLength+postWidth;
 
-        double yForShedPostLowerCorners = eaves+shedWidth-3-postWidth;
-        double yForShedMiddlePosts = (shedWidth + eaves) / 2;
 
-      if(shedWidth != 0) {
+        if(shedWidth != 0) {
             // Ramme for skuret
-            svg.addRectNoFill(shedStart, yForPosts, shedWidth, shedLength);
+
+
+           // svg.addRectNoFill(shedStart, yForShedStart, shedWidth+beamWidth, shedLength);
+
+            svg.addRectThickerLine(xForShedPostsLeft,yForShedStart, beamWidth, shedLength);
+            svg.addRectThickerLine(xForShedPostsLeft,yForShedStart+beamWidth, shedWidth, beamWidth);
+            svg.addRectThickerLine(xForShedPostsLeft, yForShedStart+shedWidth, beamWidth, shedLength);
+            svg.addRectThickerLine(finalPostsSpace+beamWidth,yForShedStart,shedWidth, beamWidth);
 
             //stolper til skur
-            svg.addRect(finalPostsSpace,yForPosts,postLength,postWidth);
-            svg.addRect(finalPostsSpace,yForShedPostLowerCorners, postLength,postWidth);
-            svg.addRect(shedStart, yForPosts, postLength, postWidth);
-            svg.addRect(shedStart, yForShedPostLowerCorners, postLength, postWidth);
+            svg.addRect(finalPostsSpace,yForShedPostsUpperCorners,postLength,postWidth);
+            svg.addRect(xForShedPostsLeft,yForShedPostsUpperCorners,postLength,postWidth);
+            svg.addRect(xForShedPostsLeft,widthForPosts, postLength, postWidth);
+            svg.addRect(finalPostsSpace, widthForPosts, postLength, postWidth);
+
+//            svg.addRect(shedStart, yForShedPostsUpperCorners, postLength, postWidth);
+//            svg.addRect(shedStart, yForShedPostLowerCorners, postLength, postWidth);
+//            svg.addRect(finalPostsSpace,yForShedPostLowerCorners, postLength,postWidth);
+//            svg.addRect(finalPostsSpace,yForShedPostsUpperCorners,postLength,postWidth);
+
+
+
             if (shedWidth > 300) {
-                svg.addRect(shedStart, yForShedMiddlePosts, postLength, postWidth);
+                svg.addRect(xForShedPostsLeft, yForShedMiddlePosts, postLength, postWidth);
                 svg.addRect(finalPostsSpace, yForShedMiddlePosts, postLength, postLength);
             }
-       }
+        }
 
         svgOuterDrawing.addInnerDrawing(svg);
 
         session.setAttribute("svgdrawing", svgOuterDrawing.toString());
         return "carportplan";
-  }
+    }
 }

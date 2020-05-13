@@ -78,7 +78,7 @@
                     <strong>Redskabsrum:</strong>
                 </b>
                 <br>
-                NB! Der skal beregnes 15 cm tagudhæng på hver side af redskabsrummet*
+                NB! Der skal beregnes 30 cm tagudhæng på hver side af redskabsrummet*
             </div>
         </div>
 
@@ -172,7 +172,7 @@
         </div>
 
         <p>
-            *&nbsp;Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet maksimalt måle&nbsp;<b>210x330
+            *&nbsp;Hvis du f.eks. har valgt en carport med målene 240x360 cm kan redskabsrummet maksimalt måle&nbsp;<b>180x300
             cm</b>.</p>
     </div>
 </form>
