@@ -18,7 +18,7 @@ public class Svg {
     private final String textRotatedTemplate = "<text style=\"text-anchor: middle\" transform=\"translate(%s) rotate(-90)\">%s</text>";
     private final String textTemplate = "<text style=\"text-anchor: middle\" x=\"%f\" y=\"%f\">%s</text>";
     private final String rammeTemplate = "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" style=\"stroke:none; fill: #ffffff\" />";
-    private final String rectNoFillTemplate = "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" style=\"stroke:#000000; stroke-width: 3; fill: none\" />";
+    private final String rectThickerLineTemplate = "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" style=\"stroke:#000000; stroke-width: 2;stroke-dasharray: 5 5; fill: none\" />";
 
 
 
@@ -46,8 +46,8 @@ public class Svg {
         svg.append(String.format(Locale.ROOT,rectTemplate, x, y, height, width));
     }
 
-    public void addRectNoFill(double x, double y, double height, double width){
-        svg.append(String.format(Locale.ROOT,rectNoFillTemplate, x, y, height, width));
+    public void addRectThickerLine(double x, double y, double height, double width){
+        svg.append(String.format(Locale.ROOT, rectThickerLineTemplate, x, y, height, width));
     }
 
     public void addPerforatedBand(double x1, double y1, double x2, double y2) {
