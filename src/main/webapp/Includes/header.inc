@@ -16,9 +16,9 @@
 
 <header>
     <div class="container responsive-header">
-        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #0C2069; max-height: 126px">
-            <a class="navbar-brand" href="#">
-                <img src="Images/logo-fog.png" alt="logo" style="margin-left: -15px">
+        <nav class="navbar navbar-expand-sm" style="background-color: #0C2069; padding: 0px">
+            <a class="navbar-brand" style="padding: 0px" href="#">
+                <img src="Images/logo-fog.png" alt="logo">
             </a>
 
             <ul class="navbar-nav">
@@ -50,8 +50,8 @@
                                         <button type="submit" class="btn btn-primary">Log ind</button>
                                     </form>
                                     <li class="nav-item">
-                                          <button type="button" class="btn" data-toggle="modal" data-target="#login"
-                                                                 style="font-family: Bebas Neue; font-size: 32px; color: white; background-color: #0C2069;">Forhandler Login</button>
+                                          <button type="button" class="btn btn-sm sticky-top" data-toggle="modal" data-target="#login"
+                                                                 style="font-family: Bebas Neue; font-size: 20px; color: white; background-color: #0C2069; position: absolute; right: 0">Forhandler Login</button>
                                                          <div id="login" class="modal fade" role="dialog">
                                                              <div class="modal-dialog">
                                                                  <div class="modal-content">
