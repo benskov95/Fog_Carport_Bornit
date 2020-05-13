@@ -58,7 +58,7 @@ public class FrontController extends HttpServlet {
 
         } catch (OrderException e){
             request.setAttribute("error", e.getMessage());
-            Log.info("processRequest " + e.getMessage());
+            Log.info(request.getHeader("User-Agent") + " " + e.getMessage());
             request.getRequestDispatcher("/WEB-INF/flatorder.jsp").forward(request,response);
         }catch (SQLException ex){
             request.setAttribute("error", ex.getMessage());
