@@ -1,8 +1,6 @@
 package DBAccess;
 
-import FunctionLayer.Customer;
-import FunctionLayer.CustomerFacade;
-import FunctionLayer.LoginSampleException;
+import FunctionLayer.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertNotNull;
 
-public class CustomerMapperTest {
+public class CarportPartsMapperTest {
 
     private static Connection testConnection;
     private static String USER = "fogtest";
@@ -44,14 +42,17 @@ public class CustomerMapperTest {
     @Before
     public void beforeEachTest(){
         try ( Statement stmt = testConnection.createStatement()) {
-            stmt.execute( "drop table if exists customer" );
-            stmt.execute( "CREATE TABLE `customer` LIKE fog.customer;" );
-            stmt.execute("INSERT INTO customer VALUES (12345678,'John','Johngade 2','John@johnmail.john', '2800 Hvemved')");
+            stmt.execute( "drop table if exists carport_parts" );
+            stmt.execute( "CREATE TABLE `carport_parts` LIKE fog.carport_parts;" );
+            stmt.execute("INSERT INTO carport_parts (material_id, description, carport_id) VALUES (1,'understernbrædder til for & bag ende',2)");
+            stmt.execute("INSERT INTO carport_parts (material_id, description, carport_id) VALUES (1,'understernbrædder til for & bag ende',2)");
+            stmt.execute("INSERT INTO carport_parts (material_id, description, carport_id) VALUES (1,'understernbrædder til for & bag ende',2)");
+
+
         } catch ( SQLException ex ) {
             System.out.println( "Could not open connection to database: " + ex.getMessage() );
         }
     }
-
     @Test
     public void testSetUpOK() {
         // Just check that we have a connection.
@@ -59,22 +60,24 @@ public class CustomerMapperTest {
     }
 
     @Test
-    public void testGetAllCustomers() throws SQLException, ClassNotFoundException {
-        ArrayList<Customer> customers = CustomerFacade.getAllCustomers();
-        assert (customers.size() == 1);
+    public void testGetCarportParts() throws SQLException, ClassNotFoundException {
+        ArrayList<CarPortPart> carportParts = CarportPartsFacade.getCarportParts();
+        assert (carportParts.size() == 3);
     }
 
     @Test
-    public void testGetCustomer() throws LoginSampleException, SQLException, ClassNotFoundException {
-        Customer customer = CustomerFacade.getCustomer(12345678);
-        assert (customer.getName().equals("John"));
+    public void testgetCarportPartIds() throws LoginSampleException, SQLException, ClassNotFoundException {
+        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        CarportPartsFacade.getCarportPartIds(materials, 2);
+
+        assert (materials.get(0).getCarportPartId()==1);
+    }
+    @Test
+    public void testgetCarportPartDescriptions() throws SQLException, ClassNotFoundException, LoginSampleException {
+        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        CarportPartsFacade.getCarportPartIds(materials, 2);
+        CarportPartsFacade.getCarportPartDescriptions(materials);
+        assert (materials.get(0).getCarportPartDescription().length() >0);
     }
 
-    @Test
-    public void testDeleteCustomer() throws SQLException, ClassNotFoundException, LoginSampleException {
-        ArrayList<Customer> customers = CustomerFacade.getAllCustomers();
-        CustomerFacade.deleteCustomer(customers.get(0).getPhone());
-        customers = CustomerFacade.getAllCustomers();
-        assert (customers.size() == 0);
-    }
 }

@@ -10,7 +10,7 @@ public class BomMapper {
 
     public static void insertBillOfMaterials(BillOfMaterials bom) throws SQLException, ClassNotFoundException {
 
-        String sql = "INSERT INTO fog.bill_of_materials (order_id, material_id, material_size_id, bom_carport_part_id, quantity, sum) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO bill_of_materials (order_id, material_id, material_size_id, bom_carport_part_id, quantity, sum) VALUES (?,?,?,?,?,?)";
 
         Connection con = Connector.connection();
 
@@ -35,7 +35,7 @@ public class BomMapper {
 
         String sql = "select b.bom_id, b.bom_carport_part_id, b.order_id, b.material_id, " +
                     "m.name, s.size, b.quantity, m.unit_id, c.description " +
-                    "from fog.bill_of_materials b " +
+                    "from bill_of_materials b " +
                     "inner join materials m " +
                     "on b.material_id = m.material_id " +
                     "inner join link_material_size l " +
@@ -76,7 +76,7 @@ public class BomMapper {
     }
 
     public static void deleteBom(int orderId) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM fog.bill_of_materials " +
+        String sql = "DELETE FROM bill_of_materials " +
                 "WHERE order_id = ?";
         Connection con = Connector.connection();
         try {
@@ -87,6 +87,51 @@ public class BomMapper {
             System.out.println("Fejl i connection til database");
             e.printStackTrace();
         }
+    }
+
+    // Kun til test
+    public static BillOfMaterials getBillOfMaterialsForTest(int orderId) throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from bill_of_materials where order_id = ?";
+
+        BillOfMaterials bom = new BillOfMaterials();
+        bom.setOrderId(orderId);
+        Connection con = Connector.connection();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, orderId);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int materialId = resultSet.getInt("material_id");
+                bom.addMaterial(new Material(materialId));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bom;
+    }
+
+    // Kun til test
+    public static int getNumberOfBillOfMaterials() throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from bill_of_materials";
+        Connection con = Connector.connection();
+        int count = 0;
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql) ;
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()){
+                count++;
+            }
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+        return  count;
     }
 }
 
