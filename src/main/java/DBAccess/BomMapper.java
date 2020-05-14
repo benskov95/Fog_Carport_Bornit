@@ -88,5 +88,50 @@ public class BomMapper {
             e.printStackTrace();
         }
     }
+
+    // Kun til test
+    public static BillOfMaterials getBillOfMaterialsForTest(int orderId) throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from bill_of_materials where order_id = ?";
+
+        BillOfMaterials bom = new BillOfMaterials();
+        bom.setOrderId(orderId);
+        Connection con = Connector.connection();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, orderId);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                int materialId = resultSet.getInt("material_id");
+                bom.addMaterial(new Material(materialId));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bom;
+    }
+
+    // Kun til test
+    public static int getNumberOfBillOfMaterials() throws SQLException, ClassNotFoundException {
+
+        String sql = "select * from bill_of_materials";
+        Connection con = Connector.connection();
+        int count = 0;
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql) ;
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()){
+                count++;
+            }
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+        return  count;
+    }
 }
 

@@ -77,26 +77,35 @@ public class MaterialMapperTest {
     public void testSetMaterialValues() throws SQLException, ClassNotFoundException {
         ArrayList<Material> materials = new ArrayList<>();
         materials.add(new Material(1));
-
         MaterialFacade.setMaterialValues(materials);
+
         assert (materials.get(0).getMaterialName().equals("testmateriale 1"));
     }
 
     @Test
     public void testSetMaterialSizeIds() throws SQLException, ClassNotFoundException {
         ArrayList<Material> materials = MaterialMapper.getAllMaterials();
-
         MaterialFacade.setMaterialSizeIds(materials);
+
         assert (materials.get(2).getSizeId() == 3);
 
     }
 
     @Test
-    public void testSetLinkMaterialSizeIds() {
-        ArrayList<Material> materials = new ArrayList<>();
-        materials.add(new Material(1));
-        materials.add(new Material(2));
-        materials.add(new Material(3));
+    public void testSetLinkMaterialSizeIds() throws SQLException, ClassNotFoundException {
+        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        MaterialFacade.setMaterialSizeIds(materials);
+        MaterialFacade.setLinkMaterialSizeIds(materials);
 
+        assert (materials.get(1).getMaterialSizeId() == 2);
+
+    }
+
+    @Test
+    public void testSetUnitTypes() throws SQLException, ClassNotFoundException {
+        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        MaterialFacade.setUnitTypes(materials);
+
+        assert (materials.get(0).getUnit().equals("Pakke"));
     }
 }

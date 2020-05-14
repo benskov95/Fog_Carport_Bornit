@@ -59,24 +59,27 @@ public class BomMapperTest {
     }
 
     @Test
-    public void testInsertBillOfMaterials() {
+    public void testInsertBillOfMaterials() throws SQLException, ClassNotFoundException {
+        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        BillOfMaterials bom = new BillOfMaterials(materials);
 
+        bom.setOrderId(4);
+        BomFacade.insertBillOfMaterials(bom);
+
+        BillOfMaterials newBom = BomMapper.getBillOfMaterialsForTest(4);
+        assert (newBom.getMaterials().size() == 3);
     }
 
     @Test
     public void testgetBillOfMaterials() throws SQLException, ClassNotFoundException {
-        BillOfMaterials bom = BomFacade.getBillOfMaterials(10);
+        BillOfMaterials bom = BomMapper.getBillOfMaterialsForTest(10);
         assert (bom.getMaterials().size() == 1);
     }
 
     @Test
     public void testDeleteBom() throws SQLException, ClassNotFoundException {
-        ArrayList<BillOfMaterials> bom = new ArrayList<>();
-        bom.add(BomFacade.getBillOfMaterials(10));
-        bom.add(BomFacade.getBillOfMaterials(11));
-        bom.add(BomFacade.getBillOfMaterials(12));
-        BomFacade.deleteBom(bom.get(0).getOrderId());
-        assert (bom.size() == 2);
-        // Evt bare lav getAllBillOfMaterials...
+        int amountBeforeDeletion = BomMapper.getNumberOfBillOfMaterials();
+        BomFacade.deleteBom(10);
+        assert (amountBeforeDeletion > BomMapper.getNumberOfBillOfMaterials());
     }
 }
