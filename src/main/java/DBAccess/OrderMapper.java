@@ -15,8 +15,8 @@ public class OrderMapper {
     public static int insertOrder(Customer customer, Order order) {
 
         int generatedId = 0;
-        String sqlCustomer = "INSERT INTO fog.customer (phone, name, address, email, zip_code) VALUES (?,?,?,?,?)";
-        String sqlOrder = "INSERT INTO fog.order (cp_id, carport_width, carport_length, shed_width, shed_length, phone, total_price, status_id ) VALUES (?,?,?,?,?,?,?,?)";
+        String sqlCustomer = "INSERT INTO customer (phone, name, address, email, zip_code) VALUES (?,?,?,?,?)";
+        String sqlOrder = "INSERT INTO `order` (cp_id, carport_width, carport_length, shed_width, shed_length, phone, total_price, status_id ) VALUES (?,?,?,?,?,?,?,?)";
 
         try {
             Connection con = Connector.connection();
@@ -64,7 +64,7 @@ public class OrderMapper {
     public static Order getMyOrder(int orderId, int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
 
         Connection con = Connector.connection();
-        String sqlOrders = "SELECT * from fog.order WHERE order_id = ? AND phone = ?";
+        String sqlOrders = "SELECT * from `order` WHERE order_id = ? AND phone = ?";
         try  (  PreparedStatement ps = con.prepareStatement(sqlOrders)) {
 
             ps.setInt(1,orderId);
@@ -98,10 +98,10 @@ public class OrderMapper {
 
     }
 
-    public static Order getOrderForWarehouse(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static Order getOrderForWarehouse(int orderId) throws SQLException, ClassNotFoundException {
 
         Connection con = Connector.connection();
-        String sqlOrders = "SELECT * from fog.order WHERE order_id = ?";
+        String sqlOrders = "SELECT * from `order` WHERE order_id = ?";
         try  (  PreparedStatement ps = con.prepareStatement(sqlOrders)) {
 
             ps.setInt(1,orderId);
@@ -136,8 +136,7 @@ public class OrderMapper {
 
     public static void deleteOrder(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
 
-        String sql = "DELETE FROM fog.order " +
-                "WHERE order_id = ?";
+        String sql = "DELETE FROM `order` WHERE order_id = ?";
         Connection con = Connector.connection();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -153,7 +152,7 @@ public class OrderMapper {
 
         Connection con = Connector.connection();
 
-        String SQL = "SELECT * from fog.status WHERE status_id = ?";
+        String SQL = "SELECT * from status WHERE status_id = ?";
         try  (  PreparedStatement ps = con.prepareStatement(SQL)) {
 
             ps.setInt(1, statusId);
@@ -175,7 +174,7 @@ public class OrderMapper {
 
         Connection con = Connector.connection();
 
-        String SQL = "SELECT * from fog.type WHERE type_id = ?";
+        String SQL = "SELECT * from `type` WHERE type_id = ?";
         try  (  PreparedStatement ps = con.prepareStatement(SQL)) {
 
             ps.setInt(1, typeId);
@@ -196,8 +195,7 @@ public class OrderMapper {
     public static ArrayList<Order> getAllOrderByStatus (int status_id) throws SQLException, ClassNotFoundException {
 
         ArrayList<Order> orderlist = new ArrayList<>();
-        String sqlOrders = "SELECT * FROM fog.order\n" +
-                "Where status_id = " + status_id;
+        String sqlOrders = "SELECT * FROM `order` Where status_id = " + status_id;
         Connection con = Connector.connection();
         try  (  PreparedStatement ps = con.prepareStatement(sqlOrders);
 
@@ -228,10 +226,10 @@ public class OrderMapper {
         return orderlist;
     }
 
-    public static void updateStatus(int order_id, int status_id) throws LoginSampleException {
+    public static void updateStatus(int order_id, int status_id) {
 
 
-        String sql = "update fog.order set status_id = ? where order_id = ?";
+        String sql = "update `order` set status_id = ? where order_id = ?";
 
         try{
             Connection con = Connector.connection();
@@ -252,7 +250,7 @@ public class OrderMapper {
 
 
     public static void updateTotalPrice(int order_id, int totalPrice) {
-        String sql = "update fog.order set total_price = ? where order_id = ?";
+        String sql = "update `order`set total_price = ? where order_id = ?";
 
         try{
             Connection con = Connector.connection();
