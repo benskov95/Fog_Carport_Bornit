@@ -16,7 +16,7 @@ public class DrawingSide extends Command {
         Order order = (Order) session.getAttribute("order");
         BillOfMaterials bom = (BillOfMaterials) session.getAttribute("bom");
 
-        int carportHeight = 210;
+        int carportHeight = 230;
         int length = order.getCarport_length();
         int arrowTextY = carportHeight/2;
         int arrowTextX = (length/2) + 75;
@@ -26,7 +26,7 @@ public class DrawingSide extends Command {
         int underFasciaHeight = 20;
         double overFasciaheight = 12.5;
         double postWidth = 9.7;
-        int permanentYValue = 35;
+        int permanentYValue = 30;
         double widthWithRafterWidth = carportHeight + rafterWidth;
         int sbr = calc.calcSpaceBetweenRafters(length);
         int shedWidth = order.getShed_width();
@@ -48,34 +48,29 @@ public class DrawingSide extends Command {
         svgOuterDrawing.addText(arrowTextX, carportHeight+85, length + " cm");
 
         //Tegning indre del, selve Carport
-        Svg svg = new Svg(800, carportHeight, "0,0,780,210",75,10);
+        Svg svg = new Svg(800, carportHeight, "0,0,780,230",75,10);
 
         //ramme
         svg.addRamme(0,0,carportHeight,length);
-        //stolper
 
+        //stolper
         int sbrTo = sbr / 2;
         double spaceBetweenStartAndPosts = sbr * 1.5;
         int finalPostsSpace = length - sbrTo;
         double test = finalPostsSpace - spaceBetweenStartAndPosts;
         double testTo = test / 2;
         double check = spaceBetweenStartAndPosts + testTo;
+        double postHeight = carportHeight-underFasciaHeight;
 
-
-        svg.addRect(spaceBetweenStartAndPosts+fasciaWidthTo,0,carportHeight,postWidth);
-        svg.addRect(finalPostsSpace+fasciaWidthTo,0,carportHeight,postWidth);
+        svg.addRect(spaceBetweenStartAndPosts+fasciaWidthTo,underFasciaHeight,postHeight,postWidth);
+        svg.addRect(finalPostsSpace+fasciaWidthTo,underFasciaHeight,postHeight,postWidth);
 
         if (length > 300) {
-            svg.addRect(check+fasciaWidthTo,0,carportHeight,postWidth);
+            svg.addRect(check+fasciaWidthTo,underFasciaHeight,postHeight,postWidth);
         }
 
-        //understærn
-        svg.addRect(fasciaWidth,0,underFasciaHeight,length+fasciaWidth);
-        //overstærn
-        svg.addRect(0,0,overFasciaheight,length+fasciaWidthTo);
-
         //remme
-        svg.addRect(fasciaWidthTo,underFasciaHeight,beamHeight, length);
+        svg.addRectDecline(fasciaWidthTo,underFasciaHeight,beamHeight, length);
 
 
         //skur
@@ -102,6 +97,11 @@ public class DrawingSide extends Command {
                 svg.addRect(firstOverPlankX,firstPlankY,plankHeight,plankWidth );
                 firstOverPlankX -=15;
             }
+
+            //understærn
+            svg.addRectDecline(fasciaWidth,0,underFasciaHeight,length+fasciaWidth);
+            //overstærn
+            svg.addRectDecline(0,0,overFasciaheight,length+fasciaWidthTo);
 
 
 

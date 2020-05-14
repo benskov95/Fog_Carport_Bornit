@@ -19,6 +19,7 @@ public class Svg {
     private final String textTemplate = "<text style=\"text-anchor: middle\" x=\"%f\" y=\"%f\">%s</text>";
     private final String rammeTemplate = "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" style=\"stroke:none; fill: #ffffff\" />";
     private final String rectThickerLineTemplate = "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" style=\"stroke:#000000; stroke-width: 2;stroke-dasharray: 5 5; fill: none\" />";
+    private final String rectDeclineTemplate = "<rect x=\"%f\" y=\"%f\" height=\"%f\" width=\"%f\" style=\"stroke:#000000; fill: #ffffff\" transform=\"skewY(1)\" />";
 
 
 
@@ -65,6 +66,11 @@ public class Svg {
     public void addText (double x, double y, String measurements) {
         svg.append(String.format(Locale.ROOT,textTemplate, x, y, measurements));
     }
+    public void addRectDecline (double x, double y, double height, double width) {
+        svg.append(String.format(Locale.ROOT,rectDeclineTemplate,x, y, height, width));
+
+    }
+
     public void addInnerDrawing (Svg drawing){
         svg.append(drawing);
     }
