@@ -10,7 +10,7 @@ public class BomMapper {
 
     public static void insertBillOfMaterials(BillOfMaterials bom) throws SQLException, ClassNotFoundException {
 
-        String sql = "INSERT INTO fog.bill_of_materials (order_id, material_id, material_size_id, bom_carport_part_id, quantity, sum) VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO bill_of_materials (order_id, material_id, material_size_id, bom_carport_part_id, quantity, sum) VALUES (?,?,?,?,?,?)";
 
         Connection con = Connector.connection();
 
@@ -35,7 +35,7 @@ public class BomMapper {
 
         String sql = "select b.bom_id, b.bom_carport_part_id, b.order_id, b.material_id, " +
                     "m.name, s.size, b.quantity, m.unit_id, c.description " +
-                    "from fog.bill_of_materials b " +
+                    "from bill_of_materials b " +
                     "inner join materials m " +
                     "on b.material_id = m.material_id " +
                     "inner join link_material_size l " +
@@ -76,7 +76,7 @@ public class BomMapper {
     }
 
     public static void deleteBom(int orderId) throws SQLException, ClassNotFoundException {
-        String sql = "DELETE FROM fog.bill_of_materials " +
+        String sql = "DELETE FROM bill_of_materials " +
                 "WHERE order_id = ?";
         Connection con = Connector.connection();
         try {
