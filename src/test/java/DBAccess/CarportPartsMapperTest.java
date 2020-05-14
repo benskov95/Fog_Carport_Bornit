@@ -45,6 +45,10 @@ public class CarportPartsMapperTest {
             stmt.execute( "drop table if exists carport_parts" );
             stmt.execute( "CREATE TABLE `carport_parts` LIKE fog.carport_parts;" );
             stmt.execute("INSERT INTO carport_parts (material_id, description, carport_id) VALUES (1,'understernbrædder til for & bag ende',2)");
+            stmt.execute("INSERT INTO carport_parts (material_id, description, carport_id) VALUES (1,'understernbrædder til for & bag ende',2)");
+            stmt.execute("INSERT INTO carport_parts (material_id, description, carport_id) VALUES (1,'understernbrædder til for & bag ende',2)");
+
+
         } catch ( SQLException ex ) {
             System.out.println( "Could not open connection to database: " + ex.getMessage() );
         }
@@ -58,7 +62,7 @@ public class CarportPartsMapperTest {
     @Test
     public void testGetCarportParts() throws SQLException, ClassNotFoundException {
         ArrayList<CarPortPart> carportParts = CarportPartsFacade.getCarportParts();
-        assert (carportParts.size() == 1);
+        assert (carportParts.size() == 3);
     }
 
     @Test
@@ -68,6 +72,12 @@ public class CarportPartsMapperTest {
 
         assert (materials.get(0).getCarportPartId()==1);
     }
-
+    @Test
+    public void testgetCarportPartDescriptions() throws SQLException, ClassNotFoundException, LoginSampleException {
+        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        CarportPartsFacade.getCarportPartIds(materials, 2);
+        CarportPartsFacade.getCarportPartDescriptions(materials);
+        assert (materials.get(0).getCarportPartDescription().length() >0);
+    }
 
 }
