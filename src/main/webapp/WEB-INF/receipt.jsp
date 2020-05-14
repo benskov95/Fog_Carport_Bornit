@@ -7,7 +7,8 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-md-12 center-block" style="text-align: center" >
+            <div class="col-md-12
+             center-block" style="text-align: center" >
                 <h1>
                     Tak for din bestilling!
                 </h1>
