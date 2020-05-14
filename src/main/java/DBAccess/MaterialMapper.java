@@ -172,4 +172,30 @@ public class MaterialMapper {
             }
         }
     }
+    public static ArrayList<Material> getAllMaterials () throws SQLException, ClassNotFoundException {
+
+        ArrayList<Material> materialArrayList = new ArrayList<>();
+
+        String sql = "select * from materials";
+        Connection con = Connector.connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql) ;
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()){
+
+                int materialId = resultSet.getInt("material_id");
+                String materialName = resultSet.getString("name");
+                int unitId = resultSet.getInt("unit_id");
+                int price = resultSet.getInt("price");
+                materialArrayList.add(new Material(materialId, materialName, unitId, price));
+
+
+            }
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+
+        return materialArrayList;
+    }
 }
