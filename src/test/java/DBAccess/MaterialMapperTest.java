@@ -46,7 +46,7 @@ public class MaterialMapperTest {
 
             stmt.execute( "drop table if exists materials" );
             stmt.execute( "CREATE TABLE `materials` LIKE fog.materials;" );
-            stmt.execute("INSERT INTO materials VALUES (1, 'testmateriale 1', 1, 1), (2, 'testmateriale 2', 2, 2), (3, 'testmateriale 1', 3, 3)");
+            stmt.execute("INSERT INTO materials VALUES (1, 'testmateriale 1', 1, 1), (2, 'testmateriale 2', 2, 2), (3, 'testmateriale 3', 3, 3)");
 
             stmt.execute( "drop table if exists `size`" );
             stmt.execute( "CREATE TABLE `size` LIKE fog.size;" );
@@ -84,10 +84,7 @@ public class MaterialMapperTest {
 
     @Test
     public void testSetMaterialSizeIds() throws SQLException, ClassNotFoundException {
-        ArrayList<Material> materials = new ArrayList<>();
-        materials.add(new Material(1));
-        materials.add(new Material(2));
-        materials.add(new Material(3));
+        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
 
         MaterialFacade.setMaterialSizeIds(materials);
         assert (materials.get(2).getSizeId() == 3);
@@ -101,6 +98,5 @@ public class MaterialMapperTest {
         materials.add(new Material(2));
         materials.add(new Material(3));
 
-        assert (materials.get(0).)
     }
 }

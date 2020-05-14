@@ -36,12 +36,6 @@ public class Material {
         this.quantity = quantity;
     }
 
-    public Material(int materialId, int size, int quantity) {
-        this.materialId = materialId;
-        this.size = size;
-        this.quantity = quantity;
-    }
-
     public Material(int materialId, String materialName, int size, int quantity, int unitId, String carportPartDescription) {
         this.materialId = materialId;
         this.materialName = materialName;
@@ -51,6 +45,19 @@ public class Material {
         this.carportPartDescription = carportPartDescription;
     }
 
+    public Material(int materialId, String materialName, int unitId, int price) {
+        this.materialId = materialId;
+        this.materialName = materialName;
+        this.unitId = unitId;
+        this.price = price;
+    }
+
+    public Material(int materialId, int size, int quantity) {
+        this.materialId = materialId;
+        this.size = size;
+        this.quantity = quantity;
+    }
+
     public Material(int materialId) {
         this.materialId = materialId;
     }
@@ -58,8 +65,6 @@ public class Material {
     public Material() {
     }
 
-    public Material(int materialId, String materialName, int unitId, int price) {
-    }
 
     public void roofCarportPartIdHelper(int carportPartId, ArrayList<Material> materials) {
         for (Material material : materials) {

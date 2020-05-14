@@ -172,6 +172,8 @@ public class MaterialMapper {
             }
         }
     }
+
+    // Kun til test, derfor ligger den ikke i facaden.
     public static ArrayList<Material> getAllMaterials () throws SQLException, ClassNotFoundException {
 
         ArrayList<Material> materialArrayList = new ArrayList<>();
