@@ -18,7 +18,7 @@ public class CustomerMapper {
 
        ArrayList<Customer> customerArrayList = new ArrayList<>();
 
-       String sql = "select * from fog.customer";
+       String sql = "select * from customer";
        Connection con = Connector.connection();
        try {
            PreparedStatement ps = con.prepareStatement(sql) ;
@@ -46,7 +46,7 @@ public class CustomerMapper {
 
         Connection con = Connector.connection();
         try {
-            String SQL = "select * from fog.customer where phone = ?";
+            String SQL = "select * from customer where phone = ?";
             PreparedStatement ps = con.prepareStatement( SQL );
             ps.setInt( 1, phone);
             ResultSet rs = ps.executeQuery();
@@ -68,7 +68,7 @@ public class CustomerMapper {
 
     public static void deleteCustomer(int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
 
-        String sql = "DELETE FROM fog.customer " +
+        String sql = "DELETE FROM customer " +
                 "WHERE phone = ?";
         Connection con = Connector.connection();
         try {
