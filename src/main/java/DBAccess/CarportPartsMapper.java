@@ -17,7 +17,7 @@ public class CarportPartsMapper {
 
         ArrayList<CarPortPart> carportPartsArrayList = new ArrayList<>();
 
-        String sql = "select * from fog.carport_parts";
+        String sql = "select * from carport_parts";
         Connection con = Connector.connection();
 
         try {
@@ -42,7 +42,7 @@ public class CarportPartsMapper {
 
     public static void getCarportPartIds(ArrayList<Material> materials, int carportTypeId) throws SQLException, ClassNotFoundException {
 
-        String sql = "select * from fog.carport_parts where carport_id = ?";
+        String sql = "select * from carport_parts where carport_id = ?";
         Connection con = Connector.connection();
         int partId;
 
@@ -78,7 +78,7 @@ public class CarportPartsMapper {
 
     public static void getCarportPartDescriptions(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
 
-        String sql = "select * from fog.carport_parts where pk_carport_part_id = ?";
+        String sql = "select * from carport_parts where pk_carport_part_id = ?";
         Connection con = Connector.connection();
 
         for (Material material : materials) {

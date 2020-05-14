@@ -58,6 +58,9 @@ public class Material {
     public Material() {
     }
 
+    public Material(int materialId, String materialName, int unitId, int price) {
+    }
+
     public void roofCarportPartIdHelper(int carportPartId, ArrayList<Material> materials) {
         for (Material material : materials) {
             if (material.getMaterialId() == 69) {
