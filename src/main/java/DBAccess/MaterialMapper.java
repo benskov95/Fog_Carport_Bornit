@@ -15,7 +15,7 @@ public class MaterialMapper {
     public static ArrayList<Integer> getMaterialLengths(int materialId) throws SQLException, ClassNotFoundException {
 
         ArrayList<Integer> lengths = new ArrayList<>();
-        String sql = "select m.material_id, m.name, s.size from fog.materials m " +
+        String sql = "select m.material_id, m.name, s.size from materials m " +
                      "inner join link_material_size l " +
                      "on m.material_id = l.link_material_id " +
                      "inner join size s " +
@@ -45,7 +45,7 @@ public class MaterialMapper {
 
     public static void setMaterialValues(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
 
-        String sql = "select * from fog.materials where material_id = ?";
+        String sql = "select * from materials where material_id = ?";
         Connection con = Connector.connection();
 
         for (Material material : materials) {
@@ -75,14 +75,14 @@ public class MaterialMapper {
         for (Material material : materials) {
 
             if (material.getSize() == 0) {
-                sql = "select m.material_id, m.name, s.size, l.link_size_id, s.size_id from fog.materials m " +
+                sql = "select m.material_id, m.name, s.size, l.link_size_id, s.size_id from materials m " +
                         "inner join link_material_size l " +
                         "on m.material_id = l.link_material_id " +
                         "inner join size s " +
                         "on l.link_size_id = s.size_id " +
                         "where m.material_id = ?";
             } else {
-                sql = "select m.material_id, m.name, s.size, l.link_size_id, s.size_id from fog.materials m " +
+                sql = "select m.material_id, m.name, s.size, l.link_size_id, s.size_id from materials m " +
                         "inner join link_material_size l " +
                         "on m.material_id = l.link_material_id " +
                         "inner join size s " +
@@ -123,7 +123,7 @@ public class MaterialMapper {
 
     public static void setLinkMaterialSizeIds(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
 
-        String sql = "select * from fog.link_material_size where link_material_id = ? and link_size_id = ?";
+        String sql = "select * from link_material_size where link_material_id = ? and link_size_id = ?";
         Connection con = Connector.connection();
 
         for (Material material : materials) {
@@ -148,7 +148,7 @@ public class MaterialMapper {
 
         Connection con = Connector.connection();
 
-        String SQL = "SELECT * from fog.unit";
+        String SQL = "SELECT * from unit";
 
         for (Material material : materials) {
 

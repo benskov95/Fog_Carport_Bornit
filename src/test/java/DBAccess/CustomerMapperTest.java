@@ -51,6 +51,7 @@ public class CustomerMapperTest {
             System.out.println( "Could not open connection to database: " + ex.getMessage() );
         }
     }
+
     @Test
     public void testSetUpOK() {
         // Just check that we have a connection.

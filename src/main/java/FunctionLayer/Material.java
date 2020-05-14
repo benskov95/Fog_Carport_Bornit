@@ -51,6 +51,10 @@ public class Material {
         this.carportPartDescription = carportPartDescription;
     }
 
+    public Material(int materialId) {
+        this.materialId = materialId;
+    }
+
     public Material() {
     }
 
