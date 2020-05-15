@@ -16,13 +16,17 @@ public class Calculator {
     private int secondaryRoofPlateLength;
 
     /**
-     * the type1Calc() method calculates all necessary values for each
-     * material through a variety of helper methods. Once certain
-     * values have been defined, the materials are added to an
-     * arraylist whose as of yet incomplete materials are updated
-     * and fully defined through a number of Mapper methods. The end
-     * result is an arraylist with all of the materials for a type
-     * 1 carport (flat roof, no shed), which is added to a
+     * the type1Calc() method calculates the values of certain
+     * attributes for each material through a variety of helper
+     * methods. Once the values, such as length and quantity,
+     * have been calculated for all materials, each material
+     * is added to an arraylist with its respective values.
+     * Once all materials are in the arraylist, the rest of
+     * each material's attributes (which do not need to be
+     * calculated) are determined and assigned through a
+     * number of Mapper methods. The end result is an
+     * arraylist with all of the materials for a type 1
+     * carport (flat roof, no shed), which is added to a
      * BillOfMaterials object.
      *
      * NOTE: Material IDs are hardcoded because we need
@@ -420,7 +424,7 @@ public class Calculator {
      * looped through and for each length, a while
      * loop is executed that subtracts the length
      * from the carport length until it is as close
-     * to 0 as possible meaning the roof is
+     * to 0 as possible, 0 meaning the roof is
      * completely covered.
      *
      * Remainder (meaning any amount of carport length
