@@ -8,11 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Projektskabelon" />
         <module name="ProjektSkabelon-master" />
-        <module name="Projektskabelon-master" />
         <module name="prejektSkabelon" />
         <module name="Fog_Carport_Born" />
         <module name="Fog Carport Projekt" />
         <module name="Projektskabelon-current" />
+        <module name="Projektskabelon-master" />
       </profile>
     </annotationProcessing>
   </component>
