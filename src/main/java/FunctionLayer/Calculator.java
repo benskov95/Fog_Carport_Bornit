@@ -420,8 +420,8 @@ public class Calculator {
      * looped through and for each length, a while
      * loop is executed that subtracts the length
      * from the carport length until it is as close
-     * to 0 as possible (meaning the roof is completely
-     * covered).
+     * to 0 as possible (meaning the roof is
+     * completely covered).
      *
      * Remainder (meaning any amount of carport length
      * that is not covered by a roofplate length) and
