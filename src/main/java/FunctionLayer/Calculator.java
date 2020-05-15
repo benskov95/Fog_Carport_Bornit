@@ -7,6 +7,15 @@ public class Calculator {
     private int primaryRoofPlateLength;
     private int secondaryRoofPlateLength;
 
+    /**
+     * Test
+     * @param length
+     * @param width
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+
     public BillOfMaterials type1Calc(int length, int width) throws SQLException, ClassNotFoundException {
 
         ArrayList<Material> materialHolder = new ArrayList<>();
