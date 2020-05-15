@@ -195,7 +195,7 @@ public class Calculator {
         return new BillOfMaterials(materialHolder);
     }
 
-    public static int calcOptimalLengthOfMaterial(int measurement, int materialId) throws SQLException, ClassNotFoundException { // Løsholter
+    public int calcOptimalLengthOfMaterial(int measurement, int materialId) throws SQLException, ClassNotFoundException { // Løsholter
 
         int initialWidth = measurement;
         ArrayList<Integer> studSizes = MaterialFacade.getMaterialLengths(materialId);
@@ -224,12 +224,12 @@ public class Calculator {
         return res;
     }
 
-    public static int calcLengthOfBeamsForShed(int shedMeasurement, int materialId) throws SQLException, ClassNotFoundException { // Hvad er den til? Ingen ved det.
+    public int calcLengthOfBeamsForShed(int shedMeasurement, int materialId) throws SQLException, ClassNotFoundException { // Hvad er den til? Ingen ved det.
         shedMeasurement *= 2;
         return calcOptimalLengthOfMaterial(shedMeasurement, materialId);
     }
 
-    public static int calcNumberOfBeamsForShed(int shedLength, int beamLength) {
+    public int calcNumberOfBeamsForShed(int shedLength, int beamLength) {
         int splitBeam = beamLength / 2;
         if (shedLength == splitBeam) {
             return 1;
@@ -238,7 +238,7 @@ public class Calculator {
         }
     }
 
-    public static int determineNumberOfStuds(int shedMeasurement, int materialId) throws SQLException, ClassNotFoundException {
+    public int determineNumberOfStuds(int shedMeasurement, int materialId) throws SQLException, ClassNotFoundException {
         int length = calcOptimalLengthOfMaterial(shedMeasurement, materialId);
         int plankCaseOne = shedMeasurement - (length * 2);
         int plankCaseTwo = shedMeasurement - length;
@@ -255,7 +255,7 @@ public class Calculator {
         return res;
     }
 
-    public static int calcNumberOfCladdingPlanks(int shedWidth, int shedLength) {
+    public int calcNumberOfCladdingPlanks(int shedWidth, int shedLength) {
         double boardWidthWithOverlap = 7.5;
         int circumference = (shedWidth * 2) + (shedLength * 2);
         return (int) Math.ceil(circumference / boardWidthWithOverlap);
