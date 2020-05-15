@@ -38,7 +38,7 @@ public class CalculatorTest {
 
     @Test
     public void testCalcLengthOfTrapezPlates() throws SQLException, ClassNotFoundException {
-        int res = calculator.calcLengthOfTrapezPlates(carportLength, carportWidth, MaterialFacade.getMaterialLengths(69));
+        int res = calculator.calcLengthAndAmountOfTrapezPlates(carportLength, carportWidth, MaterialFacade.getMaterialLengths(69));
         assert (res == 8 && calculator.getPrimaryRoofPlateLength() == 600 && calculator.getSecondaryRoofPlateLength() == 240);
     }
 

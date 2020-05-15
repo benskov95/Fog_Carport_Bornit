@@ -8,12 +8,44 @@ public class Calculator {
     private int secondaryRoofPlateLength;
 
     /**
-     * Test
-     * @param length
-     * @param width
+     * @author Benjamin/benskov95
+     *
+     * the type1Calc() method calculates all necessary values for each
+     * material through a variety of helper methods. Once certain
+     * values have been defined, the materials are added to an
+     * arraylist whose as of yet undefined values are updated
+     * through a number of Mapper methods. The end result is
+     * an arraylist with all of the materials for a type 1
+     * carport (flat roof, no shed), which is added to a
+     * BillOfMaterials object.
+     *
+     * NOTE: Material IDs are hardcoded because we need
+     * a way to identify the materials in the database
+     * to assign the correct values to them. We found
+     * that one way or another, we'd have to hardcode
+     * at least one ID (not necessarily material ID)
+     * per material somewhere to get the rest of the
+     * values belonging to each material, so we did.
+     *
+     * @param length in cm
+     * The chosen length of a customer's carport.
+     * @param width in cm
+     * The chosen width of a customer's carport.
      * @return
+     * A BillOfMaterials object is returned, containing the
+     * aforementioned arraylist. This object is used to add
+     * the bill of materials to the database (this happens
+     * in the FlatOrder class in the PresentationLayer
+     * directory).
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
      */
 
     public BillOfMaterials type1Calc(int length, int width) throws SQLException, ClassNotFoundException {
@@ -52,7 +84,7 @@ public class Calculator {
         int waterFasciaSidesQuantity = calcNumberOfFascia(length, waterFasciaSidesLength, true); // Vandbræt til siderne.
 
         int plates = calcNumberOfTrapezPlates(width);
-        int plateSizesAndQuantity = calcLengthOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
+        int plateSizesAndQuantity = calcLengthAndAmountOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
         int bottomScrews = calcNumberOfBottomScrewPacks(plates);
         int brackets = calcNumberOfUniversalBrackets(rafters);
         int bracketScrews = calcNumberOfBracketScrewPacks(brackets);
@@ -95,6 +127,41 @@ public class Calculator {
         return new BillOfMaterials(materialHolder);
     }
 
+    /**
+     * @author Benjamin/benskov95
+     * Works similarly to the type1Calc() method but with
+     * additional helper methods for calculating the
+     * material values for the shed. This method is
+     * used when a type 2 carport is ordered
+     * (flat roof with shed).
+     *
+     * @param length in cm
+     * The chosen length of a customer's carport.
+     * @param width in cm
+     * The chosen width of a customer's carport.
+     * @param shedLength in cm
+     * The chosen length of a customer's shed.
+     * Cannot be greater than the length of the
+     * carport (handled in the FlatOrder class).
+     * @param shedWidth in cm
+     * The chosen width of a customer's shed.
+     * Cannot be greater than the width of the
+     * carport (handled in the FlatOrder class).
+     * @return
+     * Same as type1Calc(), a BillOfMaterials
+     * object containing the arraylist that
+     * has been filled in this method.
+     * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
+     * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     */
+
     public BillOfMaterials type2Calc(int length, int width, int shedLength, int shedWidth) throws SQLException, ClassNotFoundException {
 
         ArrayList<Material> materialHolder = new ArrayList<>();
@@ -131,7 +198,7 @@ public class Calculator {
         int waterFasciaSidesQuantity = calcNumberOfFascia(length, waterFasciaSidesLength, true); // Vandbræt til siderne.
 
         int plates = calcNumberOfTrapezPlates(width);
-        int plateSizesAndQuantity = calcLengthOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
+        int plateSizesAndQuantity = calcLengthAndAmountOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
         int bottomScrews = calcNumberOfBottomScrewPacks(plates);
         int brackets = calcNumberOfUniversalBrackets(rafters);
         int bracketScrews = calcNumberOfBracketScrewPacks(brackets);
@@ -204,6 +271,52 @@ public class Calculator {
         return new BillOfMaterials(materialHolder);
     }
 
+    /**
+     * @author Benjamin/benskov95
+     * The calcOptimalLengthOfMaterial() method
+     * is mainly used to calculate the optimal
+     * length of studs for a type 2 carport.
+     *
+     * The length is optimized by getting
+     * all stud sizes in the database through
+     * the getMaterialLengths() method from
+     * the MaterialMapper, looping through
+     * each length and subtracting it from
+     * the measurement until the measurement
+     * reaches exactly 0 OR has an excess
+     * that is not greater than 30 cm (at
+     * which point the loop breaks), and
+     * returning the length with which this
+     * was achieved.
+     *
+     * If the measurement does not reach 0
+     * through the subtraction of a given
+     * length it is reset to its initial
+     * value, after which the loop continues
+     * until the optimal length is found.
+     *
+     * @param measurement in cm
+     * A value used to determine the optimal length
+     * of a material for a specified measurement
+     * (typically length or width of the shed).
+     * @param materialId
+     * In order for the getMaterialLengths method
+     * to return the correct lengths for the
+     * material we want the optimal length of,
+     * we need to know its ID in the database.
+     * @return
+     * The calculated optimal length of a
+     * material for a given measurement.
+     * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
+     * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     */
     public int calcOptimalLengthOfMaterial(int measurement, int materialId) throws SQLException, ClassNotFoundException { // Løsholter
 
         int initialWidth = measurement;
@@ -289,8 +402,58 @@ public class Calculator {
         return count;
     }
 
-
-        public int calcLengthOfTrapezPlates(int length, int width, ArrayList<Integer> measurements){
+    /**
+     * @author Benjamin/benskov95
+     * The calcLengthAndAmountOfTrapezPlates() method is used
+     * to calculate the optimal length of roofplates
+     * for a carport. This is done in a similar manner
+     * to the calcOptimalLengthOfMaterial() method, but
+     * is noticeably more complex.
+     *
+     * A provided arraylist of lengths (these being
+     * lengths of roofplates from the database) is
+     * looped and for each length, a while loop is
+     * executed that subtracts the length from the
+     * carport length until it is as close to 0 as
+     * possible.
+     *
+     * Remainder (meaning any amount of carport length
+     * that is not covered by a roofplate length) and
+     * excess (meaning any amount length that is greater
+     * than the carport length) values are then used to
+     * further optimize the roofplate lengths later in
+     * the method.
+     *
+     * Once fully optimized, the primaryPlateLength
+     * variable, which is a variable in this
+     * (Calculator) class, is set to be equal
+     * to the optimized plate length. This is
+     * also done for the secondaryPlateLength
+     * variable if a second roofplate length
+     * was needed to ensure as little
+     * waste/excess as possible.
+     *
+     * @param length in cm
+     * The chosen length of a customer's carport.
+     * @param width in cm
+     * The chosen width of a customer's carport.
+     * @param measurements
+     * An arraylist of lengths for a material.
+     * The getMaterialLengths() method is used
+     * to get the lengths of the roofplates
+     * in the type1Calc and type2Calc methods
+     * like it was in the calcOptimalLengthOfMaterial
+     * method.
+     * @return
+     * This method returns the number of roofplates
+     * needed to cover the entire roof of the carport.
+     * If a secondary plate length is needed, the
+     * amount of plates needed is equal to the amount
+     * of primary plates. This is not obvious here, but
+     * can be seen on the bill of materials page on the
+     * website.
+     */
+    public int calcLengthAndAmountOfTrapezPlates(int length, int width, ArrayList<Integer> measurements){
 
             final int overhang = 5;
             final int overlap = 20;
@@ -520,6 +683,36 @@ public class Calculator {
 
     }
 
+    /**
+     * @author Benjamin/benskov95
+     * The calcNumberOfPosts() method is used
+     * to calculate the number of posts needed
+     * for a carport. The base amount is 4,
+     * which is what the local variable
+     * numberOfPosts is set to.
+     *
+     * Additional posts are added if certain
+     * conditions are met, such as if the carport
+     * is wider or longer than 600 cm, or if it
+     * has a shed.
+     *
+     * @param length in cm
+     * The chosen length of a customer's carport.
+     * @param width in cm
+     * The chosen width of a customer's carport.
+     * @param shedLength in cm
+     * The chosen length of a customer's shed.
+     * Cannot be greater than the length of the
+     * carport (handled in the FlatOrder class).
+     * @param shedWidth in cm
+     * The chosen width of a customer's shed.
+     * Cannot be greater than the width of the
+     * carport (handled in the FlatOrder class).
+     * @return
+     * The final amount of posts needed for the
+     * carport.
+     */
+
     public int calcNumberOfPosts(int length, int width, int shedLength, int shedWidth) {
         int numberOfPosts = 4;
         int eaves = 35;
@@ -561,6 +754,35 @@ public class Calculator {
         return numberOfRafters;
     }
 
+    /**
+     * @author Benjamin/benskov95
+     * The calcSpaceBetweenRafters() method is used
+     * to calculate the optimal amount of space
+     * between rafters on a carport, based on the
+     * length of the carport.
+     *
+     * This is done in a similar manner to the
+     * calcOptimalLengthOfMaterial() method,
+     * with a loop that subtracts the space
+     * variable from the provided length until
+     * the length is 0.
+     *
+     * The space variable starts at 45 to ensure
+     * that the space between rafters is minimum
+     * 45 cm, and is then increased by 1 for each
+     * time the loop results in the length becoming
+     * negative (going below 0).
+     *
+     * Eventually, if the length ends up hitting
+     * 0, the loop will break and the space value
+     * with which this was achieved will be returned.
+     *
+     * @param length in cm
+     * The chosen length of a customer's carport.
+     * @return
+     * The optimal amount of space between rafters
+     * in cm.
+     */
     public int calcSpaceBetweenRafters(int length) {
         int space = 45;
         int initialLength = length;
