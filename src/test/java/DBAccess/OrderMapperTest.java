@@ -1,7 +1,6 @@
 package DBAccess;
 
 import FunctionLayer.*;
-import com.sun.org.apache.xpath.internal.operations.Or;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

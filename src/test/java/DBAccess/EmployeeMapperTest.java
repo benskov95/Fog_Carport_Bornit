@@ -61,7 +61,7 @@ public class EmployeeMapperTest {
     public void testLogin() throws LoginSampleException {
 
         Employee employee = EmployeeMapper.login(1, "admin");
-        assert (employee.getRoleId()==1);
+        assertNotNull (employee);
 
     }
 

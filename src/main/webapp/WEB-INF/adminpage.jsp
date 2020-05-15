@@ -11,6 +11,7 @@
     <thead>
     <tr>
         <th scope="col">Ordre nr.</th>
+        <th scope="col">Telefon nr.</th>
         <th scope="col">Carport type</th>
         <th scope="col">Carport bredde</th>
         <th scope="col">Carport længde</th>
@@ -29,6 +30,7 @@
     <c:forEach var="orders" items="${sessionScope.orderlist}">
         <tr>
             <td>${orders.order_id}</td>
+            <td>${orders.phone}</td>
             <td>${orders.carport_id}</td>
             <td>${orders.carport_width}</td>
             <td>${orders.carport_length}</td>
