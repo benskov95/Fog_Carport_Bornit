@@ -26,8 +26,6 @@ public class DrawingSide extends Command {
         int underFasciaHeight = 20;
         double overFasciaheight = 12.5;
         double postWidth = 9.7;
-        int permanentYValue = 30;
-        double widthWithRafterWidth = carportHeight + rafterWidth;
         int sbr = calc.calcSpaceBetweenRafters(length);
         int shedWidth = order.getShed_width();
         int shedLength = order.getShed_length();
@@ -38,11 +36,14 @@ public class DrawingSide extends Command {
 
         //Tegning ytre del med piler og mål
         Svg svgOuterDrawing = new Svg(1000,1000,"0,0,1000,1000",0,0);
+
         //pilehodedefinisjon
         svgOuterDrawing.addDefs();
+
         //pile
         svgOuterDrawing.addLine(30, 10, 30, carportHeight+10);
         svgOuterDrawing.addLine(75, carportHeight+60, length+75, carportHeight+60);
+
         //txt
         svgOuterDrawing.addTextRotated("15, " + arrowTextY, carportHeight + " cm");
         svgOuterDrawing.addText(arrowTextX, carportHeight+85, length + " cm");
@@ -72,9 +73,7 @@ public class DrawingSide extends Command {
         //remme
         svg.addRectDecline(fasciaWidthTo,underFasciaHeight,beamHeight, length);
 
-
         //skur
-
         if (shedWidth != 0) {
 
            int numberOfCladdingPlanks = calcNumberOfCladdingPlanks(shedLength);
@@ -102,24 +101,14 @@ public class DrawingSide extends Command {
             svg.addRectDecline(fasciaWidth,0,underFasciaHeight,length+fasciaWidth);
             //overstærn
             svg.addRectDecline(0,0,overFasciaheight,length+fasciaWidthTo);
-
-
-
-
-
             }
-
-
-
-
 
         svgOuterDrawing.addInnerDrawing(svg);
 
-
-
-        session.setAttribute("svgdrawingside", svgOuterDrawing.toString());
+      session.setAttribute("svgdrawingside", svgOuterDrawing.toString());
         return "carportplanside";
     }
+
     public static int calcNumberOfCladdingPlanks(int shedLength){
         double boardWidthWithOverlap = 7.5;
         int circumference =  shedLength;

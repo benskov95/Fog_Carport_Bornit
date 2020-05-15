@@ -31,12 +31,13 @@ public class Drawing extends Command {
         int eaves = 30; // udhæng
         double postWidth = 9.7;
         double postLength = 9.7;
+        int offset = 3;
 
         double widthWithRafterWidth = width + rafterWoodWidth;
         double finalWidth = widthWithRafterWidth - eaves;
         int sbr = calc.calcSpaceBetweenRafters(length);
-        int yForPosts = eaves - 3;
-        int yForPostsWidth = eaves + 3;
+        int yForPosts = eaves - offset;
+        int yForPostsWidth = eaves + offset;
         int widthForPosts = width - yForPostsWidth;
         int sbrTo = sbr / 2;
         double spaceBetweenStartAndPosts = sbr * 1.5;
@@ -46,31 +47,33 @@ public class Drawing extends Command {
         double xForAdditionalPosts = spaceBetweenStartAndPosts + secondTemp;
         double shedStart = (finalPostsSpace+postWidth)-shedLength;
 
+
         //Tegning ytre del med piler og mål
         Svg svgOuterDrawing = new Svg(1000,1000,"0,0,1000,1000",0,0);
+
         //pilehodedefinisjon
         svgOuterDrawing.addDefs();
+
         //pile
         svgOuterDrawing.addLine(30, 10, 30, width+10);
         svgOuterDrawing.addLine(75, width+60, length+75, width+60);
+
         //txt
         svgOuterDrawing.addTextRotated("15, " + placementOfThirdBeam, width + " cm");
         svgOuterDrawing.addText(arrowTextX, width+85, length + " cm");
 
         //Tegning indre del, selve Carport
-
-
         Svg svg = new Svg(800, 800, "0,0,800,800",75,10);
 
         //ramme
         svg.addRamme(0,0,width,length);
+
         //remme
         svg.addRect(0,eaves,rafterWoodWidth,length);
         svg.addRect(0,width-eaves,rafterWoodWidth,length);
 
 
-        //spær --Loope igjennom?
-
+        //spær
         for (Material material : bom.getMaterials()) {
             if (material.getCarportPartId() == 59 || material.getCarportPartId() == 35){
                 amountOfRafters = material.getQuantity();
@@ -87,9 +90,7 @@ public class Drawing extends Command {
             amountOfRafters--;
         }
 
-
         //hulbånd
-
         if(shedWidth != 0) {
 
             svg.addPerforatedBand(sbr, eaves, shedStart, finalWidth);
@@ -100,6 +101,7 @@ public class Drawing extends Command {
             svg.addPerforatedBand(sbr, eaves, length - sbr, finalWidth);
             svg.addPerforatedBand(sbr, finalWidth, length - sbr, eaves);
         }
+
         //stolper
         for (Material material : bom.getMaterials()) {
             if (material.getCarportPartId() == 60 || material.getCarportPartId() == 36) {
@@ -107,8 +109,6 @@ public class Drawing extends Command {
                 break;
             }
         }
-
-
 
         svg.addRect(spaceBetweenStartAndPosts,yForPosts,postLength,postWidth);
         svg.addRect(spaceBetweenStartAndPosts,widthForPosts,postLength,postWidth);
@@ -119,8 +119,8 @@ public class Drawing extends Command {
 
         if (width > 600) {
             svg.addRect(0, placementOfThirdBeam, rafterWoodWidth, length); // En tredje rem tilføjes hvis bredden på carporten er større end 6 meter.
-            svg.addRect(spaceBetweenStartAndPosts, placementOfThirdBeam - 3,postLength,postWidth); // Har tilføjet -3 til placementOfThirdBeam fordi stolperne ikke ligger lige på remmen ellers.
-            svg.addRect(finalPostsSpace, placementOfThirdBeam - 3,postLength,postWidth);
+            svg.addRect(spaceBetweenStartAndPosts, placementOfThirdBeam - offset,postLength,postWidth); // Har tilføjet -3 til placementOfThirdBeam fordi stolperne ikke ligger lige på remmen ellers.
+            svg.addRect(finalPostsSpace, placementOfThirdBeam - offset,postLength,postWidth);
             amountOfPosts -= 2;
         }
 
@@ -143,15 +143,15 @@ public class Drawing extends Command {
 
         }
 
-        double beamWidth = 4.5;
-        double offset = 3; //Det er den samme som er satt til 3 andre steder evt. bytte til postwidth/4? eller beamwidt/2?
-        double yForShedStart = width-eaves-shedWidth;
-        double yForShedPostsUpperCorners = yForShedStart-offset;
-        double yForShedMiddlePosts = yForShedStart+(shedWidth / 2);
-        double xForShedPostsLeft = finalPostsSpace-shedLength+postWidth;
-
-
+        //Skur
         if(shedWidth != 0) {
+
+            double beamWidth = 4.5;
+            double yForShedStart = width-eaves-shedWidth;
+            double yForShedPostsUpperCorners = yForShedStart-offset;
+            double yForShedMiddlePosts = yForShedStart+(shedWidth / 2);
+            double xForShedPostsLeft = finalPostsSpace-shedLength+postWidth;
+
             // Ramme for skuret
             svg.addRectThickerLine(xForShedPostsLeft,yForShedStart, beamWidth, shedLength);
             svg.addRectThickerLine(xForShedPostsLeft,yForShedStart+beamWidth, shedWidth, beamWidth);
@@ -169,10 +169,6 @@ public class Drawing extends Command {
                 svg.addRect(xForShedPostsLeft, yForShedMiddlePosts, postLength, postWidth);
                 svg.addRect(finalPostsSpace, yForShedMiddlePosts, postLength, postLength);
             }
-
-//            if (shedLength > 300) {
-//                svg.addRect();
-//            }
         }
 
         svgOuterDrawing.addInnerDrawing(svg);
