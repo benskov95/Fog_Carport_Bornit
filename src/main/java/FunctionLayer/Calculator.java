@@ -13,10 +13,10 @@ public class Calculator {
      * the type1Calc() method calculates all necessary values for each
      * material through a variety of helper methods. Once certain
      * values have been defined, the materials are added to an
-     * arraylist whose as of yet undefined values are updated
-     * through a number of Mapper methods. The end result is
-     * an arraylist with all of the materials for a type 1
-     * carport (flat roof, no shed), which is added to a
+     * arraylist whose as of yet incomplete materials are updated
+     * and fully defined through a number of Mapper methods. The end
+     * result is an arraylist with all of the materials for a type
+     * 1 carport (flat roof, no shed), which is added to a
      * BillOfMaterials object.
      *
      * NOTE: Material IDs are hardcoded because we need
