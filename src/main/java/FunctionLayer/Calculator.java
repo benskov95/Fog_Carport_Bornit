@@ -2,14 +2,20 @@ package FunctionLayer;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * The purpose of the Calculator class is
+ * to contain all methods that have to do
+ * calculating the amounts, lengths etc
+ * of all the materials needed for a
+ * specific carport.
+ * @author Benjamin/benskov95
+ */
 public class Calculator {
 
     private int primaryRoofPlateLength;
     private int secondaryRoofPlateLength;
 
     /**
-     * @author Benjamin/benskov95
-     *
      * the type1Calc() method calculates all necessary values for each
      * material through a variety of helper methods. Once certain
      * values have been defined, the materials are added to an
@@ -26,7 +32,6 @@ public class Calculator {
      * at least one ID (not necessarily material ID)
      * per material somewhere to get the rest of the
      * values belonging to each material, so we did.
-     *
      * @param length in cm
      * The chosen length of a customer's carport.
      * @param width in cm
@@ -46,6 +51,7 @@ public class Calculator {
      * Thrown from Connector if the "Class.forName" method
      * doesn't find the specified class
      * (JDBC driver in this case).
+     * @author Benjamin/benskov95
      */
 
     public BillOfMaterials type1Calc(int length, int width) throws SQLException, ClassNotFoundException {
@@ -128,13 +134,11 @@ public class Calculator {
     }
 
     /**
-     * @author Benjamin/benskov95
      * Works similarly to the type1Calc() method but with
      * additional helper methods for calculating the
      * material values for the shed. This method is
      * used when a type 2 carport is ordered
      * (flat roof with shed).
-     *
      * @param length in cm
      * The chosen length of a customer's carport.
      * @param width in cm
@@ -160,6 +164,7 @@ public class Calculator {
      * Thrown from Connector if the "Class.forName" method
      * doesn't find the specified class
      * (JDBC driver in this case).
+     * @author Benjamin/benskov95
      */
 
     public BillOfMaterials type2Calc(int length, int width, int shedLength, int shedWidth) throws SQLException, ClassNotFoundException {
@@ -272,7 +277,6 @@ public class Calculator {
     }
 
     /**
-     * @author Benjamin/benskov95
      * The calcOptimalLengthOfMaterial() method
      * is mainly used to calculate the optimal
      * length of studs for a type 2 carport.
@@ -294,7 +298,6 @@ public class Calculator {
      * length it is reset to its initial
      * value, after which the loop continues
      * until the optimal length is found.
-     *
      * @param measurement in cm
      * A value used to determine the optimal length
      * of a material for a specified measurement
@@ -316,6 +319,7 @@ public class Calculator {
      * Thrown from Connector if the "Class.forName" method
      * doesn't find the specified class
      * (JDBC driver in this case).
+     * @author Benjamin/benskov95
      */
     public int calcOptimalLengthOfMaterial(int measurement, int materialId) throws SQLException, ClassNotFoundException { // Løsholter
 
@@ -403,7 +407,6 @@ public class Calculator {
     }
 
     /**
-     * @author Benjamin/benskov95
      * The calcLengthAndAmountOfTrapezPlates() method is used
      * to calculate the optimal length of roofplates
      * for a carport. This is done in a similar manner
@@ -432,7 +435,6 @@ public class Calculator {
      * variable if a second roofplate length
      * was needed to ensure as little
      * waste/excess as possible.
-     *
      * @param length in cm
      * The chosen length of a customer's carport.
      * @param width in cm
@@ -452,6 +454,7 @@ public class Calculator {
      * of primary plates. This is not obvious here, but
      * can be seen on the bill of materials page on the
      * website.
+     * @author Benjamin/benskov95
      */
     public int calcLengthAndAmountOfTrapezPlates(int length, int width, ArrayList<Integer> measurements){
 
@@ -684,7 +687,6 @@ public class Calculator {
     }
 
     /**
-     * @author Benjamin/benskov95
      * The calcNumberOfPosts() method is used
      * to calculate the number of posts needed
      * for a carport. The base amount is 4,
@@ -695,7 +697,6 @@ public class Calculator {
      * conditions are met, such as if the carport
      * is wider or longer than 600 cm, or if it
      * has a shed.
-     *
      * @param length in cm
      * The chosen length of a customer's carport.
      * @param width in cm
@@ -711,6 +712,7 @@ public class Calculator {
      * @return
      * The final amount of posts needed for the
      * carport.
+     * @author Benjamin/benskov95
      */
 
     public int calcNumberOfPosts(int length, int width, int shedLength, int shedWidth) {
@@ -755,7 +757,6 @@ public class Calculator {
     }
 
     /**
-     * @author Benjamin/benskov95
      * The calcSpaceBetweenRafters() method is used
      * to calculate the optimal amount of space
      * between rafters on a carport, based on the
@@ -782,6 +783,7 @@ public class Calculator {
      * @return
      * The optimal amount of space between rafters
      * in cm.
+     * @author Benjamin/benskov95
      */
     public int calcSpaceBetweenRafters(int length) {
         int space = 45;
