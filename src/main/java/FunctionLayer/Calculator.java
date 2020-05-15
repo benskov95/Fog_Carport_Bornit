@@ -806,7 +806,6 @@ public class Calculator {
 
     }
 
-
     public int calcNumberOfBottomScrewPacks(int numberOfRoofPlates) { // Bundskruepakker.
         return numberOfRoofPlates / 4; // For hver 4 tagplader skal der 1 pakke bundskruer til.
 
