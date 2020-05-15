@@ -32,10 +32,10 @@ public class Calculator {
      * at least one ID (not necessarily material ID)
      * per material somewhere to get the rest of the
      * values belonging to each material, so we did.
-     * @param length in cm
-     * The chosen length of a customer's carport.
-     * @param width in cm
-     * The chosen width of a customer's carport.
+     * @param length
+     * The chosen length of a customer's carport in cm.
+     * @param width
+     * The chosen width of a customer's carport in cm.
      * @return
      * A BillOfMaterials object is returned, containing the
      * aforementioned arraylist. This object is used to add
@@ -139,16 +139,16 @@ public class Calculator {
      * material values for the shed. This method is
      * used when a type 2 carport is ordered
      * (flat roof with shed).
-     * @param length in cm
-     * The chosen length of a customer's carport.
-     * @param width in cm
-     * The chosen width of a customer's carport.
-     * @param shedLength in cm
-     * The chosen length of a customer's shed.
+     * @param length
+     * The chosen length of a customer's carport in cm.
+     * @param width
+     * The chosen width of a customer's carport in cm.
+     * @param shedLength
+     * The chosen length of a customer's shed in cm.
      * Cannot be greater than the length of the
      * carport (handled in the FlatOrder class).
-     * @param shedWidth in cm
-     * The chosen width of a customer's shed.
+     * @param shedWidth
+     * The chosen width of a customer's shed in cm.
      * Cannot be greater than the width of the
      * carport (handled in the FlatOrder class).
      * @return
@@ -282,15 +282,17 @@ public class Calculator {
      * length of studs for a type 2 carport.
      *
      * The length is optimized by getting
-     * all stud sizes in the database through
+     * all stud lengths in the database through
      * the getMaterialLengths() method from
-     * the MaterialMapper, looping through
-     * each length and subtracting it from
-     * the measurement until the measurement
-     * reaches exactly 0 OR has an excess
-     * that is not greater than 30 cm (at
-     * which point the loop breaks), and
-     * returning the length with which this
+     * the MaterialMapper into an arraylist,
+     * looping through it and subtracting the
+     * current length from the measurement
+     * until the measurement reaches 0 or
+     * becomes negative and has an excess that
+     * is not greater than 30 cm (at which point
+     * the loop breaks and restarts with the next
+     * length until all lengths have been tested),
+     * and returning the length with which this
      * was achieved.
      *
      * If the measurement does not reach 0
@@ -298,10 +300,10 @@ public class Calculator {
      * length it is reset to its initial
      * value, after which the loop continues
      * until the optimal length is found.
-     * @param measurement in cm
+     * @param measurement
      * A value used to determine the optimal length
-     * of a material for a specified measurement
-     * (typically length or width of the shed).
+     * of a material for a specified measurement in
+     * cm (typically length or width of the shed).
      * @param materialId
      * In order for the getMaterialLengths method
      * to return the correct lengths for the
@@ -415,10 +417,10 @@ public class Calculator {
      *
      * A provided arraylist of lengths (these being
      * lengths of roofplates from the database) is
-     * looped and for each length, a while loop is
-     * executed that subtracts the length from the
-     * carport length until it is as close to 0 as
-     * possible.
+     * looped through and for each length, a while
+     * loop is executed that subtracts the length
+     * from the carport length until it is as close
+     * to 0 as possible.
      *
      * Remainder (meaning any amount of carport length
      * that is not covered by a roofplate length) and
@@ -435,10 +437,10 @@ public class Calculator {
      * variable if a second roofplate length
      * was needed to ensure as little
      * waste/excess as possible.
-     * @param length in cm
-     * The chosen length of a customer's carport.
-     * @param width in cm
-     * The chosen width of a customer's carport.
+     * @param length
+     * The chosen length of a customer's carport in cm.
+     * @param width
+     * The chosen width of a customer's carport in cm.
      * @param measurements
      * An arraylist of lengths for a material.
      * The getMaterialLengths() method is used
@@ -697,16 +699,16 @@ public class Calculator {
      * conditions are met, such as if the carport
      * is wider or longer than 600 cm, or if it
      * has a shed.
-     * @param length in cm
-     * The chosen length of a customer's carport.
-     * @param width in cm
-     * The chosen width of a customer's carport.
-     * @param shedLength in cm
-     * The chosen length of a customer's shed.
+     * @param length
+     * The chosen length of a customer's carport in cm.
+     * @param width
+     * The chosen width of a customer's carport in cm.
+     * @param shedLength
+     * The chosen length of a customer's shed in cm.
      * Cannot be greater than the length of the
      * carport (handled in the FlatOrder class).
      * @param shedWidth in cm
-     * The chosen width of a customer's shed.
+     * The chosen width of a customer's shed in cm.
      * Cannot be greater than the width of the
      * carport (handled in the FlatOrder class).
      * @return
@@ -764,9 +766,9 @@ public class Calculator {
      *
      * This is done in a similar manner to the
      * calcOptimalLengthOfMaterial() method,
-     * with a loop that subtracts the space
-     * variable from the provided length until
-     * the length is 0.
+     * with a while loop that subtracts the
+     * space variable from the provided length
+     * until the length is 0.
      *
      * The space variable starts at 45 to ensure
      * that the space between rafters is minimum
@@ -778,8 +780,8 @@ public class Calculator {
      * 0, the loop will break and the space value
      * with which this was achieved will be returned.
      *
-     * @param length in cm
-     * The chosen length of a customer's carport.
+     * @param length
+     * The chosen length of a customer's carport in cm.
      * @return
      * The optimal amount of space between rafters
      * in cm.
