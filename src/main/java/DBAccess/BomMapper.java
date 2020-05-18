@@ -1,5 +1,11 @@
 package DBAccess;
 
+/**
+ * The purpose of the BomMapper class is
+ * to communicate with the Database with SQL statements.
+ * @author Pelle Rasmussen
+ */
+
 import FunctionLayer.*;
 import com.mysql.cj.protocol.Resultset;
 
@@ -7,6 +13,12 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class BomMapper {
+    /**
+     * Inserts a Arraylist of Materials to the DB.
+     * @param bom / Arraylist of Materials
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static void insertBillOfMaterials(BillOfMaterials bom) throws SQLException, ClassNotFoundException {
 
@@ -30,6 +42,14 @@ public class BomMapper {
             }
         }
     }
+
+    /**
+     *
+     * @param orderId / The customers Order ID
+     * @return  Returns a Bill of Materials
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static BillOfMaterials getBillOfMaterials(int orderId) throws SQLException, ClassNotFoundException {
 
@@ -75,6 +95,13 @@ public class BomMapper {
             return bom;
     }
 
+    /**
+     * Deletes a Bill of Materials
+     * @param orderId
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+
     public static void deleteBom(int orderId) throws SQLException, ClassNotFoundException {
         String sql = "DELETE FROM bill_of_materials " +
                 "WHERE order_id = ?";
@@ -90,6 +117,14 @@ public class BomMapper {
     }
 
     // Kun til test
+
+    /**
+     * Only used for test, returns all material IDs from the Bom list.
+     * @param orderId
+     * @return
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static BillOfMaterials getBillOfMaterialsForTest(int orderId) throws SQLException, ClassNotFoundException {
 
         String sql = "select * from bill_of_materials where order_id = ?";
@@ -114,7 +149,13 @@ public class BomMapper {
         return bom;
     }
 
-    // Kun til test
+    /**
+     * Only for test.
+     * @return The number of BOM's.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+
     public static int getNumberOfBillOfMaterials() throws SQLException, ClassNotFoundException {
 
         String sql = "select * from bill_of_materials";

@@ -7,7 +7,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * The purpose of the InitializeMapper class is
+ * to communicate with the Database with SQL statements.
+ * @author Pelle Rasmussen
+ */
+
 public class InitializeMapper {
+
+    /**
+     * Gets the carport widths used on the dropdown menus on the website
+     * @return Arraylist of carport widths
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static ArrayList<Integer> getCarportWidth() throws SQLException, ClassNotFoundException {
 
@@ -28,6 +41,12 @@ public class InitializeMapper {
         }
         return CWList;
     }
+    /**
+     * Gets the carport lengths used on the dropdown menus on the website
+     * @return Arraylist of carport lengths
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static ArrayList<Integer> getCarportLength() throws SQLException, ClassNotFoundException {
 
@@ -48,8 +67,14 @@ public class InitializeMapper {
         }
         return CLList;
     }
+    /**
+     * Gets the shed widths used on the dropdown menus on the website
+     * @return Arraylist of shed widths
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
-    public static ArrayList<Integer> getShedWidth() throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static ArrayList<Integer> getShedWidth() throws  SQLException, ClassNotFoundException {
 
         ArrayList<Integer> SWList = new ArrayList<>();
 
@@ -68,8 +93,14 @@ public class InitializeMapper {
         }
         return SWList;
     }
+    /**
+     * Gets the shed lengths used on the dropdown menus on the website
+     * @return Arraylist of shed lengths
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
-    public static ArrayList<Integer> getShedLength() throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static ArrayList<Integer> getShedLength() throws  SQLException, ClassNotFoundException {
 
         ArrayList<Integer> SLList = new ArrayList<>();
 

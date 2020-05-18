@@ -8,9 +8,19 @@ import FunctionLayer.Order;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * The purpose of the OrderMapper class is
+ * to communicate with the Database with SQL statements.
+ * @author Pelle Rasmussen
+ */
 
 public class OrderMapper {
+    /**
+     * Insert a order linked with the customer making the order.
+     * @param customer
+     * @param order
+     * @return The new unique generated order id.
+     */
 
     public static int insertOrder(Customer customer, Order order) {
 
@@ -61,7 +71,16 @@ public class OrderMapper {
         return generatedId;
     }
 
-    public static Order getMyOrder(int orderId, int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
+    /**
+     * Gets the order by using the order ID and the customers phone number.
+     * @param orderId
+     * @param phone
+     * @return the Order.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+
+    public static Order getMyOrder(int orderId, int phone) throws  SQLException, ClassNotFoundException {
 
         Connection con = Connector.connection();
         String sqlOrders = "SELECT * from `order` WHERE order_id = ? AND phone = ?";
@@ -97,6 +116,14 @@ public class OrderMapper {
         return null;
 
     }
+
+    /**
+     * Used to get all orders to the warehouse.
+     * @param orderId
+     * @return All orders from the DB
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static Order getOrderForWarehouse(int orderId) throws SQLException, ClassNotFoundException {
 
@@ -134,7 +161,15 @@ public class OrderMapper {
 
     }
 
-    public static void deleteOrder(int orderId) throws LoginSampleException, SQLException, ClassNotFoundException {
+    /**
+     * Deletes a order using its Order id.
+     * @param orderId
+     * @throws LoginSampleException
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+
+    public static void deleteOrder(int orderId) throws  SQLException, ClassNotFoundException {
 
         String sql = "DELETE FROM `order` WHERE order_id = ?";
         Connection con = Connector.connection();
@@ -147,6 +182,14 @@ public class OrderMapper {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Used to get orders by the status ID. / example status id 1 = "afventer"
+     * @param statusId
+     * @return a String with the status
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static String getOrderStatus(int statusId) throws SQLException, ClassNotFoundException {
 
@@ -170,6 +213,14 @@ public class OrderMapper {
 
     }
 
+    /**
+     * Gets the type of the Carport.
+     * @param typeId
+     * @return a String with the type.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+
     public static String getCarportType(int typeId) throws SQLException, ClassNotFoundException {
 
         Connection con = Connector.connection();
@@ -191,6 +242,14 @@ public class OrderMapper {
         return null;
 
     }
+
+    /**
+     * Gets all the orders by a specific order status.
+     * @param status_id
+     * @return Arraylist of orders.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static ArrayList<Order> getAllOrderByStatus (int status_id) throws SQLException, ClassNotFoundException {
 
@@ -226,6 +285,12 @@ public class OrderMapper {
         return orderlist;
     }
 
+    /**
+     * Updates the status of a Order.
+     * @param order_id
+     * @param status_id
+     */
+
     public static void updateStatus(int order_id, int status_id) {
 
 
@@ -248,6 +313,11 @@ public class OrderMapper {
 
     }
 
+    /**
+     * Updates the orders total price.
+     * @param order_id
+     * @param totalPrice
+     */
 
     public static void updateTotalPrice(int order_id, int totalPrice) {
         String sql = "update `order`set total_price = ? where order_id = ?";
