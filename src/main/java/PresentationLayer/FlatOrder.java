@@ -7,8 +7,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public class FlatOrder extends Command {
+
+    /**
+     * Inherits the execute() method from the Command interface. Whenever a new order is placed, this method is called.
+     * With help from the Calculator class, a bill of materials is calculated after which the order itself, the customer and the bill of materials
+     * are inserted into the database.
+     * @param request
+     * @param response
+     * @return receipt.jsp - confirming the order and providing the customer with an order ID.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     * @throws OrderException (custommade exception) when an input is either wrong (letters instead of numbers) or missing entirely.
+     */
+
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException, ClassNotFoundException, OrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, OrderException {
 
         Calculator calculator = new Calculator();
 

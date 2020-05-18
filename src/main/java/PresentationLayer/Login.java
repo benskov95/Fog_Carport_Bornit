@@ -10,6 +10,17 @@ import java.sql.SQLException;
 
 public class Login extends Command {
 
+    /**
+     * Inherits the execute() method from the Command interface. This overriden method handles user logins. If the login is succesful,
+     * the details specific for the applicable order is obtained from the database and the customer will be redirected to myorder.jsp.
+     * @param request
+     * @param response
+     * @return destination - a jsp page that differs depending on if the login was succesful or not.
+     * @throws LoginSampleException if phoneNumber or orderId is incorrect or non-existent.
+     * @throws SQLException if any problems with reading from the database occurs.
+     * @throws ClassNotFoundException
+     */
+
     @Override
     String execute( HttpServletRequest request, HttpServletResponse response ) throws LoginSampleException, SQLException, ClassNotFoundException {
 
