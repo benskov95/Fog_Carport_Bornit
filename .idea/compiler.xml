@@ -9,6 +9,7 @@
         <module name="Projektskabelon" />
         <module name="ProjektSkabelon-master" />
         <module name="prejektSkabelon" />
+        <module name="Fog_Carport_Bornit" />
         <module name="Fog_Carport_Born" />
         <module name="Fog Carport Projekt" />
         <module name="Projektskabelon-current" />
@@ -20,6 +21,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Fog Carport Projekt" options="-endorseddirs &quot;C:\Users\mozuh\Documents\Java Projects\2. semester\Fog Carport Projekt\target/endorsed&quot;" />
       <module name="Fog_Carport_Born" options="-endorseddirs &quot;C:\Users\frede\Java Kode\2.Semester\Fog_Carport_Born\target/endorsed&quot;" />
+      <module name="Fog_Carport_Bornit" options="-endorseddirs C:\Users\Tha-Y\Desktop\Fog_Carport_Bornit\target/endorsed" />
       <module name="ProjektSkabelon-master" options="-endorseddirs &quot;$PROJECT_DIR$/target/endorsed&quot;" />
       <module name="Projektskabelon" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
       <module name="Projektskabelon-current" options="-endorseddirs &quot;C:\Users\mozuh\Documents\Java Projects\2. semester\Projektskabelon-current\target/endorsed&quot;" />
