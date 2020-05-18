@@ -1,5 +1,12 @@
 package PresentationLayer;
 
+/**
+ * The purpose of the FlatOrder class is to insert order related data into the database
+ * and creating a bill of materials that matches the type of carport ordered.
+ *
+ * @author Matt Thomsen
+ */
+
 import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,8 +14,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 public class FlatOrder extends Command {
+
+    /**
+     * Inherits the execute() method from the Command interface. Whenever a new order is placed, this method is called.
+     * With help from the Calculator class, a bill of materials is calculated after which the order itself, the customer and the bill of materials
+     * are inserted into the database.
+     *
+     * @param request
+     * @param response
+     * @return receipt.jsp - confirming the order and providing the customer with an order ID.
+     * @throws SQLException if any problems with inserting into the database occurs.
+     * @throws ClassNotFoundException
+     * @throws OrderException (custommade exception) when an input is either wrong (letters instead of numbers) or missing entirely.
+     */
+
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException, ClassNotFoundException, OrderException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, OrderException {
 
         Calculator calculator = new Calculator();
 
@@ -60,7 +81,6 @@ public class FlatOrder extends Command {
             throw new OrderException(e.getMessage());
         }
 
-
         BillOfMaterials bom;
         Order order;
 
@@ -72,7 +92,6 @@ public class FlatOrder extends Command {
             order = new Order(1, carportWidth, carportLength, shedWidth, shedLength, bom.getTotalPrice(), telephone);
         }
 
-
         Customer customer = new Customer(telephone, name, address, email, postalCodeCity);
 
         int orderId = OrderFacade.insertOrder(customer, order);
@@ -83,6 +102,4 @@ public class FlatOrder extends Command {
 
         return "receipt";
     }
-
-
 }

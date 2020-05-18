@@ -1,5 +1,11 @@
 package PresentationLayer;
 
+/**
+ * The purpose of the Login class is to handle customer logins.
+ *
+ * @author Matt Thomsen
+ */
+
 import DBAccess.CustomerMapper;
 import FunctionLayer.*;
 
@@ -10,8 +16,20 @@ import java.sql.SQLException;
 
 public class Login extends Command {
 
+    /**
+     * Inherits the execute() method from the Command interface. This overriden method handles user logins. If the login is succesful,
+     * the details specific for the applicable order is obtained from the database and the customer will be redirected to myorder.jsp.
+     *
+     * @param request
+     * @param response
+     * @return destination - a jsp page that differs depending on if the login was succesful or not.
+     * @throws LoginSampleException if phoneNumber or orderId is incorrect or non-existent.
+     * @throws SQLException if any problems with reading from the database occurs.
+     * @throws ClassNotFoundException
+     */
+
     @Override
-    String execute( HttpServletRequest request, HttpServletResponse response ) throws LoginSampleException, SQLException, ClassNotFoundException {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException, ClassNotFoundException {
 
         HttpSession session = request.getSession();
         int phoneNumber;
@@ -40,10 +58,10 @@ public class Login extends Command {
             bom = BomFacade.getBillOfMaterials(orderId);
 
             if (order == null || customer == null) {
-               throw new LoginSampleException("FEJL: Der blev ikke fundet nogen ordre med dette telefonnummer og ordrenummer i databasen. Prøv igen.");
+                throw new LoginSampleException("FEJL: Der blev ikke fundet nogen ordre med dette telefonnummer og ordrenummer i databasen. Prøv igen.");
             } else {
                 session.setAttribute("bom", bom);
-                session.setAttribute( "customer", customer);
+                session.setAttribute("customer", customer);
                 session.setAttribute("order", order);
 
                 String carportType = OrderFacade.getCarportType(order.getCarport_id());
@@ -52,12 +70,8 @@ public class Login extends Command {
 
                 destination = "myorder";
             }
-
-
         }
-
 
         return destination;
     }
-
 }
