@@ -1,11 +1,5 @@
 package PresentationLayer;
 
-/**
- * The purpose of the Login class is to handle customer logins.
- *
- * @author Matt Thomsen
- */
-
 import DBAccess.CustomerMapper;
 import FunctionLayer.*;
 
@@ -14,11 +8,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
+/**
+ * The purpose of the Login class is to handle customer logins.
+ * It inherits the execute() method from the Command class.
+ * This overriden method handles user logins. If the login is
+ * succesful, the order information is retrieved from the database
+ * and the customer will be redirected to myorder.jsp.
+ *
+ * The customer's phone number and an order ID are used as
+ * credentials for the login process. If a customer has
+ * multiple orders, they will have to log in and look at
+ * each order individually with each order ID. This is
+ * because the functionality code for the myorder.jsp
+ * page uses information from a single order (to see the
+ * drawing and look at the bill of materials).
+ * @author Matt Thomsen
+ */
+
 public class Login extends Command {
 
     /**
      * Inherits the execute() method from the Command interface. This overriden method handles user logins. If the login is succesful,
-     * the details specific for the applicable order is obtained from the database and the customer will be redirected to myorder.jsp.
+     * the order information is retrieved from the database and the customer will be redirected to myorder.jsp.
      *
      * @param request
      * @param response

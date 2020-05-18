@@ -5,9 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- The purpose of Connector is to...
+ The purpose of Connector is to establish
+ a connection to the database so that CRUD
+ operations can be carried out through the
+ various Mapper classes.
 
- @author kasper
+ @author Benjamin/benskov95
  */
 public class Connector {
 

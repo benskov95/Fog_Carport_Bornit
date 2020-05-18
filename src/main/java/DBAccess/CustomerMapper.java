@@ -2,24 +2,34 @@ package DBAccess;
 
 import FunctionLayer.Customer;
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.OrderException;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 /**
- * /**
- *  * The purpose of the CustomerMapper class is
- *  * to communicate with the Database with SQL statements.
- *  * @author Pelle Rasmussen
- *  */
+ * The purpose of the CustomerMapper class is
+ * to communicate with the Database with SQL
+ * statements to insert, delete or retrieve
+ * customers.
+ * @author Pelle Rasmussen
+ */
 
 public class CustomerMapper {
 
     /**
-     * Gets all customers from the DB
+     * Gets all customers from the database.
      * @return Arraylist of all Customers
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
    public static ArrayList<Customer> getAllCustomers () throws SQLException, ClassNotFoundException {
@@ -51,12 +61,23 @@ public class CustomerMapper {
    }
 
     /**
-     *Gets a customer by using there phonenumber
+     * Gets a customer by using their phone
+     * number as an identifier.
      * @param phone Phone number of the customer
      * @return a customer
      * @throws LoginSampleException
+     * Thrown if the phone number does not match with
+     * any of the registered customers in the database.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static Customer getCustomer (int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
@@ -73,24 +94,29 @@ public class CustomerMapper {
                 String address= rs.getString("address");
                 String email = rs.getString("email");
                 String zipCode = rs.getString("zip_code");
-                Customer customer = new Customer(phoneNumber, name, address, email, zipCode);
-                return customer;
+                return new Customer(phoneNumber, name, address, email, zipCode);
             }
         } catch ( SQLException ex ) {
             ex.printStackTrace();
             throw new LoginSampleException(ex.getMessage());
         }
-        return null;
+       return null;
     }
 
     /**
-     * Deletes a customer
+     * Deletes a customer.
      * @param phone phone number of the customer getting deleted
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
-
-
 
     public static void deleteCustomer(int phone) throws SQLException, ClassNotFoundException {
 

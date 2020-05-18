@@ -1,7 +1,5 @@
 package DBAccess;
 
-import FunctionLayer.CarPortPart;
-import FunctionLayer.Customer;
 import FunctionLayer.Material;
 
 import java.sql.Connection;
@@ -9,19 +7,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  * The purpose of the MaterialMapper class is
- * to communicate with the Database with SQL statements.
+ * to communicate with the Database with SQL
+ * statements to retrieve materials from the
+ * database and to modify Material objects.
  * @author Pelle Rasmussen
  */
 
 public class MaterialMapper {
+
     /**
      * Gets the lengths of specific materials
      * @param materialId The id of the material
      * @return  Arraylist of all the lengths.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static ArrayList<Integer> getMaterialLengths(int materialId) throws SQLException, ClassNotFoundException {
@@ -56,10 +66,22 @@ public class MaterialMapper {
     }
 
     /**
-     * Sets the values of the materials. "name","unit id" and "price"
+     * Sets the values of the materials.
+     * "name","unit id" and "price"
      * @param materials
+     * Arraylist of materials with
+     * undefined names, unit IDs and
+     * prices.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static void setMaterialValues(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
@@ -85,6 +107,27 @@ public class MaterialMapper {
         }
     }
 
+    /**
+     * Sets size IDs for each material
+     * in the provided arraylist which
+     * is necessary for when the
+     * arraylist later becomes part of
+     * a BillOfMaterials object that is
+     * then inserted into the database.
+     * @param materials
+     * An arraylist of materials
+     * with no size IDs.
+     * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
+     * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Benjamin/benskov95
+     */
     public static void setMaterialSizeIds(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
 
         Connection con = Connector.connection();
@@ -140,6 +183,34 @@ public class MaterialMapper {
         }
     }
 
+    /**
+     * Sets link_material_size IDs for
+     * each material in the provided
+     * arraylist which is necessary for
+     * when the arraylist later becomes
+     * part of a BillOfMaterials object
+     * that is then inserted into the
+     * database.
+     *
+     * The link_size_material ID is
+     * necessary to ensure that each
+     * material's size is correct, as
+     * many materials have different
+     * sizes.
+     * @param materials
+     * An arraylist of materials
+     * with no link_material_size IDs.
+     * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
+     * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Benjamin/benskov95
+     */
     public static void setLinkMaterialSizeIds(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
 
         String sql = "select * from link_material_size where link_material_id = ? and link_size_id = ?";
@@ -163,6 +234,29 @@ public class MaterialMapper {
         }
     }
 
+    /**
+     * Only used to as part of the
+     * categorization process in the
+     * BomPage class, where a bill of
+     * materials is retrieved from the
+     * database and its materials are
+     * split into two different categories
+     * when displayed on the bompage.jsp
+     * page.
+     * @param materials
+     * Arraylist of materials with
+     * undefined unit names.
+     * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
+     * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Benjamin/benskov95
+     */
     public static void setUnitTypes(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
 
         Connection con = Connector.connection();

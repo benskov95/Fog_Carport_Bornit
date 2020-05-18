@@ -1,12 +1,5 @@
 package PresentationLayer;
 
-/**
- * The purpose of the BomPage class is to obtain the correct bill of materials for a specific order ID.
- *
- * @author Matt Thomsen
- */
-
-import DBAccess.MaterialMapper;
 import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +8,23 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BomPage extends Command {
 
-    /**
-     * Inherits the execute() method from the Command interface. A bill of material, linked to a specific order ID, is read from the database
-     * as well as the appertaining descriptions.
-     *
-     * @param request
-     * @param response
-     * @return bompage.jsp - shows a complete bill of materials.
-     * @throws SQLException if any problems with reading from the database occurs.
-     * @throws ClassNotFoundException
-     * @throws LoginSampleException
-     */
+/**
+ * The purpose of the BomPage class is to retrieve the
+ * correct bill of materials for a specific order ID
+ * and make sure it gets displayed correctly on the
+ * bompage.jsp page.
+ *
+ * Inherits the execute() method from the Command
+ * class. The method is used to retrieve the
+ * bill of materials and sort its materials
+ * into two categories - all for the purpose
+ * of displaying it in an easy-to-understand
+ * fashion.
+ * @author Matt Thomsen
+ */
+
+public class BomPage extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, LoginSampleException {

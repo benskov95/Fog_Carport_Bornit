@@ -9,19 +9,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
  * The purpose of the EmployeeMapper class is
- * to communicate with the Database with SQL statements.
+ * to communicate with the Database with SQL
+ * statements to retrieve employees and set
+ * their roles.
  * @author Pelle Rasmussen
  */
 
 public class EmployeeMapper {
     /**
-     * Login for the employees, makes sure the password and ID is correct.
+     * Login for the employees, makes
+     * sure the password and ID is
+     * correct.
      * @param employee_id
+     *  ID provided by user, has to
+     *  match an ID in the employee
+     *  table in the database.
      * @param password
+     * Password provided by user,
+     * has to match an ID in the
+     * employee table in the database.
      * @return Employee
      * @throws LoginSampleException
+     * Thrown if login credentials do not match with
+     * any of the registered employees in the database.
+     * @author Pelle Rasmussen
      */
     public static Employee login(int employee_id, String password ) throws LoginSampleException {
         try {
@@ -48,10 +62,20 @@ public class EmployeeMapper {
     }
 
     /**
-     * Sets the role of the employee
+     * Sets the role of an employee.
      * @param employee
+     * The Employee object whose
+     * role has not yet been set.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static void setEmployeeRole(Employee employee) throws SQLException, ClassNotFoundException {

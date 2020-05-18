@@ -75,8 +75,4 @@
     </div>
 
 
-
-
-
-
 <%@include file="../Includes/footer.inc"%>
