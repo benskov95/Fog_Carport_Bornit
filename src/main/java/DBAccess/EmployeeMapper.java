@@ -9,9 +9,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+/**
+ * The purpose of the EmployeeMapper class is
+ * to communicate with the Database with SQL statements.
+ * @author Pelle Rasmussen
+ */
 
 public class EmployeeMapper {
-
+    /**
+     * Login for the employees, makes sure the password and ID is correct.
+     * @param employee_id
+     * @param password
+     * @return Employee
+     * @throws LoginSampleException
+     */
     public static Employee login(int employee_id, String password ) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
@@ -35,6 +46,13 @@ public class EmployeeMapper {
         }
 
     }
+
+    /**
+     * Sets the role of the employee
+     * @param employee
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static void setEmployeeRole(Employee employee) throws SQLException, ClassNotFoundException {
 
