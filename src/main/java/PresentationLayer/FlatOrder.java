@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * Inherits the execute() method from the Command class.
  * Whenever a new order is placed, this method is called.
  * With help from the Calculator class, a bill of materials
- * is calculated after which the order itself, the customer
+ * is created after which the order itself, the customer
  * and the bill of materials are inserted into the database.
  * If the customer already exists, all registration fields
  * are skipped.
