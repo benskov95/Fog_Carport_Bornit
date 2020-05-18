@@ -6,7 +6,21 @@ import FunctionLayer.LoginSampleException;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * /**
+ *  * The purpose of the CustomerMapper class is
+ *  * to communicate with the Database with SQL statements.
+ *  * @author Pelle Rasmussen
+ *  */
+
 public class CustomerMapper {
+
+    /**
+     * Gets all customers from the DB
+     * @return Arraylist of all Customers
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     // todo - Vi skal enten have smidt "role" på customer tabellen i databasen,
     // todo - eller lave en employee/admin tabel, så vi har det til adminsiden.
@@ -42,6 +56,15 @@ public class CustomerMapper {
        return customerArrayList;
    }
 
+    /**
+     *Gets a customer by using there phonenumber
+     * @param phone Phone number of the customer
+     * @return a customer
+     * @throws LoginSampleException
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+
     public static Customer getCustomer (int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
 
         Connection con = Connector.connection();
@@ -66,7 +89,16 @@ public class CustomerMapper {
         return null;
     }
 
-    public static void deleteCustomer(int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
+    /**
+     * Deletes a customer
+     * @param phone phone number of the customer getting deleted
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
+
+
+
+    public static void deleteCustomer(int phone) throws SQLException, ClassNotFoundException {
 
         String sql = "DELETE FROM customer " +
                 "WHERE phone = ?";

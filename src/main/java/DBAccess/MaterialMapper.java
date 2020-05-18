@@ -9,8 +9,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+/**
+ * The purpose of the MaterialMapper class is
+ * to communicate with the Database with SQL statements.
+ * @author Pelle Rasmussen
+ */
 
 public class MaterialMapper {
+    /**
+     * Gets the lengths of specific materials
+     * @param materialId The id of the material
+     * @return  Arraylist of all the lengths.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static ArrayList<Integer> getMaterialLengths(int materialId) throws SQLException, ClassNotFoundException {
 
@@ -42,6 +54,13 @@ public class MaterialMapper {
 
         return lengths;
     }
+
+    /**
+     * Sets the values of the materials. "name","unit id" and "price"
+     * @param materials
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static void setMaterialValues(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
 

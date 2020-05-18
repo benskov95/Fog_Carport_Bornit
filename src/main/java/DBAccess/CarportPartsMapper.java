@@ -10,9 +10,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+/**
+ * The purpose of the CarportPartsMapper class is
+ * to communicate with the Database with SQL statements.
+ * @author Pelle Rasmussen
+ */
 
 public class CarportPartsMapper {
-
+    /**
+     * Gets all Carport parts.
+     * @return Arraylist of Carport Parts.
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static ArrayList<CarPortPart> getCarportParts() throws SQLException, ClassNotFoundException {
 
         ArrayList<CarPortPart> carportPartsArrayList = new ArrayList<>();
@@ -40,6 +50,13 @@ public class CarportPartsMapper {
         return carportPartsArrayList;
     }
 
+    /**
+     *
+     * @param materials
+     * @param carportTypeId
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static void getCarportPartIds(ArrayList<Material> materials, int carportTypeId) throws SQLException, ClassNotFoundException {
 
         String sql = "select * from carport_parts where carport_id = ?";
@@ -75,6 +92,13 @@ public class CarportPartsMapper {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Getting all the descriptions of the materials
+     * @param materials Arraylist of Materials
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
 
     public static void getCarportPartDescriptions(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
 
