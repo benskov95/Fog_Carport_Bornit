@@ -33,6 +33,7 @@ end note
     carportplanside.jsp --> myorder.jsp: Return
     myorder.jsp --> bompage.jsp: Bill of materials (if order is purchased)
     bompage.jsp --> myorder.jsp: Return
-    myorder.jsp -up-> checkoutpage.jsp: When just purchased
+    myorder.jsp -up-> checkoutpage.jsp: Purchase order
+    myorder.jsp -up-> declineorder.jsp: Decline order
 }
 @enduml
