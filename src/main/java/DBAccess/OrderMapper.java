@@ -1,25 +1,34 @@
 package DBAccess;
 
 import FunctionLayer.Customer;
-import FunctionLayer.LoginSampleException;
 import FunctionLayer.Order;
-
-
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
+
+
 /**
  * The purpose of the OrderMapper class is
- * to communicate with the Database with SQL statements.
+ * to communicate with the Database with SQL
+ * statements to insert, update, delete or
+ * retrieve orders from the database.
  * @author Pelle Rasmussen
  */
 
 public class OrderMapper {
+
     /**
-     * Insert a order linked with the customer making the order.
+     * Insert an order linked with the customer
+     * making the order.
      * @param customer
+     * A Customer object created from
+     * values provided by the user of
+     * the website.
      * @param order
+     * An Order object created in the
+     * FlatOrder class whenever an
+     * order is made.
      * @return The new unique generated order id.
+     * @author Pelle Rasmussen
      */
 
     public static int insertOrder(Customer customer, Order order) {
@@ -71,13 +80,63 @@ public class OrderMapper {
         return generatedId;
     }
 
+    public static int insertOrderForExistingCustomer(Order order) throws SQLException, ClassNotFoundException {
+
+        int generatedId = 0;
+        String sqlOrder = "INSERT INTO `order` (cp_id, carport_width, carport_length, shed_width, shed_length, phone, total_price, status_id ) VALUES (?,?,?,?,?,?,?,?)";
+
+        try {
+            Connection con = Connector.connection();
+            con.setAutoCommit(false);
+
+                try (PreparedStatement ps1 = con.prepareStatement(sqlOrder, Statement.RETURN_GENERATED_KEYS)) {
+                    ps1.setInt(1, order.getCarport_id());
+                    ps1.setInt(2, order.getCarport_width());
+                    ps1.setInt(3, order.getCarport_length());
+                    ps1.setInt(4, order.getShed_width());
+                    ps1.setInt(5, order.getShed_length());
+                    ps1.setInt(6, order.getPhone());
+                    ps1.setInt(7, order.getTotalPrice());
+                    ps1.setInt(8, order.getStatus_id());
+                    ps1.executeUpdate();
+
+                    ResultSet idResultset = ps1.getGeneratedKeys();
+                    if (idResultset.next()){
+                        generatedId = idResultset.getInt(1);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    con.rollback();
+                }
+                con.commit();
+                con.setAutoCommit(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return generatedId;
+    }
+
     /**
-     * Gets the order by using the order ID and the customers phone number.
+     * Retrieves an order by using the order ID
+     * and the customers phone number.
      * @param orderId
+     * Provided order ID.
      * @param phone
-     * @return the Order.
+     * Provided phone number.
+     * @return An Order object.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static Order getMyOrder(int orderId, int phone) throws  SQLException, ClassNotFoundException {
@@ -118,11 +177,24 @@ public class OrderMapper {
     }
 
     /**
-     * Used to get all orders to the warehouse.
+     * Used to get an order for
+     * the warehouse which is
+     * used to retrieve and
+     * display bill of materials
+     * in the BomPage class.
      * @param orderId
-     * @return All orders from the DB
+     * Provided order ID.
+     * @return An Order object.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static Order getOrderForWarehouse(int orderId) throws SQLException, ClassNotFoundException {
@@ -164,9 +236,17 @@ public class OrderMapper {
     /**
      * Deletes a order using its Order id.
      * @param orderId
-     * @throws LoginSampleException
+     * Provided order ID.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static void deleteOrder(int orderId) throws  SQLException, ClassNotFoundException {
@@ -184,11 +264,22 @@ public class OrderMapper {
     }
 
     /**
-     * Used to get orders by the status ID. / example status id 1 = "afventer"
+     * Used to find and set the correct
+     * status name for each order based
+     * on its status ID.
      * @param statusId
-     * @return a String with the status
+     * Provided status id.
+     * @return The name matching the status ID.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static String getOrderStatus(int statusId) throws SQLException, ClassNotFoundException {
@@ -216,9 +307,19 @@ public class OrderMapper {
     /**
      * Gets the type of the Carport.
      * @param typeId
-     * @return a String with the type.
+     * Used to find the matching
+     * carport type name.
+     * @return A carport type name.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static String getCarportType(int typeId) throws SQLException, ClassNotFoundException {
@@ -244,14 +345,29 @@ public class OrderMapper {
     }
 
     /**
-     * Gets all the orders by a specific order status.
+     * Used to get orders based on the status ID.
+     * Example: status id 1 = "afventer". Mainly
+     * used for the admin and warehouse employees
+     * to be able to view all orders that are
+     * relevant to them (admin has to approve
+     * orders so he only needs to see orders
+     * with status ID 1, for example).
      * @param status_id
-     * @return Arraylist of orders.
+     * @return
+     * Arraylist of orders with status names.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
-    public static ArrayList<Order> getAllOrderByStatus (int status_id) throws SQLException, ClassNotFoundException {
+    public static ArrayList<Order> getAllOrdersByStatus(int status_id) throws SQLException, ClassNotFoundException {
 
         ArrayList<Order> orderlist = new ArrayList<>();
         String sqlOrders = "SELECT * FROM `order` Where status_id = " + status_id;
@@ -288,7 +404,11 @@ public class OrderMapper {
     /**
      * Updates the status of a Order.
      * @param order_id
+     * Order whose status ID is being
+     * updated.
      * @param status_id
+     * The new status ID for the order.
+     * @author Pelle Rasmussen
      */
 
     public static void updateStatus(int order_id, int status_id) {
@@ -316,7 +436,11 @@ public class OrderMapper {
     /**
      * Updates the orders total price.
      * @param order_id
+     * Order whose total price is being
+     * updated.
      * @param totalPrice
+     * The new total price for the order.
+     * @author Pelle Rasmussen
      */
 
     public static void updateTotalPrice(int order_id, int totalPrice) {

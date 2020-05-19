@@ -11,11 +11,11 @@ public class CustomerFacade {
         return CustomerMapper.getAllCustomers();
     }
 
-    public static Customer getCustomer(int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static Customer getCustomer(int phone) throws LoginSampleException, SQLException, ClassNotFoundException{
         return CustomerMapper.getCustomer(phone);
     }
 
-    public static void deleteCustomer(int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
+    public static void deleteCustomer(int phone) throws SQLException, ClassNotFoundException {
         CustomerMapper.deleteCustomer(phone);
     }
 }

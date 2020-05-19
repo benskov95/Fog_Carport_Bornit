@@ -3,6 +3,7 @@ package DBAccess;
 import FunctionLayer.Customer;
 import FunctionLayer.CustomerFacade;
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.OrderException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -65,7 +66,7 @@ public class CustomerMapperTest {
     }
 
     @Test
-    public void testGetCustomer() throws LoginSampleException, SQLException, ClassNotFoundException {
+    public void testGetCustomer() throws LoginSampleException, SQLException, ClassNotFoundException, OrderException {
         Customer customer = CustomerFacade.getCustomer(12345678);
         assert (customer.getName().equals("John"));
     }

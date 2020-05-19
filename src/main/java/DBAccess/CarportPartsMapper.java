@@ -12,7 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 /**
  * The purpose of the CarportPartsMapper class is
- * to communicate with the Database with SQL statements.
+ * to communicate with the Database with SQL
+ * statements to retrieve carport parts.
+ *
+ * Mainly used to assign specific values
+ * to Material objects.
  * @author Pelle Rasmussen
  */
 
@@ -21,7 +25,15 @@ public class CarportPartsMapper {
      * Gets all Carport parts.
      * @return Arraylist of Carport Parts.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
     public static ArrayList<CarPortPart> getCarportParts() throws SQLException, ClassNotFoundException {
 
@@ -51,11 +63,39 @@ public class CarportPartsMapper {
     }
 
     /**
+     * The getCarportPartIds() method is used
+     * to assign the correct carport part IDs
+     * to each material in an arraylist.
+     *
+     * This is necessary to later assign the
+     * correct descriptions to each material
+     * but also important for when the
+     * BillOfMaterials (containing this
+     * arraylist of materials) has to be
+     * inserted into the database.
      *
      * @param materials
+     * Arraylist of materials that is or
+     * will be part of a BillOfMaterials
+     * object.
      * @param carportTypeId
+     * Carport parts in the database
+     * are split into categories based
+     * on whether the carport has a shed
+     * or not. The method has to know the
+     * type of the carport to retrieve and
+     * assign the correct carport part IDs
+     * to each material.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Benjamin/benskov95
      */
     public static void getCarportPartIds(ArrayList<Material> materials, int carportTypeId) throws SQLException, ClassNotFoundException {
 
@@ -94,10 +134,22 @@ public class CarportPartsMapper {
     }
 
     /**
-     * Getting all the descriptions of the materials
+     * Retrieves all the descriptions of the
+     * carport parts and assigns them to the
+     * materials in the provided arraylist of
+     * Material objects based on their carport
+     * part ID.
      * @param materials Arraylist of Materials
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static void getCarportPartDescriptions(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {

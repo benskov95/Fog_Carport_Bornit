@@ -1,6 +1,5 @@
 package PresentationLayer;
 
-import DBAccess.MaterialMapper;
 import FunctionLayer.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +8,24 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+/**
+ * The purpose of the BomPage class is to retrieve the
+ * correct bill of materials for a specific order ID
+ * and make sure it gets displayed correctly on the
+ * bompage.jsp page.
+ *
+ * Inherits the execute() method from the Command
+ * class. The method is used to retrieve the
+ * bill of materials and sort its materials
+ * into two categories - all for the purpose
+ * of displaying it in an easy-to-understand
+ * fashion.
+ * @author Matt Thomsen
+ */
+
 public class BomPage extends Command {
+
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, LoginSampleException {
 
@@ -18,16 +34,16 @@ public class BomPage extends Command {
         int orderId = 0;
         BillOfMaterials bom;
 
-            try {
-                orderId = Integer.parseInt(request.getParameter("billofmaterials"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {
+            orderId = Integer.parseInt(request.getParameter("billofmaterials"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-            if (orderId != 0) {
-                bom = BomFacade.getBillOfMaterials(orderId);
-                session.setAttribute("order", OrderFacade.getOrderForWarehouse(orderId));
-            } else {
+        if (orderId != 0) {
+            bom = BomFacade.getBillOfMaterials(orderId);
+            session.setAttribute("order", OrderFacade.getOrderForWarehouse(orderId));
+        } else {
             bom = BomFacade.getBillOfMaterials(order.getOrder_id());
 
             for (Material material : bom.getMaterials()) {
@@ -36,7 +52,7 @@ public class BomPage extends Command {
                     material.setCarportPartDescription(current + " (skur del)");
                 }
             }
-            }
+        }
 
         MaterialFacade.setUnitTypes(bom.getMaterials());
         ArrayList<Material> woodAndRoofPlates = new ArrayList<>();

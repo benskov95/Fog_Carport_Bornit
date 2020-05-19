@@ -9,17 +9,28 @@ import java.util.ArrayList;
 
 /**
  * The purpose of the InitializeMapper class is
- * to communicate with the Database with SQL statements.
+ * to communicate with the Database with SQL
+ * statements to retrieve carport and shed
+ * measurements from the database.
  * @author Pelle Rasmussen
  */
 
 public class InitializeMapper {
 
     /**
-     * Gets the carport widths used on the dropdown menus on the website
+     * Gets the carport widths used on the
+     * dropdown menus on the website.
      * @return Arraylist of carport widths
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static ArrayList<Integer> getCarportWidth() throws SQLException, ClassNotFoundException {
@@ -41,11 +52,21 @@ public class InitializeMapper {
         }
         return CWList;
     }
+
     /**
-     * Gets the carport lengths used on the dropdown menus on the website
+     * Gets the carport lengths used on the
+     * dropdown menus on the website.
      * @return Arraylist of carport lengths
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static ArrayList<Integer> getCarportLength() throws SQLException, ClassNotFoundException {
@@ -67,11 +88,21 @@ public class InitializeMapper {
         }
         return CLList;
     }
+
     /**
-     * Gets the shed widths used on the dropdown menus on the website
+     * Gets the shed widths used on the
+     * dropdown menus on the website.
      * @return Arraylist of shed widths
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static ArrayList<Integer> getShedWidth() throws  SQLException, ClassNotFoundException {
@@ -93,11 +124,21 @@ public class InitializeMapper {
         }
         return SWList;
     }
+
     /**
-     * Gets the shed lengths used on the dropdown menus on the website
+     * Gets the shed lengths used on the
+     * dropdown menus on the website.
      * @return Arraylist of shed lengths
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static ArrayList<Integer> getShedLength() throws  SQLException, ClassNotFoundException {

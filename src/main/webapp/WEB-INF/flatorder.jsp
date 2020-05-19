@@ -17,8 +17,7 @@
         <p>Tilbud og skitsetegning fremsendes med post hurtigst muligt.<br>Ved bestilling medfølger
             standardbyggevejledning.</p>
         <p>*&nbsp;Hvis de viste mål ikke opfylder dine ønsker, kan vi kontaktes på tlf.: 45 47 10 01</p>
-        <p><strong>Udfyld nedenstående omhyggeligt og klik på "Bestil tilbud"</strong><br>Felter markeret * SKAL
-            udfyldes!</p>
+        <p><strong>Udfyld nedenstående omhyggeligt og klik på "Bestil tilbud"</strong><br></p>
 
         <form action="FrontController" method="get">
             <input type="hidden" name="target" value="flatorder">
@@ -118,6 +117,21 @@
             </div>
         </div>
 
+        <p>
+            <a class="btn btn-primary btn-sm" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Jeg er allerede registreret
+            </a>
+        </p>
+
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body" style="width: 8rem; text-align: center">
+                <form action="FrontController?target=flatorder" method="get">
+                <input type="text" name="registeredTelephone" value="12345678">
+                    <button type="submit" value="">Bestil</button>
+                </form>
+            </div>
+        </div>
+
         <div class="form-group">
             <div class="col-md-12 col-xs-12">
                 <label title="Navn">
@@ -150,7 +164,7 @@
                 <label title="Telefon">
                     <strong>Telefon</strong>
                 </label>
-                <input class="form-control" id="telephone" name="telephone" size="20" type="text" value="">
+                <input class="form-control" id="telephone" name="telephone" size="20" type="text" value="12345678">
             </div>
         </div>
 

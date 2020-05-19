@@ -1,23 +1,31 @@
 package DBAccess;
 
-/**
- * The purpose of the BomMapper class is
- * to communicate with the Database with SQL statements.
- * @author Pelle Rasmussen
- */
 
 import FunctionLayer.*;
-import com.mysql.cj.protocol.Resultset;
 
 import java.sql.*;
-import java.util.ArrayList;
 
+/**
+ * The purpose of the BomMapper class is
+ * to communicate with the Database with
+ * SQL statements to insert, delete or
+ * retrieve bills of materials.
+ * @author Pelle Rasmussen
+ */
 public class BomMapper {
+
     /**
      * Inserts a Arraylist of Materials to the DB.
      * @param bom / Arraylist of Materials
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
      */
 
     public static void insertBillOfMaterials(BillOfMaterials bom) throws SQLException, ClassNotFoundException {
@@ -46,9 +54,17 @@ public class BomMapper {
     /**
      *
      * @param orderId / The customers Order ID
-     * @return  Returns a Bill of Materials
+     * @return  Returns a BillOfMaterials object.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static BillOfMaterials getBillOfMaterials(int orderId) throws SQLException, ClassNotFoundException {
@@ -98,8 +114,19 @@ public class BomMapper {
     /**
      * Deletes a Bill of Materials
      * @param orderId
+     * ID used to identify which
+     * bills of materials have to be
+     * deleted.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static void deleteBom(int orderId) throws SQLException, ClassNotFoundException {
@@ -121,9 +148,21 @@ public class BomMapper {
     /**
      * Only used for test, returns all material IDs from the Bom list.
      * @param orderId
+     * Used to identify the bill
+     * of materials that has to
+     * be retrieved.
      * @return
+     * A BillOfMaterials object.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
     public static BillOfMaterials getBillOfMaterialsForTest(int orderId) throws SQLException, ClassNotFoundException {
 
@@ -153,7 +192,15 @@ public class BomMapper {
      * Only for test.
      * @return The number of BOM's.
      * @throws SQLException
+     *  Thrown if the provided SQL string in each method
+     *  has incorrect syntax, unknown keywords etc. or
+     *  if the connection to the database cannot be
+     *  established.
      * @throws ClassNotFoundException
+     * Thrown from Connector if the "Class.forName" method
+     * doesn't find the specified class
+     * (JDBC driver in this case).
+     * @author Pelle Rasmussen
      */
 
     public static int getNumberOfBillOfMaterials() throws SQLException, ClassNotFoundException {

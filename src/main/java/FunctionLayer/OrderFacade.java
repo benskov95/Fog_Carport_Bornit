@@ -11,6 +11,10 @@ public class OrderFacade {
        return OrderMapper.insertOrder(customer, order);
     }
 
+    public static int insertOrderForExistingCustomer(Order order) throws SQLException, ClassNotFoundException {
+        return OrderMapper.insertOrderForExistingCustomer(order);
+    }
+
     public static Order getMyOrder(int orderId, int phone) throws LoginSampleException, SQLException, ClassNotFoundException {
         return OrderMapper.getMyOrder(orderId, phone);
     }
@@ -31,7 +35,7 @@ public class OrderFacade {
         return OrderMapper.getCarportType(typeId);
     }
     public static ArrayList<Order> getAllOrdersByStatusId (int status_id) throws SQLException, ClassNotFoundException {
-        return OrderMapper.getAllOrderByStatus(status_id);
+        return OrderMapper.getAllOrdersByStatus(status_id);
     }
 
     public static void updateStatus (int order_id, int status_id) throws LoginSampleException {

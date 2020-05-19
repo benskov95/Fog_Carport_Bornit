@@ -1,0 +1,39 @@
+@startuml
+
+Title Fog Carport
+state flatorder.jsp
+
+[*] --> index.jsp
+index.jsp -right-> flatorder.jsp
+flatorder.jsp -right-> receipt.jsp: Order a carport + (if necessary) register
+receipt.jsp --> LoggedOnCustomer: Login (if OK)
+receipt.jsp --> index.jsp: Login (if not OK)
+
+LoggedOnCustomer --> index.jsp: Logout
+
+state LoggedOnCustomer {
+    state myorder.jsp
+    state carportplan.jsp
+    state carportplanside.jsp
+    state bompage.jsp
+    state checkoutpage.jsp
+
+note top of myorder.jsp
+customer, order
+and BOM stored
+in session
+end note
+
+    [*]--> myorder.jsp
+    myorder.jsp --> carportplan.jsp: Drawing from bird's-eye view
+    carportplan.jsp --> myorder.jsp: Return
+    carportplan.jsp -right-> carportplanside.jsp
+    carportplanside.jsp -right-> carportplan.jsp
+    myorder.jsp --> carportplanside.jsp: Drawing from side view
+    carportplanside.jsp --> myorder.jsp: Return
+    myorder.jsp --> bompage.jsp: Bill of materials (if order is purchased)
+    bompage.jsp --> myorder.jsp: Return
+    myorder.jsp -up-> checkoutpage.jsp: Purchase order
+    myorder.jsp -up-> declineorder.jsp: Decline order
+}
+@enduml
