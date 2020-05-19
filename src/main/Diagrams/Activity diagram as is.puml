@@ -1,13 +1,13 @@
 @startuml
-Title Fog Carport
+Title Fog Carport - as is
 |Customer|
 start
 :Go to website;
 |#AntiqueWhite|Webshop|
-:Precent options;
+:Present options;
 |Customer|
 : Choose Customize carport;
-:Input preferncences;
+:Select dimensions;
 |Webshop|
 repeat
 :Calculating/Verifying measures;
@@ -19,18 +19,17 @@ repeat while (Measures doable?) is (no)
 :Place Order/pay;
 |Webshop|
 repeat
-:Verify payment/verify order manually;
+:verify order manually;
 |Fog|
-:Go through customers inquery/order;
-:Contact cusmtomer for customer service and aditional information;
+:Go through customer's order;
 repeat while (Everything ok?) is (no)
 ->yes;
 |Webshop|
 :Order placed;
-:Make receipt/manual/plukklist;
+:Make receipt/manual;
 fork
 |Customer|
-:Reciept/Manual/plukkliste]
+:Reciept/manual]
 :Wait for materials (and construction crew);
 fork again
 |Fog|
