@@ -6,10 +6,10 @@ state flatorder.jsp
 [*] --> index.jsp
 index.jsp -right-> flatorder.jsp
 flatorder.jsp -right-> receipt.jsp: Order a carport + (if necessary) register
-receipt.jsp --> LoggedOnCustomer: Log in (if OK)
-receipt.jsp --> index.jsp: Log in (if not OK)
+receipt.jsp --> LoggedOnCustomer: Login (if OK)
+receipt.jsp --> index.jsp: Login (if not OK)
 
-LoggedOnCustomer --> index.jsp: Log out
+LoggedOnCustomer --> index.jsp: Logout
 
 state LoggedOnCustomer {
     state myorder.jsp
@@ -26,8 +26,13 @@ end note
 
     [*]--> myorder.jsp
     myorder.jsp --> carportplan.jsp: Drawing from bird's-eye view
+    carportplan.jsp --> myorder.jsp: Return
+    carportplan.jsp -right-> carportplanside.jsp
+    carportplanside.jsp -right-> carportplan.jsp
     myorder.jsp --> carportplanside.jsp: Drawing from side view
+    carportplanside.jsp --> myorder.jsp: Return
     myorder.jsp --> bompage.jsp: Bill of materials (if order is purchased)
+    bompage.jsp --> myorder.jsp: Return
     myorder.jsp -up-> checkoutpage.jsp: When just purchased
 }
 @enduml
