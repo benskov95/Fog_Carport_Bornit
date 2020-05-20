@@ -10,26 +10,29 @@ start
 :Select dimensions;
 |Webshop|
 repeat
-:Calculating/Verifying measures;
+:Verifying measures;
 repeat while (Measures doable?) is (no)
 ->yes;
 :Give customer an overview of carport;
 |Customer|
-:Recieve overview;
-:Place Order/pay;
+:Recieve overview via email;
+:Place order;
 |Webshop|
-repeat
 :verify order manually;
 |Fog|
 :Go through customer's order;
-repeat while (Everything ok?) is (no)
+:Calculate bill of materials etc.;
+if (Everything ok?) then
 ->yes;
+|Fog|
+:Send offer to customer;
+|Customer|
+:Accept offer;
 |Webshop|
-:Order placed;
 :Make receipt/manual;
 fork
 |Customer|
-:Reciept/manual]
+:View receipt/manual]
 :Wait for materials (and construction crew);
 fork again
 |Fog|
@@ -37,6 +40,11 @@ fork again
 :Deliver the materials;
 |Customer|
 end fork
-:Recieve materials/Construnction Crew;
+:Receive materials/construction crew;
 stop
+else
+->no;
+|Fog|
+:Contact customer;
+end
 @enduml

@@ -14,29 +14,36 @@ repeat
 repeat while (Measures doable?) is (no)
 ->yes;
 |Customer|
-:Place Order/pay;
+:Place order;
+:Receipt;
 |Webshop|
-:Generate bill of materials and order in DB;
-repeat
-:Verify payment/verify order manually;
+:Generate bill of materials, customer and order in DB;
 |Fog|
-:Go through customers inquery/order;
-:Contact cusmtomer for customer service and aditional information;
-repeat while (Everything ok?) is (no)
+:Go through customer's order;
+if (approved) then
 ->yes;
 |Webshop|
-:Order placed;
-:Make receipt/manual;
+:Order ready for purchase;
+|Customer|
+:Log in;
+|Webshop|
+:View drawing, purchase carport;
+:Make bill of materials available;
 fork
 |Customer|
-:Reciept/manual]
+:View drawing and bill of materials]
 :Wait for materials (and construction crew);
 fork again
 |Fog|
 :Pack the materials;
-:Deliver the materials;
+:Send materials;
 |Customer|
 end fork
-:Recieve materials/Construnction Crew;
+:Receive materials/construction crew;
 stop
+else
+->no;
+|Fog|
+:Order denied;
+end
 @endum
