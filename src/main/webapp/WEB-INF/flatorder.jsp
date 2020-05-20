@@ -126,6 +126,7 @@
         <div class="collapse" id="collapseExample">
             <div class="card card-body" style="width: 8rem; text-align: center">
                 <form action="FrontController?target=flatorder" method="get">
+                    Telefon:
                 <input type="text" name="registeredTelephone" value="12345678">
                     <button type="submit" value="">Bestil</button>
                 </form>
