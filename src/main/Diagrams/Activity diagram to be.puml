@@ -19,7 +19,7 @@ repeat while (Measures doable?) is (no)
 |Webshop|
 :Generate bill of materials, customer and order in DB;
 |Fog|
-:Go through customer's order;
+:Check customer's order;
 if (approved) then
 ->yes;
 |Webshop|
