@@ -61,6 +61,7 @@ public class Calculator {
     public BillOfMaterials type1Calc(int length, int width) throws SQLException, ClassNotFoundException {
 
         ArrayList<Material> materialHolder = new ArrayList<>();
+        calcLengthOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
 
         int numberOfBeams;
         if (width > 600) {
@@ -93,9 +94,8 @@ public class Calculator {
         int waterFasciaSidesLength = calcFasciaLength(1, length);
         int waterFasciaSidesQuantity = calcNumberOfFascia(length, waterFasciaSidesLength, true); // Vandbræt til siderne.
 
-        int plates = calcNumberOfTrapezPlates(width);
-        int plateSizesAndQuantity = calcLengthAndAmountOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
-        int bottomScrews = calcNumberOfBottomScrewPacks(plates);
+        int plateQuantity = calcNumberOfTrapezPlates(width);
+        int bottomScrews = calcNumberOfBottomScrewPacks(plateQuantity);
         int brackets = calcNumberOfUniversalBrackets(rafters);
         int bracketScrews = calcNumberOfBracketScrewPacks(brackets);
         int carriageBolts = calcNumberOfCarriageBolts(posts, numberOfBeams);
@@ -116,9 +116,9 @@ public class Calculator {
         materialHolder.add(new Material(1, waterFasciaSidesLength, waterFasciaSidesQuantity));
         materialHolder.add(new Material(1, waterFasciaFrontLength, waterFasciaFrontQuantity));
 
-        materialHolder.add(new Material(69, primaryRoofPlateLength, plateSizesAndQuantity));
+        materialHolder.add(new Material(69, primaryRoofPlateLength, plateQuantity));
         if (secondaryRoofPlateLength != 0) {
-            materialHolder.add(new Material(69, secondaryRoofPlateLength, plateSizesAndQuantity));
+            materialHolder.add(new Material(69, secondaryRoofPlateLength, plateQuantity));
         }
 
         materialHolder.add(new Material(91, 0, bottomScrews));
@@ -174,6 +174,7 @@ public class Calculator {
     public BillOfMaterials type2Calc(int length, int width, int shedLength, int shedWidth) throws SQLException, ClassNotFoundException {
 
         ArrayList<Material> materialHolder = new ArrayList<>();
+        calcLengthOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
 
         int numberOfBeams;
         if (width > 600) {
@@ -206,9 +207,8 @@ public class Calculator {
         int waterFasciaSidesLength = calcFasciaLength(1, length);
         int waterFasciaSidesQuantity = calcNumberOfFascia(length, waterFasciaSidesLength, true); // Vandbræt til siderne.
 
-        int plates = calcNumberOfTrapezPlates(width);
-        int plateSizesAndQuantity = calcLengthAndAmountOfTrapezPlates(length, width, MaterialFacade.getMaterialLengths(69));
-        int bottomScrews = calcNumberOfBottomScrewPacks(plates);
+        int plateQuantity = calcNumberOfTrapezPlates(width);
+        int bottomScrews = calcNumberOfBottomScrewPacks(plateQuantity);
         int brackets = calcNumberOfUniversalBrackets(rafters);
         int bracketScrews = calcNumberOfBracketScrewPacks(brackets);
         int carriageBolts = calcNumberOfCarriageBolts(posts, numberOfBeams);
@@ -248,9 +248,9 @@ public class Calculator {
         materialHolder.add(new Material(1, waterFasciaSidesLength, waterFasciaSidesQuantity));
         materialHolder.add(new Material(1, waterFasciaFrontLength, waterFasciaFrontQuantity));
 
-        materialHolder.add(new Material(69, primaryRoofPlateLength, plateSizesAndQuantity));
+        materialHolder.add(new Material(69, primaryRoofPlateLength, plateQuantity));
         if (secondaryRoofPlateLength != 0) {
-            materialHolder.add(new Material(69, secondaryRoofPlateLength, plateSizesAndQuantity));
+            materialHolder.add(new Material(69, secondaryRoofPlateLength, plateQuantity));
         }
 
         materialHolder.add(new Material(91, 0, bottomScrews));
@@ -399,7 +399,7 @@ public class Calculator {
         int count = 0;
 
         while (!test) {
-            width -= 100;
+            width -= 109; // Tagpladerne er 109 cm brede (ifølge: https://www.plastmo.dk/tag/trapeztag/ecolite.aspx)
             count++;
             if (width == 0) {
                 test = true;
@@ -413,11 +413,11 @@ public class Calculator {
     }
 
     /**
-     * The calcLengthAndAmountOfTrapezPlates() method is used
+     * The calcLengthOfTrapezPlates() method is used
      * to calculate the optimal length of roofplates
      * for a carport. This is done in a similar manner
      * to the calcOptimalLengthOfMaterial() method, but
-     * is noticeably more complex.
+     * is noticeably more complex (and messy).
      *
      * A provided arraylist of lengths (these being
      * lengths of roofplates from the database) is
@@ -453,17 +453,9 @@ public class Calculator {
      * in the type1Calc and type2Calc methods
      * like it was in the calcOptimalLengthOfMaterial
      * method.
-     * @return
-     * This method returns the number of roofplates
-     * needed to cover the entire roof of the carport.
-     * If a secondary plate length is needed, the
-     * amount of plates needed is equal to the amount
-     * of primary plates. This is not obvious here, but
-     * can be seen on the bill of materials page on the
-     * website.
      * @author Benjamin/benskov95
      */
-    public int calcLengthAndAmountOfTrapezPlates(int length, int width, ArrayList<Integer> measurements){
+    public void calcLengthOfTrapezPlates(int length, int width, ArrayList<Integer> measurements){
 
             final int overhang = 5;
             final int overlap = 20;
@@ -672,7 +664,6 @@ public class Calculator {
 
             this.setPrimaryRoofPlateLength(finalPlate.getLength());
             this.setSecondaryRoofPlateLength(secondPlateLength);
-            return numberOfPlates;
         }
 
 
@@ -810,7 +801,10 @@ public class Calculator {
 
     }
 
-    public int calcNumberOfBottomScrewPacks(int numberOfRoofPlates) { // Bundskruepakker.
+    public int calcNumberOfBottomScrewPacks(int numberOfRoofPlates) {// Bundskruepakker.
+        if (secondaryRoofPlateLength != 0) {
+            numberOfRoofPlates *= 2;
+        }
         return numberOfRoofPlates / 4; // For hver 4 tagplader skal der 1 pakke bundskruer til.
 
     }
