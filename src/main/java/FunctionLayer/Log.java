@@ -10,11 +10,11 @@ public class Log {
 
 
 
-    private static final String FILENAME = "demo.log";
-    private static final String FILEPATH = "/Users/Tha-Y/Desktop/";
+//    private static final String FILENAME = "demo.log";
+//    private static final String FILEPATH = "/Users/Tha-Y/Desktop/";
 
-    //private static final String FILEPATH = "/var/log/tomcat8/";
-    private static final String PATH = FILEPATH + FILENAME;
+    private static final String FILEPATH = "/opt/tomcat/logs/";
+    private static final String PATH = FILEPATH + "fog.log";
 
     private Log() {
     }
