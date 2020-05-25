@@ -1,0 +1,67 @@
+@startuml
+
+autonumber
+title Order
+actor customer
+
+
+boundary index.jsp
+boundary flatorder.jsp
+boundary receipt.jsp
+control FrontController
+
+
+
+customer -> index.jsp: start
+index.jsp -> FrontController: target=redirect
+FrontController -> FrontController: processRequest()
+FrontController -> Command: from()
+Command -> Redirect: execute()
+Redirect --> FrontController: flatorder
+FrontController --> flatorder.jsp: forward()
+flatorder.jsp -> FrontController: http GET
+FrontController -> FrontController: processRequest()
+FrontController -> Command: from()
+Command -> FlatOrder: execute()
+FlatOrder -> OrderFacade: insertOrder()
+OrderFacade -> OrderMapper: insertOrder()
+
+database FogDB
+OrderMapper -> FogDB: executeQuery()
+FogDB --> OrderMapper: Ok
+OrderMapper --> OrderFacade: Ok
+OrderFacade --> FlatOrder: Ok
+FlatOrder --> FrontController: receipt
+FrontController --> receipt.jsp: forward()
+
+
+
+
+
+
+'== Initialization ==
+'box
+'Login -> LogicFacade: getBottoms()
+'Initializer --> index.jsp: ArrayList<Sport>
+'end box
+'== Beregn BMI ==
+'box PresentationLayer
+'control FrontController
+'index.jsp -> FrontController: doPost()
+'
+'
+'Command --> FrontController: customerpage.jsp
+'FrontController -> Resultat: execute()
+'end box
+'
+'box LogicFacade
+'Resultat -> LogicFacade: insertBmiItem()
+'end box
+'
+'box DBAccess
+'LogicFacade -> BmiMapper: insertBmiItem()
+'end box
+
+
+
+@enduml

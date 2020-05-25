@@ -1,0 +1,25 @@
+@startuml
+
+autonumber
+title Initialize
+actor customer
+boundary index.jsp
+
+customer -> index.jsp: start
+index.jsp -> Initializer: initCWList()
+Initializer -> LogicFacade: getCWList()
+LogicFacade -> InitializeMapper: getCarportWidth()
+database FogDB
+InitializeMapper ->FogDB: executeQuery()
+FogDB --> InitializeMapper: Ok
+InitializeMapper --> LogicFacade: Ok
+LogicFacade --> index.jsp: Stored in applicationscope
+index.jsp -> Initializer: initCLList()
+Initializer -> LogicFacade: getCLList()
+LogicFacade -> InitializeMapper: getCarportLength()
+InitializeMapper ->FogDB: executeQuery()
+FogDB --> InitializeMapper: Ok
+InitializeMapper --> LogicFacade: Ok
+LogicFacade --> index.jsp: Stored in applicationscope
+
+@enduml
