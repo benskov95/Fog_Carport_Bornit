@@ -1,0 +1,41 @@
+@startuml
+
+autonumber
+title Customer Login
+actor customer
+
+
+boundary index.jsp
+boundary myorder.jsp
+control FrontController
+database FogDB
+
+
+
+
+
+
+
+customer -> index.jsp: phone & orderId
+index.jsp -> FrontController: http POST login
+FrontController -> FrontController: processRequest()
+FrontController -> Command: from()
+Command ->":Login": execute()
+":Login" -> OrderFacade: getMyOrder()
+OrderFacade -> OrderMapper: getMyOrder()
+OrderMapper ->FogDB: executeQuery()
+FogDB --> OrderMapper: Ok
+OrderMapper--> OrderFacade: Ok
+OrderFacade--> ":Login": Ok
+":Login"-> CustomerFacade: getCustomer()
+CustomerFacade -> CustomerMapper: getCustomer()
+CustomerMapper ->FogDB: executeQuery()
+FogDB --> CustomerMapper: Ok
+CustomerMapper--> CustomerFacade: Ok
+CustomerFacade--> ":Login": Ok
+":Login" --> FrontController: myorder
+FrontController --> myorder.jsp: forward()
+
+database FogDB
+
+@enduml
