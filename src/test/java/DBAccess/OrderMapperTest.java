@@ -137,7 +137,7 @@ public class OrderMapperTest {
 
     }
     @Test
-    public void testinsertOrder () {
+    public void testinsertOrder () throws SQLException, OrderException, ClassNotFoundException {
         Customer customer = new Customer(87654321,"Pelle", "Smedeløkken 66", "Pelle@mail.dk", "3770 Allinge");
         Order order = new Order(1,600,720,450,360,0,87654321);
 

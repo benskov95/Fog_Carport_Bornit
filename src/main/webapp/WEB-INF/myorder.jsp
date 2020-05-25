@@ -7,7 +7,14 @@
 
 <h1 class="display-4" style="font-family: Roboto,sans-serif">Hej ${sessionScope.customer.name}</h1>
 <br>
+
+<c:if test="${sessionScope.order.status_id == 5}">
+    <p class="lead" style="font-family: Roboto,sans-serif">Din ordre er blevet afvist. Kontakt os på tlf. 87654321, hvis du har nogen spørgsmål.</p>
+</c:if>
+
+<c:if test="${sessionScope.order.status_id != 5}">
 <p class="lead" style="font-family: Roboto,sans-serif">Her kan du se status mm. på din ordre.</p>
+</c:if>
 
 <table class="table table-striped">
     <thead>

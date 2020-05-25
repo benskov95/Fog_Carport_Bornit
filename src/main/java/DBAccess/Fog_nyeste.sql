@@ -41,7 +41,7 @@ CREATE TABLE `bill_of_materials` (
   CONSTRAINT `fk_material_id` FOREIGN KEY (`material_id`) REFERENCES `materials` (`material_id`),
   CONSTRAINT `fk_material_size_id` FOREIGN KEY (`material_size_id`) REFERENCES `link_material_size` (`pk_link_material_size`),
   CONSTRAINT `fk_order_id` FOREIGN KEY (`order_id`) REFERENCES `order` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +180,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (12381751,'sdasdoiai','oa98amn','aoisna8dnaw','9ima0');
+INSERT INTO `customer` VALUES (12381751,'sdasdoiai','oa98amn','aoisna8dnaw','9ima0'),(17231781,'sa98dasudnuj','aodawo8da','9a8wdm8a','uanwidaw');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,7 +319,7 @@ CREATE TABLE `order` (
   CONSTRAINT `fk_cp_id` FOREIGN KEY (`cp_id`) REFERENCES `carport` (`carport_id`),
   CONSTRAINT `fk_phone` FOREIGN KEY (`phone`) REFERENCES `customer` (`phone`),
   CONSTRAINT `fk_status` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -328,7 +328,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (10,2,'2020-05-12 13:12:33',600,480,240,540,12381751,10070,3);
+INSERT INTO `order` VALUES (10,2,'2020-05-12 13:12:33',600,480,240,540,12381751,10070,3),(11,1,'2020-05-20 11:57:53',390,360,0,0,17231781,2846,5);
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -439,7 +439,7 @@ CREATE TABLE `status` (
   `status_id` int(11) NOT NULL AUTO_INCREMENT,
   `status` varchar(45) NOT NULL,
   PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -448,7 +448,7 @@ CREATE TABLE `status` (
 
 LOCK TABLES `status` WRITE;
 /*!40000 ALTER TABLE `status` DISABLE KEYS */;
-INSERT INTO `status` VALUES (1,'Afventer'),(2,'Godkendt'),(3,'Pakkes'),(4,'Afsendt');
+INSERT INTO `status` VALUES (1,'Afventer'),(2,'Godkendt'),(3,'Pakkes'),(4,'Afsendt'),(5,'Afvist');
 /*!40000 ALTER TABLE `status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -509,4 +509,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-05-13 13:19:23
+-- Dump completed on 2020-05-20 14:08:43

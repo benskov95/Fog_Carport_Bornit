@@ -45,7 +45,7 @@ abstract class Command {
         commands.put("bompage", new BomPage());
         commands.put("allOrders", new AllOrders());
         commands.put("updateorder", new UpdateOrder());
-        commands.put("deleteorder", new DeleteOrder());
+        commands.put("rejectorder", new RejectOrder());
         commands.put("employeeLogin", new EmployeeLogin());
         commands.put("drawing", new Drawing());
         commands.put("shiporder", new ShipOrder());

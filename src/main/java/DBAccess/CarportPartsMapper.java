@@ -4,6 +4,7 @@ import FunctionLayer.CarPortPart;
 import FunctionLayer.Customer;
 import FunctionLayer.Log;
 import FunctionLayer.Material;
+import PresentationLayer.UnknownCommand;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -170,6 +171,7 @@ public class CarportPartsMapper {
             } catch (SQLException e) {
                 System.out.println("Fejl i connection til database");
                 e.printStackTrace();
+                throw new SQLException(e.getMessage());
             }
         }
 

@@ -45,21 +45,19 @@
                                                                                   size="20" type="text"
                                                                             value="${orders.totalPrice}">
 
-<%--                    Der skal være et form closing tag her, men det kan der ikke være før--%>
-<%--                    der bliver lavet om på godkend knappen også.--%>
+                <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
+                </button>
+                </form>
             </td>
 
             <td>${orders.status}</td>
 
-
             <td>
 
-                <button type="submit" class="btn btn-primary btn-sm" name="accept" value="${orders.order_id}">Godkend
-                </button>
 
-                <form onsubmit="return confirm('Er du sikker på du vil slette ordre nr:' + ${orders.order_id})" name="delete" action="FrontController" method="POST" id="delete">
-                    <input type="hidden" name="target" value="deleteorder">
-                    <button type="submit" class="btn btn-danger btn-sm" name="delete" value="${orders.order_id}">Slet
+                <form onsubmit="return confirm('Er du sikker på du vil afvise ordre nr: ' + ${orders.order_id})" name="reject" action="FrontController" method="POST" id="reject">
+                    <input type="hidden" name="target" value="rejectorder">
+                    <button type="submit" class="btn btn-danger btn-sm" name="reject" value="${orders.order_id}">Afvis
                     </button>
                 </form>
             </td>

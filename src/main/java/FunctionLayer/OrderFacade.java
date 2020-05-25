@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class OrderFacade {
 
-    public static int insertOrder(Customer customer, Order order) {
+    public static int insertOrder(Customer customer, Order order) throws SQLException, ClassNotFoundException, OrderException {
        return OrderMapper.insertOrder(customer, order);
     }
 

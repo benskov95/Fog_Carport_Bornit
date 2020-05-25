@@ -1,0 +1,49 @@
+@startuml
+Title Fog Carport - to be
+|Customer|
+start
+:Go to website;
+|#AntiqueWhite|Webshop|
+:Present options;
+|Customer|
+: Choose Customize carport;
+:Select dimensions;
+|Webshop|
+repeat
+:Verifying measures;
+repeat while (Measures doable?) is (no)
+->yes;
+|Customer|
+:Place order;
+:Receipt;
+|Webshop|
+:Generate bill of materials, customer and order in DB;
+|Fog|
+:Check customer's order;
+if (approved) then
+->yes;
+|Webshop|
+:Order ready for purchase;
+|Customer|
+:Log in;
+|Webshop|
+:View drawing, purchase carport;
+:Make bill of materials available;
+fork
+|Customer|
+:View drawing and bill of materials]
+:Wait for materials (and construction crew);
+fork again
+|Fog|
+:Pack the materials;
+:Send materials;
+|Customer|
+end fork
+:Receive materials/construction crew;
+stop
+else
+->no;
+|Fog|
+:Order denied;
+end
+@endum
