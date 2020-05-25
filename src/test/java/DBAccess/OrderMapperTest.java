@@ -62,7 +62,7 @@ public class OrderMapperTest {
     }
 
     @Test
-    public void testGetAllOrderByStatus() throws SQLException, ClassNotFoundException {
+    public void testGetAllOrdersByStatus() throws SQLException, ClassNotFoundException {
         ArrayList<Order> orders1 = OrderFacade.getAllOrdersByStatusId(1);
         ArrayList<Order> orders2 = OrderFacade.getAllOrdersByStatusId(2);
         ArrayList<Order> orders3 = OrderFacade.getAllOrdersByStatusId(3);

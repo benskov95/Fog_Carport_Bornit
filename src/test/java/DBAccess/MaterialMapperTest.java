@@ -68,6 +68,12 @@ public class MaterialMapperTest {
     }
 
     @Test
+    public void testGetAllMaterials() throws SQLException, ClassNotFoundException {
+        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        assert (materials.size() > 0);
+    }
+
+    @Test
     public void testGetMaterialLengths() throws SQLException, ClassNotFoundException {
         ArrayList<Integer> lengths = MaterialFacade.getMaterialLengths(1);
         assert (lengths.get(0) == 240);

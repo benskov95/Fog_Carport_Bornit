@@ -102,7 +102,7 @@ public class BomMapper {
                     String description = resultSet.getString("description");
                     int carportpart_id = resultSet.getInt("bom_carport_part_id");
 
-                    bom.addMaterial(new Material(materialId, name,unitId, quantity, size , carportpart_id,description ));
+                    bom.addMaterial(new Material(materialId, name, unitId, quantity, size, carportpart_id, description ));
                 }
 
             } catch (Exception e) {
@@ -203,6 +203,7 @@ public class BomMapper {
      * @author Pelle Rasmussen
      */
 
+    // Kun til test
     public static int getNumberOfBillOfMaterials() throws SQLException, ClassNotFoundException {
 
         String sql = "select * from bill_of_materials";
