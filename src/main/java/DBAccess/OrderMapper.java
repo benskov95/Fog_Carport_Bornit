@@ -1,7 +1,10 @@
 package DBAccess;
 
 import FunctionLayer.Customer;
+import FunctionLayer.Log;
 import FunctionLayer.Order;
+import FunctionLayer.OrderException;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -31,24 +34,21 @@ public class OrderMapper {
      * @author Pelle Rasmussen
      */
 
-    public static int insertOrder(Customer customer, Order order) {
+    public static int insertOrder(Customer customer, Order order) throws OrderException, SQLException, ClassNotFoundException {
 
         int generatedId = 0;
         String sqlCustomer = "INSERT INTO customer (phone, name, address, email, zip_code) VALUES (?,?,?,?,?)";
         String sqlOrder = "INSERT INTO `order` (cp_id, carport_width, carport_length, shed_width, shed_length, phone, total_price, status_id ) VALUES (?,?,?,?,?,?,?,?)";
-
+        Connection con = Connector.connection();
         try {
-            Connection con = Connector.connection();
-            con.setAutoCommit(false);
             try (PreparedStatement ps = con.prepareStatement(sqlCustomer, Statement.RETURN_GENERATED_KEYS)) {
+                con.setAutoCommit(false);
                 ps.setInt(1, customer.getPhone());
                 ps.setString(2, customer.getName());
                 ps.setString(3, customer.getAddress());
                 ps.setString(4, customer.getEmail());
                 ps.setString(5, customer.getZip_code());
                 ps.executeUpdate();
-
-
                 try (PreparedStatement ps1 = con.prepareStatement(sqlOrder, Statement.RETURN_GENERATED_KEYS)) {
                     ps1.setInt(1, order.getCarport_id());
                     ps1.setInt(2, order.getCarport_width());
@@ -64,19 +64,18 @@ public class OrderMapper {
                     if (idResultset.next()){
                         generatedId = idResultset.getInt(1);
                     }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    con.rollback();
+                } catch (SQLException e) {
+                        Log.severe("insertOrder - rollback");
+                        e.printStackTrace();
+                        con.rollback();
                 }
                 con.commit();
                 con.setAutoCommit(true);
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.severe( "insertOrder "+ e.getMessage());
+            throw new OrderException("Der skete en uventet fejl i din ordre.");
         }
-
         return generatedId;
     }
 
@@ -84,9 +83,9 @@ public class OrderMapper {
 
         int generatedId = 0;
         String sqlOrder = "INSERT INTO `order` (cp_id, carport_width, carport_length, shed_width, shed_length, phone, total_price, status_id ) VALUES (?,?,?,?,?,?,?,?)";
+        Connection con = Connector.connection();
 
         try {
-            Connection con = Connector.connection();
             con.setAutoCommit(false);
 
                 try (PreparedStatement ps1 = con.prepareStatement(sqlOrder, Statement.RETURN_GENERATED_KEYS)) {
@@ -105,7 +104,7 @@ public class OrderMapper {
                         generatedId = idResultset.getInt(1);
                     }
 
-                } catch (Exception e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                     con.rollback();
                 }
