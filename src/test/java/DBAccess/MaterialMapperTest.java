@@ -69,7 +69,7 @@ public class MaterialMapperTest {
 
     @Test
     public void testGetAllMaterials() throws SQLException, ClassNotFoundException {
-        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        ArrayList<Material> materials = MaterialFacade.getAllMaterials();
         assert (materials.size() > 0);
     }
 
@@ -90,7 +90,7 @@ public class MaterialMapperTest {
 
     @Test
     public void testSetMaterialSizeIds() throws SQLException, ClassNotFoundException {
-        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        ArrayList<Material> materials = MaterialFacade.getAllMaterials();
         MaterialFacade.setMaterialSizeIds(materials);
 
         assert (materials.get(2).getSizeId() == 3);
@@ -99,7 +99,7 @@ public class MaterialMapperTest {
 
     @Test
     public void testSetLinkMaterialSizeIds() throws SQLException, ClassNotFoundException {
-        ArrayList<Material> materials = MaterialMapper.getAllMaterials();
+        ArrayList<Material> materials = MaterialFacade.getAllMaterials();
         MaterialFacade.setMaterialSizeIds(materials);
         MaterialFacade.setLinkMaterialSizeIds(materials);
 

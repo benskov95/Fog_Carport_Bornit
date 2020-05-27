@@ -51,6 +51,8 @@ abstract class Command {
         commands.put("shiporder", new ShipOrder());
         commands.put("checkout", new Checkout());
         commands.put("carportplanside", new DrawingSide());
+        commands.put("materialpage", new MaterialPage());
+        commands.put("updatematerial", new UpdateMaterial());
 
 
     }

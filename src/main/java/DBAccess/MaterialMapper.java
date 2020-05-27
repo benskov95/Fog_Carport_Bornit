@@ -313,4 +313,27 @@ public class MaterialMapper {
 
         return materialArrayList;
     }
+
+    public static void updateMaterial (int materialId, String name, int price) {
+
+
+        String sql = "update materials set `name` = ?, price = ? where material_id = ?";
+
+        try{
+            Connection con = Connector.connection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, name);
+            ps.setInt(2, price);
+            ps.setInt(3, materialId);
+            ps.executeUpdate();
+        }
+
+        catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+
+        }
+
+    }
 }

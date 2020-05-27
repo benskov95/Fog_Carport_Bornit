@@ -17,7 +17,7 @@
         <th scope="col">Pris</th>
         <th scope="col">Telefon</th>
         <th scope="col">Stykliste</th>
-        <th scope="col">Status</th>
+        <th scope="col"></th>
         <th></th>
     </tr>
     </thead>

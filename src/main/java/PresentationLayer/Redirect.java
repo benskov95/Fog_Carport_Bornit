@@ -20,8 +20,13 @@ public class Redirect extends Command {
         Employee employee = (Employee) session.getAttribute("employee");
 
         if (destination.equals("orderpage")) {
-            if (employee != null && employee.getRoleId() == 2) {
-                destination = "warehousepage";
+            if (employee != null) {
+                if (employee.getRoleId() == 2) {
+                    destination = "warehousepage";
+                }
+                if (employee.getRoleId() == 1) {
+                    destination = "adminpage";
+                }
             } else {
                 destination = "myorder";
             }

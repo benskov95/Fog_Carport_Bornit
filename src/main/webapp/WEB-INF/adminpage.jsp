@@ -7,6 +7,10 @@
 
 <p class="lead" style="color: red">${requestScope.error}</p>
 
+<a href="FrontController?target=materialpage"><button class="btn btn-primary">Opdatér materialer</button></a>
+<br>
+<br>
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -19,6 +23,7 @@
         <th scope="col">Skur længde</th>
         <th scope="col">Dato</th>
         <th scope="col">Samlet materialepris</th>
+        <th scope="col">Stykliste</th>
         <th scope="col">Totalpris</th>
         <th scope="col">Status</th>
         <th></th>
@@ -38,6 +43,13 @@
             <td>${orders.shed_length}</td>
             <td>${orders.date}</td>
             <td>${orders.totalPrice} kr.</td>
+            <td>
+                <form action="FrontController" method="post"><input type="hidden" name="target" value="bompage">
+                    <button type="submit" class="btn btn-primary btn-sm" name="billofmaterials" value="${orders.order_id}">
+                        Stykliste
+                    </button>
+                </form>
+            </td>
 
             <td>
                 <form onsubmit="return confirm('Er du sikker på prisen er korrekt?')" name="update" action="FrontController" method="POST">

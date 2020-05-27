@@ -74,7 +74,7 @@ public class OrderMapper {
             }
         } catch (Exception e) {
             Log.severe( "insertOrder "+ e.getMessage());
-            throw new OrderException("Der skete en uventet fejl i din ordre.");
+            throw new OrderException("Dette telfonnummer er allerede registreret i databasen.");
         }
         return generatedId;
     }

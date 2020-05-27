@@ -26,4 +26,12 @@ public class MaterialFacade {
     public static void setUnitTypes(ArrayList<Material> materials) throws SQLException, ClassNotFoundException {
         MaterialMapper.setUnitTypes(materials);
     }
+
+    public static ArrayList<Material> getAllMaterials() throws SQLException, ClassNotFoundException {
+        return MaterialMapper.getAllMaterials();
+    }
+
+    public static void updateMaterial(int materialId, String name, int price) {
+        MaterialMapper.updateMaterial(materialId, name, price);
+    }
 }
