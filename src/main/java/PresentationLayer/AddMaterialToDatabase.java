@@ -5,7 +5,6 @@ import FunctionLayer.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,11 +13,11 @@ public class AddMaterialToDatabase extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, SQLException, ClassNotFoundException, OrderException, ServletException, IOException {
 
-        HttpSession session = request.getSession();
         String[] newMaterialSizes = request.getParameterValues("newMaterialSizes");
         String[] newMaterialAmounts = request.getParameterValues("newMaterialAmounts");
         ArrayList<Size> chosenSizes = new ArrayList<>();
         ArrayList<Size> chosenAmounts = new ArrayList<>();
+        StringBuilder displayLengths = new StringBuilder();
 
         String materialName = request.getParameter("newMaterialName");
         int unitId = Integer.parseInt(request.getParameter("newMaterialUnit"));
@@ -55,16 +54,23 @@ public class AddMaterialToDatabase extends Command {
                 return "addmaterialpage";
             }
 
-            if (newMaterialAmounts[0].equals("0") && newMaterialSizes.length >= 1) {
+            if (newMaterialAmounts[0].equals("0") && newMaterialSizes.length >= 1 && unitId == 3) {
                 for (String newMaterialSize : newMaterialSizes) {
                     String[] values = newMaterialSize.split(":");
                     int id = Integer.parseInt(values[0]);
                     int size = Integer.parseInt(values[1]);
                     chosenSizes.add(new Size(id, size));
+                    displayLengths.append(size).append(" cm | ");
                 }
+
                 Material material = new Material(materialName, unitId, price);
                 materialId = MaterialFacade.insertMaterial(material, chosenSizes);
                 request.setAttribute("successfullyAdded", "Materialet blev tilføjet til databasen. ID: " + materialId);
+                request.setAttribute("displayLengths", "Valgte længder: " + displayLengths);
+
+            } else if (newMaterialSizes.length > 1 && unitId != 3) {
+                request.setAttribute("addMaterialError", "Du kan ikke sætte længder på pakker, ruller eller sæt. Skriv størrelse i materialets navn, eks: Skruer 200 stk");
+                return "addmaterialpage";
             }
 
             if (newMaterialSizes[0].equals("0") && newMaterialAmounts.length >= 1) {

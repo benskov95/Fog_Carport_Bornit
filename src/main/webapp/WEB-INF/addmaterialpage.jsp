@@ -24,6 +24,10 @@ ${requestScope.error}
     ${requestScope.successfullyAdded}
 </h3>
 
+<h5 class="h5" style="color: green">
+    ${requestScope.displayLengths}
+</h5>
+
 <form action="FrontController" method="post">
     <input type="hidden" name="target" value="addMaterialToDatabase">
     <div class="form-group">
@@ -66,6 +70,9 @@ ${requestScope.error}
             <div class="col-md-12 col-xs-12">
                 <label title="Længde">
                     <strong>Vælg alle længder materialet fås i</strong>
+                    <br>
+                   Hold musens venstre knap nede og rul ned, for at vælge hele vejen ned, <br>
+                    eller hold CTRL-knappen nede og venstreklik på enkelte længder for at<br>vælge specifikke længder.
                 </label>
                 <select class="form-control" name="newMaterialSizes" multiple="multiple" id="newMaterialSizes">
                     <option selected="selected" value="0">Ingen længder</option>
@@ -81,7 +88,7 @@ ${requestScope.error}
         <div class="form-group">
             <div class="col-md-12 col-xs-12">
                 <label title="Antal pr. pakke">
-                    <strong>Vælg alle antal materialet fås i</strong>
+                    <strong>Vælg alle antal materialet fås i </strong>
                 </label>
                 <select class="form-control" name="newMaterialAmounts" multiple="multiple" id="newMaterialAmounts">
                     <option selected="selected" value="0">Ingen</option>
