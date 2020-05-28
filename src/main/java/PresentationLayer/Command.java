@@ -53,6 +53,8 @@ abstract class Command {
         commands.put("carportplanside", new DrawingSide());
         commands.put("materialpage", new MaterialPage());
         commands.put("updatematerial", new UpdateMaterial());
+        commands.put("addMaterialToDatabase", new AddMaterialToDatabase());
+        commands.put("addmaterialpage", new AddMaterialPage());
 
 
     }

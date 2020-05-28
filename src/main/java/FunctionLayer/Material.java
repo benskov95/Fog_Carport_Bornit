@@ -58,6 +58,12 @@ public class Material {
         this.quantity = quantity;
     }
 
+    public Material(String materialName, int unitId, int price) {
+        this.materialName = materialName;
+        this.unitId = unitId;
+        this.price = price;
+    }
+
     public Material(int materialId) {
         this.materialId = materialId;
     }

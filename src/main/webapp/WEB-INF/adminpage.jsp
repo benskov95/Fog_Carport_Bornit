@@ -8,6 +8,7 @@
 <p class="lead" style="color: red">${requestScope.error}</p>
 
 <a href="FrontController?target=materialpage"><button class="btn btn-primary">Opdatér materialer</button></a>
+<a href="FrontController?target=addmaterialpage"><button class="btn btn-primary">Tilføj nyt materiale til database</button></a>
 <br>
 <br>
 

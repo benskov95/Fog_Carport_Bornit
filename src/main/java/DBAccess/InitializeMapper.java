@@ -1,5 +1,7 @@
 package DBAccess;
 import FunctionLayer.LoginSampleException;
+import FunctionLayer.Size;
+import FunctionLayer.Unit;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -161,6 +163,61 @@ public class InitializeMapper {
         return SLList;
     }
 
+    public static ArrayList<Size> getSizes(boolean isLengths) throws  SQLException, ClassNotFoundException {
 
+        ArrayList<Size> sizeList = new ArrayList<>();
+        String sql;
+        int numberOfActualLengths = 20; // Der er 20 egentlige længder til træ og tagplader
 
+        if (isLengths) {
+        sql = "SELECT * FROM fog.size where size_id <= " + numberOfActualLengths;
+        } else {
+            sql = "select * from fog.size where size_id > " + numberOfActualLengths; // Alle størrelser i databasen med ID over 20 er ikke længder.
+        }
+
+        Connection con = Connector.connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet resultSet = ps.executeQuery();
+                while (resultSet.next()) {
+                    int sizeId = resultSet.getInt("size_id");
+                    int size = resultSet.getInt("size");
+                    if (sizeId > 20 && size == 1) {
+                        sizeList.add(new Size(sizeId, size));
+                        break;
+                    } else {
+                        sizeList.add(new Size(sizeId, size));
+                    }
+                }
+
+            sizeList.removeIf(size -> size.getSize() == 0); // Bliver brugt ifb. beregner, ikke nødvendig at have med her.
+            sizeList.removeIf(size -> size.getSize() == 100); // Kommer kun med hvis det er til antal, og vi vil kun have, at man kan vælge 1.
+
+            } catch(SQLException e){
+                System.out.println("Fejl i connection til database");
+                e.printStackTrace();
+            }
+            return sizeList;
+        }
+
+    public static ArrayList<Unit> getUnits() throws  SQLException, ClassNotFoundException {
+
+        ArrayList<Unit> uList = new ArrayList<>();
+
+        String sql = "SELECT * FROM fog.unit";
+        Connection con = Connector.connection();
+        try  (PreparedStatement ps = con.prepareStatement(sql);
+              ResultSet resultSet = ps.executeQuery() )
+        {
+            while (resultSet.next()) {
+                int unitId = resultSet.getInt("unit_id");
+                String unitName = resultSet.getString("unit_type");
+                uList.add(new Unit(unitId, unitName));
+            }
+        } catch (SQLException e) {
+            System.out.println("Fejl i connection til database");
+            e.printStackTrace();
+        }
+        return uList;
+    }
 }

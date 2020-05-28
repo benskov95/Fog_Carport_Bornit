@@ -31,6 +31,7 @@ public class Redirect extends Command {
                 destination = "myorder";
             }
         }
+
         return destination;
     }
 }

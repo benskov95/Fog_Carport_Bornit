@@ -34,4 +34,8 @@ public class MaterialFacade {
     public static void updateMaterial(int materialId, String name, int price) {
         MaterialMapper.updateMaterial(materialId, name, price);
     }
+
+    public static int insertMaterial(Material material, ArrayList<Size> sizes) throws SQLException, OrderException, ClassNotFoundException {
+        return  MaterialMapper.insertMaterial(material, sizes);
+    }
 }

@@ -10,7 +10,6 @@ ${requestScope.error}
 ${requestScope.updated}
 </h3>
 
-
 <a href="FrontController?target=redirect&destination=adminpage" class="btn btn-primary" role="button" aria-pressed="true">Tilbage</a>
 <br>
 <br>
@@ -19,12 +18,11 @@ ${requestScope.updated}
     <thead>
     <tr>
         <th scope="col">Materiale ID</th>
-        <th scope="col">Materiale navn</th>
+        <th scope="col">Navn</th>
         <th scope="col">Pris</th>
         <th scope="col">Enhed</th>
         <th scope="col"></th>
 
-        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -48,7 +46,7 @@ ${requestScope.updated}
         </td>
 
             <td>
-            <button type="submit" class="btn btn-warning btn-sm" name="materialId" value="${material.materialId}">Rediger
+            <button type="submit" class="btn btn-warning btn-sm" name="materialId" value="${material.materialId}">Opdatér
             </button>
             </td>
         </form>
@@ -57,6 +55,6 @@ ${requestScope.updated}
     </c:forEach>
 
     </tbody>
-</table><
+</table>
 
 <%@include file="../Includes/footer.inc"%>

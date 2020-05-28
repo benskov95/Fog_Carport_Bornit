@@ -2,11 +2,9 @@ package CarportUtil;
 
 import FunctionLayer.Log;
 import FunctionLayer.LogicFacade;
+import FunctionLayer.Size;
+import FunctionLayer.Unit;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Initializer {
@@ -15,6 +13,8 @@ public class Initializer {
     private static ArrayList<Integer> CLList = null;
     private static ArrayList<Integer> SWList = null;
     private static ArrayList<Integer> SLList = null;
+    private static ArrayList<Size> sizeList = null;
+    private static ArrayList<Unit> unitList = null;
 
 
     public static ArrayList<Integer> initCWLIST() {
@@ -56,5 +56,25 @@ public class Initializer {
         }
 
         return SLList;
+    }
+
+    public static ArrayList<Size> initSizeList(boolean isLengths) {
+        try {
+            sizeList = LogicFacade.getSList(isLengths);
+        } catch (Exception e) {
+            Log.severe("Kan ikke hente størrelse listen");
+        }
+
+        return sizeList;
+    }
+
+    public static ArrayList<Unit> initUnitList() {
+        try {
+            unitList = LogicFacade.getUList();
+        } catch (Exception e) {
+            Log.severe("Kan ikke hente størrelse listen");
+        }
+
+        return unitList;
     }
 }

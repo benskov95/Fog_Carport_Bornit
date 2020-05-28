@@ -1,11 +1,8 @@
 package DBAccess;
 
-import FunctionLayer.Material;
+import FunctionLayer.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -334,6 +331,48 @@ public class MaterialMapper {
             e.printStackTrace();
 
         }
+    }
 
+    public static int insertMaterial(Material material, ArrayList<Size> sizes) throws OrderException, SQLException, ClassNotFoundException {
+
+        int generatedId = 0;
+        String sqlCustomer = "INSERT INTO materials (name, unit_id, price) VALUES (?,?,?)";
+        String sqlOrder = "INSERT INTO link_material_size (link_material_id, link_size_id ) VALUES (?,?)";
+        Connection con = Connector.connection();
+        try {
+            try (PreparedStatement ps = con.prepareStatement(sqlCustomer, Statement.RETURN_GENERATED_KEYS)) {
+                con.setAutoCommit(false);
+                ps.setString(1, material.getMaterialName());
+                ps.setInt(2, material.getUnitId());
+                ps.setInt(3, material.getPrice());
+                ps.executeUpdate();
+
+                ResultSet idResultset = ps.getGeneratedKeys();
+                if (idResultset.next()) {
+                    generatedId = idResultset.getInt(1);
+                    material.setMaterialId(generatedId);
+                }
+
+                for (Size size : sizes) {
+
+                try (PreparedStatement ps1 = con.prepareStatement(sqlOrder, Statement.RETURN_GENERATED_KEYS)) {
+                    ps1.setInt(1, material.getMaterialId());
+                    ps1.setInt(2, size.getSizeId());
+                    ps1.executeUpdate();
+
+                } catch (SQLException e) {
+                    Log.severe("insertOrder - rollback");
+                    e.printStackTrace();
+                    con.rollback();
+                }
+            }
+                con.commit();
+                con.setAutoCommit(true);
+            }
+        } catch (Exception e) {
+            Log.severe( "insertMaterial "+ e.getMessage());
+            throw new OrderException("Materialet kunne ikke tilføjes til databasen.");
+        }
+        return generatedId;
     }
 }

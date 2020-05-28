@@ -33,6 +33,12 @@ public class LogicFacade {
     public static ArrayList<Integer> getSLList() throws LoginSampleException, SQLException, ClassNotFoundException {
         return InitializeMapper.getShedLength();
     }
+    public static ArrayList<Size> getSList(boolean isLengths) throws SQLException, ClassNotFoundException {
+        return InitializeMapper.getSizes(isLengths);
+    }
+    public static ArrayList<Unit> getUList() throws SQLException, ClassNotFoundException {
+        return InitializeMapper.getUnits();
+    }
     public static Employee employeeLogin (int employee_id, String password) throws LoginSampleException {
         return EmployeeMapper.login(employee_id, password);
     }
