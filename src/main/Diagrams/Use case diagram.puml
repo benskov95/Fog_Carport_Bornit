@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+Title Fog - Use Case Diagram
+actor Customer
+actor Admin
+actor WarehouseEmployee
+rectangle Website {
+
+Customer -- (Order customized carport)
+Customer -- (View order)
+(Approve or disapprove order, send offer) -- Admin
+Customer --- (Accept or decline offer)
+(Prepare and send materials) -- WarehouseEmployee
+Customer -- (View carport drawings)
+Customer -- (View bill of materials for carport)
+(View bill of materials for carport) -- Admin
+(View bill of materials for carport) -- WarehouseEmployee
+(Add new material to database) -- Admin
+(Update materials in database) -- Admin
+
+}
+
+@enduml
