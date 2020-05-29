@@ -129,7 +129,12 @@ public class Material {
     }
 
     public int getSum() {
-        this.sum = this.quantity * this.price;
+        if (this.size >= 150) { // Mindste trælængde der fås (til skur)
+            int pricePerMeter = this.size / 100;
+            this.sum = ((this.quantity * this.price) * pricePerMeter);
+        } else {
+            this.sum = this.quantity * this.price;
+        }
         return this.sum;
     }
 
